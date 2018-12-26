@@ -1378,7 +1378,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #ffffff;
 }
 .uk-navbar {
-  background: #76bdf0;
+  background: #1faaea;
   color: #000000;
 }
 .uk-navbar:before,
@@ -1417,16 +1417,16 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li.uk-open > a {
-  background-color: #f5f5f5;
+  background-color: #a6dbfc;
   color: #000000;
   outline: none;
 }
 .uk-navbar-nav > li > a:active {
-  background-color: #dddddd;
+  background-color: #6b9feb;
   color: #000000;
 }
 .uk-navbar-nav > li.uk-active > a {
-  background-color: #f5f5f5;
+  background-color: #a6dbfc;
   color: #000000;
 }
 .uk-navbar-nav .uk-navbar-nav-subtitle {
@@ -5471,7 +5471,7 @@ a.uk-thumbnail:focus {
 }
 .uk-dropdown {
   padding: 15px;
-  background: #f5f5f5;
+  background: #a6dbfc;
   color: #000000;
   font-size: 1rem;
   vertical-align: top;
@@ -5555,7 +5555,7 @@ a.uk-thumbnail:focus {
 }
 .uk-dropdown-navbar {
   margin-top: 0;
-  background: #f5f5f5;
+  background: #a6dbfc;
   color: #000000;
 }
 .uk-open > .uk-dropdown-navbar {
