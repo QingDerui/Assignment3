@@ -4,6 +4,7 @@
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
+require("Word.php");
 
 class DB_Controller
 {
@@ -26,12 +27,11 @@ class DB_Controller
         self::$con->close();
     }
 
-    public static function addWord()
+    public static function addWord($word)
     {
         $query = "insert into word (wordid, wordger, wordeng, example, genus) values (?, ?, ?, ?, ?)";
-
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("sssss", );
+            $stmt->bind_param("sssss", $word->getWordID, $word->getWordGer, $word->getWordEng, $word->getExample, $word->getGenus);
             $stmt->execute();
             $stmt->close();
         }
