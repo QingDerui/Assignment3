@@ -77,10 +77,10 @@ if (!empty($_POST['updateWord'])) {
             echo "<form method='post' action='addWord(test).php'>\n";
             echo "<td><input name='updateWord[wordID]' value='$wordid'></td>\n";
             echo "<td><input name='updateWord[wordGer]' value='$wordGer'></td>\n";
-            echo "<td>$wordEng</td>\n";
-            echo "<td >$example</td>\n";
-            echo "<td>$genus</td>\n";
-            echo "<td>$section</td>\n";
+            echo "<td><input name='updateWord[wordEng]' value='$wordEng'></td>\n";
+            echo "<td ><input name='updateWord[example]' style='width: 650px;' value='$example'></td>\n";
+            echo "<td><input name='updateWord[genus]' style='width: 60px;' value='$genus'></td>\n";
+            echo "<td><input name='updateWord[section]' style='width: 60px;' value='$section'></td>\n";
             echo "<td><button class='modify' href='javascript:;' type='button'>Modify</button></td>\n";
             echo "<td><input type='submit' value='Update'></td>\n";
             echo "</form>\n";
@@ -134,10 +134,13 @@ if (!empty($_POST['updateWord'])) {
                     <option>12</option>
                 </select>
             </td>
+            <td>
+                <button type="submit" onclick="submitNewWordForm()">submit</button>
+            </td>
         </form>
     </tr>
 </table>
-<button type="submit" onclick="submitNewWordForm()">submit</button>
+
 
 
 <script>
