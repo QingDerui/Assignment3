@@ -129,4 +129,51 @@ class DB_Controller
             return $words;
         }
     }
+
+    /**
+     * @param $wordID
+     * @param $wordGer
+     * @param $wordEng
+     * @param $example
+     * @param $genus
+     * @param $section
+     * @return bool
+     */
+    public static function updateWord($wordID, $wordGer, $wordEng, $example, $genus, $section)
+    {
+        $query = "update word set wordger = ?, wordeng = ?, example = ?, genus = ?, section = ? where wordid = ?";
+
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ssssss", $wordGer, $wordEng, $example, $genus, $section, $wordID);
+            $result = $stmt->execute();
+            while ($stmt->fetch()) {
+                //null
+            }
+            $stmt->close();
+            return $result;
+        }
+        return false;
+    }
+
+    /**
+     * @param $wordID
+     * @return bool
+     */
+    public static function deleteWord($wordID)
+    {
+        $query = "delete from word where wordid = ?";
+
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('s', $wordID);
+            $result = $stmt->execute();
+            while ($stmt->fetch()) {
+                //null
+            }
+            $stmt->close();
+            return $result;
+        }
+        return false;
+    }
 }
