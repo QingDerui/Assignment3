@@ -7,29 +7,72 @@
 
 class Word
 {
+    /**
+     * @var string
+     */
     private static $id = '';
+    /**
+     * @var int
+     */
     private static $count = 0;
+    /**
+     * @var string
+     */
     private $wordID;
+    /**
+     * @var string
+     */
     private $wordGer;
+    /**
+     * @var string
+     */
     private $wordEng;
+    /**
+     * @var string
+     */
     private $example;
+    /**
+     * @var string
+     */
     private $genus;
+    /**
+     * @var string
+     */
+    private $section;
 
     /**
      * Word constructor.
-     * @param $wordGer
-     * @param $wordEng
-     * @param $example
-     * @param $genus
+     * @param string $wordGer
+     * @param string $wordEng
+     * @param string $example
+     * @param string $genus
+     * @param string $section
      */
-    public function __construct($wordGer, $wordEng, $example, $genus)
+    public function __construct($wordGer, $wordEng, $example, $genus, $section)
     {
-        self::$count++;
+        $this->wordID = 'w' . strval(self::$count + 1);
         $this->wordGer = $wordGer;
         $this->wordEng = $wordEng;
         $this->example = $example;
         $this->genus = $genus;
-        $this->wordID = 'w' . self::$count;
+        $this->section = $section;
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getId()
+    {
+        return self::$id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public static function setId($id)
+    {
+        self::$id = $id;
     }
 
     /**
@@ -51,29 +94,13 @@ class Word
     /**
      * @return string
      */
-    public static function getId()
-    {
-        return self::$id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public static function setId($id)
-    {
-        self::$id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getWordID()
     {
         return $this->wordID;
     }
 
     /**
-     * @param mixed $wordID
+     * @param string $wordID
      */
     public function setWordID($wordID)
     {
@@ -81,7 +108,7 @@ class Word
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getWordGer()
     {
@@ -89,7 +116,7 @@ class Word
     }
 
     /**
-     * @param mixed $wordGer
+     * @param string $wordGer
      */
     public function setWordGer($wordGer)
     {
@@ -97,7 +124,7 @@ class Word
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getWordEng()
     {
@@ -105,7 +132,7 @@ class Word
     }
 
     /**
-     * @param mixed $wordEng
+     * @param string $wordEng
      */
     public function setWordEng($wordEng)
     {
@@ -113,7 +140,7 @@ class Word
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getExample()
     {
@@ -121,7 +148,7 @@ class Word
     }
 
     /**
-     * @param mixed $example
+     * @param string $example
      */
     public function setExample($example)
     {
@@ -129,7 +156,7 @@ class Word
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getGenus()
     {
@@ -137,12 +164,27 @@ class Word
     }
 
     /**
-     * @param mixed $genus
+     * @param string $genus
      */
     public function setGenus($genus)
     {
         $this->genus = $genus;
     }
 
+    /**
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
+    }
+
+    /**
+     * @param string $section
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
+    }
 
 }
