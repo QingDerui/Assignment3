@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<?php session_start(); ?>
+<?php session_start();
+ $_SESSION['username']='1';
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8"><title>Title</title>
@@ -48,19 +50,29 @@
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="sidebar uk-width-medium-1-4 uk-width-large-1-6 uk-hidden-small uk-margin-large-top">
+                <div class='uk-sticky-placeholder'>
+                    <div class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px'>
+                        <h3>Study progress:</h3>
+                        <hr class='uk-grid-divider'>
                 <?php
                 if(isset($_SESSION['username'])){
-
-                }else{
-                    echo"<div class='uk-sticky-placeholder'>
-                    <div class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px'>
-                    <h3>Study progress:</h3>
-                    <hr class='uk-grid-divider'>
-                    <p>Please login to get your progress</p>
+                    echo "
+                    <div>
+                    <p>Section 1:</p>
+                    <div class='uk-progress uk-progress-striped'>
+                    <div class='uk-progress-bar' style='width: 40%;'>40%</div>
                     </div>
                     </div>";
+
+
+                }else{
+                    echo"
+                    <p>Please <a href='login.php'>login</a> to get your progress</p>
+                    ";
                 }
                 ?>
+                    </div>
+                </div>
             </aside>
             <main role="main" class="uk-width-medium-3-4 uk-width-large-5-6 uk-width-small-1-1 ">
                 <div class="uk-grid">
@@ -190,7 +202,8 @@
         <div class="uk-container uk-container-center uk-grid">
             <div class="uk-width-large-2-3 uk-margin-top">
                 <span><h2 style="color:#748487">Ahout</h2></span>
-                <p>The content of our websites are mainly referring the book </p>
+                <p style="color:#748487">The content of our websites are mainly referring the book "Netzwerk A1"</p>
+                <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang YuXuan</p>
             </div>
             <div class="uk-width-large-1-3 uk-margin-top">
                 <span><h2 style="color:#748487">Contact us</h2></span>
