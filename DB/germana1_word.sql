@@ -29,7 +29,8 @@ CREATE TABLE `word` (
   `wordger` varchar(90) DEFAULT NULL,
   `wordeng` varchar(200) DEFAULT NULL,
   `example` varchar(500) DEFAULT NULL,
-  `genus` varchar(3) DEFAULT NULL
+  `genus` varchar(3) DEFAULT NULL,
+  `section` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +40,7 @@ CREATE TABLE `word` (
 
 LOCK TABLES `word` WRITE;
 /*!40000 ALTER TABLE `word` DISABLE KEYS */;
-INSERT INTO `word` VALUES ('w1','Name','name','Mein Name ist Anna.','n.');
+INSERT INTO `word` VALUES ('w1','Name','name','Mein Name ist Anna.','n.','1'),('w2','Vorname','first name','Mein Vorname ist Lana','n.','1'),('w3','Nachname','last name','Mein Nachname ist Lang.','n.','1'),('w4','Telefonnummer','telephone number','Mein Telefonnummer ist +49-163-3232-3232','n.','1'),('w5','Handynummer','cellphone number','Mein Handynummer ist +49-163-3232-3232','n.','1'),('w6','Hausnummer','house telephone number','Mein Hausnummer ist 55-5501','n.','1');
 /*!40000 ALTER TABLE `word` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-27  3:00:30
+-- Dump completed on 2018-12-27  5:05:39
