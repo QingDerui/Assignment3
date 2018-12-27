@@ -4,39 +4,80 @@
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
-require("Word.php");
 
 class DB_Controller
 {
+    /**
+     * @var
+     */
     private static $con;
+    /**
+     * @var string
+     */
     private static $host = "localhost";
+    /**
+     * @var int
+     */
     private static $port = 3306;
+    /**
+     * @var string
+     */
     private static $socket = "";
+    /**
+     * @var string
+     */
     private static $user = "root";
-    private static $password = "";
+    /**
+     * @var string
+     */
+    private static $password = "password";
+    /**
+     * @var string
+     */
     private static $dbname = "germana1";
 
+    /**
+     *
+     */
     public static function createConnection()
     {
         self::$con = new mysqli(self::$host, self::$user, self::$password, self::$dbname, self::$port, self::$socket)
         or die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
+    /**
+     *
+     */
     public static function closeConnection()
     {
         self::$con->close();
     }
 
+    /**
+     * @param $word
+     * @return bool
+     */
     public static function addWord($word)
     {
-        $query = "insert into word (wordid, wordger, wordeng, example, genus) values (?, ?, ?, ?, ?)";
+        $query = "insert into word (wordid, wordger, wordeng, example, genus, section) values (?, ?, ?, ?, ?, ?)";
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("sssss", $word->getWordID, $word->getWordGer, $word->getWordEng, $word->getExample, $word->getGenus);
-            $stmt->execute();
+            $wordid = $word->getWordID();
+            $wordGer = $word->getWordGer();
+            $wordEng = $word->getWordEng();
+            $example = $word->getExample();
+            $genus = $word->getGenus();
+            $section = $word->getSection();
+            $stmt->bind_param("ssssss", $wordid, $wordGer, $wordEng, $example, $genus, $section);
+            $result = $stmt->execute();
             $stmt->close();
+            return $result;
         }
+        return false;
     }
 
+    /**
+     *
+     */
     public static function setWordCount()
     {
         $query = "select wordid from word";
@@ -56,5 +97,36 @@ class DB_Controller
         }
         Word::setId('w' . strval($maxid));
         Word::setCount(strval($maxid));
+    }
+
+    /**
+     * @return array|null
+     */
+    public static function getAllWords()
+    {
+        $query = "select wordid, wordger, wordeng, example, genus, section from word";
+        $wordid = '';
+        $wordeng = '';
+        $wordger = '';
+        $example = '';
+        $genus = '';
+        $section = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $section);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $word->setWordID($wordid);
+                $words[] = $word;
+            }
+            $stmt->close();
+        }
+
+        if (empty($words)) {
+            return null;
+        } else {
+            return $words;
+        }
     }
 }
