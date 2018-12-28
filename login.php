@@ -1,6 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<?php session_start(); ?>
+<?php session_start();
+unset($_SESSION['signed']);
+unset($_SESSION['pwPass']);
+unset($_SESSION['nameNull']);
+?>
 <head>
     <meta charset="UTF-8"><title>Title</title>
 
@@ -79,10 +83,10 @@
                         if(!isset($_SESSION['userExisted']) || $_SESSION['userExisted']===true){
                             if(!isset($_SESSION['userPass']) || $_SESSION['userPass']===true){
                             }else{
-                                echo "<div class='uk-alert uk-alert-warning uk-text-center'>Your password is wrong.</div>";
+                                echo "<div class='uk-alert uk-alert-danger uk-text-center'>Your password is wrong.</div>";
                             }
                         }else{
-                            echo "<div class='uk-alert uk-alert-warning uk-text-center'>This user does not exist.</div>";
+                            echo "<div class='uk-alert uk-alert-danger uk-text-center'>This user does not exist.</div>";
                         }
                     ?>
 

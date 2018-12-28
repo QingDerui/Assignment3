@@ -2,6 +2,10 @@
 <?php session_start();
 unset($_SESSION['userExisted']);
 unset($_SESSION['userPass']);
+unset($_SESSION['signed']);
+unset($_SESSION['pwPass']);
+unset($_SESSION['nameNull']);
+
 ?>
 <html lang="en">
 <head>
