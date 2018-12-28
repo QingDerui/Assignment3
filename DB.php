@@ -31,7 +31,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "password";
+    private static $password = "";
     /**
      * @var string
      */

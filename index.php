@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <?php session_start();
- $_SESSION['username']='1';
+unset($_SESSION['userExisted']);
+unset($_SESSION['userPass']);
 ?>
 <html lang="en">
 <head>
@@ -40,8 +41,16 @@
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="signUp.php">Sign up</a></li>
+                <?php
+                    if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                        echo "<li><a href='signOut.php'>Sign out</a></li>";
+                    }else{
+                        echo "<li><a href='login.php'>Login</a></li>";
+                        echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    }
+
+                    ?>
+
             </ul>
         </div>
     </div>
@@ -55,7 +64,7 @@
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
-                if(isset($_SESSION['username'])){
+                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
                     echo "
                     <div>
                     <p>Section 1:</p>
