@@ -258,7 +258,6 @@ class DB_Controller
         $wordger = '';
         $example = '';
         $genus = '';
-        $section = '';
 
         if ($stmt = self::$con->prepare($query)) {
             $stmt->bind_param("s", $section);
