@@ -276,4 +276,39 @@ class DB_Controller
             }
         }
     }
+
+    /**
+     * getting a list of 10 random words from word table with the specified section. The list doesn't include words that are marked familiar for 3 times.
+     * This method is used for signed in users.
+     * @param $section
+     * @param $userID
+     * @return array|null :the list of 10 random words
+     */
+    public static function getRandomList_signed($section, $userID)
+    {
+        $query = "select wordid, wordger, wordeng, example, genus from word where section=? and word.wordid not in (select wordid from user_word_status where userid=? and status='3') order by rand() limit 10";
+
+        $wordid = '';
+        $wordeng = '';
+        $wordger = '';
+        $example = '';
+        $genus = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ss", $section, $userID);
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $word->setWordID($wordid);
+                $words[] = $word;
+            }
+            $stmt->close();
+            if (!empty($words)) {
+                return $words;
+            } else {
+                return null;
+            }
+        }
+    }
 }
