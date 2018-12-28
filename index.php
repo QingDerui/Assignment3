@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <?php session_start();
-unset($_SESSION['userExisted']);
-unset($_SESSION['userPass']);
+ $_SESSION['username']='1';
 ?>
 <html lang="en">
 <head>
@@ -9,11 +8,53 @@ unset($_SESSION['userPass']);
 
     <link rel="stylesheet" type="text/css" href="css/uikit.css" />
     <link rel="stylesheet" type="text/css" href="css/components/sticky.css" />
+    <link rel="stylesheet" type="text/css" href="css/mdui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/uploadimage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/selfdefined.css"/>
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
+    <script src="js/mdui.min.js"></script>
 </head>
-<body>
+
+<body class="mdui-drawer-body-left">
+
+<div class="mdui-drawer" id="drawer">
+    <ul class="mdui-list">
+        <li style="text-align: center">
+            <div class="contentDiv">
+                <img src="icons/userImageDef.jpg" />
+            </div>
+            <br><br>
+
+            <div style="position: relative;left:-45px;">
+                <a class="login" href="login.php">Login</a>
+            </div>
+
+            <div style="position: relative;left: 145px;top:-23px;width:40px;">
+                <a class="login" href="signUp.php">Sign up</a>
+            </div>
+
+            <div style="position: relative;top:-46px;left:116px;width:5px;height:2px">
+                <p style="font-size: 20px;color:gainsboro">|</p>
+            </div>
+        </li>
+        <li class="mdui-subheader">Lists</li>
+        <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content"><a class="list-family">Account</a></div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content"><a class="list-family">LearningXXX</a></div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content"><a class="list-family">My Word List</a></div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content"><a class="list-family">Contact</a></div>
+        </li>
+    </ul>
+</div>
+
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
@@ -41,16 +82,11 @@ unset($_SESSION['userPass']);
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
-                <?php
-                    if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
-                        echo "<li><a href='signOut.php'>Sign out</a></li>";
-                    }else{
-                        echo "<li><a href='login.php'>Login</a></li>";
-                        echo "<li><a href=\"signUp.php\">Sign up</a></li>";
-                    }
-
-                    ?>
-
+                <li>
+                    <div class="mdui-container" style="position: absolute;top:10px;right:120px;">
+                        <button id="toggle" class="mdui-btn mdui-color-pink-accent mdui-m-a-1">Your Account</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -64,7 +100,7 @@ unset($_SESSION['userPass']);
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
-                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                if(isset($_SESSION['username'])){
                     echo "
                     <div>
                     <p>Section 1:</p>
@@ -207,25 +243,10 @@ unset($_SESSION['userPass']);
     </div>
 </div>
 <footer>
-    <div style="background-color: #002833;height:200px;margin-top: 80px">
-        <div class="uk-container uk-container-center uk-grid">
-            <div class="uk-width-large-2-3 uk-margin-top">
-                <span><h2 style="color:#748487">Ahout</h2></span>
-                <p style="color:#748487">The content of our websites are mainly referring the book "Netzwerk A1"</p>
-                <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang Yuxuan</p>
-            </div>
-            <div class="uk-width-large-1-3 uk-margin-top">
-                <span><h2 style="color:#748487">Contact us</h2></span>
-                <p style="color:#748487">E-mail:574696335@qq.com</p>
-            </div>
-        </div>
-    </div>
-    <div style="background-color: #003038">
-        <div class="uk-container uk-container-center">
-            <div class="uk-margin-top"><p style="color:#748487">©2018 German Words. All rights reserved. </p></div>
-        </div>
+    <div style="background-color: #003038;height:25px;margin-top: 100px;">
+            <div class="uk-margin-top" style="position: relative;top:4px;text-align: center"><p style="color:#748487">©2018 German Words. All rights reserved. </p></div>
     </div>
 </footer>
-
+<script src="js/drawer.js"></script>
 </body>
 </html>
