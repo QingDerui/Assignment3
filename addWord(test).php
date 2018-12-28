@@ -85,6 +85,9 @@ if (!empty($_POST['updateWord'])) {
                         n.
                     </option>
                     <option>
+                        pl.
+                    </option>
+                    <option>
                         -
                     </option>
                 </select>
@@ -93,7 +96,7 @@ if (!empty($_POST['updateWord'])) {
                 <select name="newWord[section]">
                     <option>1</option>
                     <option>2</option>
-                    <option>3</option>
+                    <option selected>3</option>
                     <option>4</option>
                     <option>5</option>
                     <option>6</option>

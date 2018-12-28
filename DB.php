@@ -185,10 +185,11 @@ class DB_Controller
     public static function signUp($user)
     {
         $query = "insert into user (userid, password) values (?,?)";
-
+        $userID = $user->getUserID();
+        $password = $user->getUserPW();
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("ss", $user->getUserID(), $user->getUserPW());
+            $stmt->bind_param("ss", $userID, $password);
             $result = $stmt->execute();
             while ($stmt->fetch()) {
                 //printf("%s, %s\n", $field1, $field2);
@@ -225,8 +226,11 @@ class DB_Controller
     public static function checkPassword($user){
         $query = "select userid from user where userid=? and password=?";
 
+        $userID = $user->getUserID();
+        $password = $user->getUserPW();
+
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("ss", $user->getUserID(), $user->getUserPW());
+            $stmt->bind_param("ss", $userID, $password);
             $stmt->execute();
             while ($stmt->fetch()) {
                 return true;

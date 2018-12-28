@@ -212,7 +212,7 @@ unset($_SESSION['userPass']);
             <div class="uk-width-large-2-3 uk-margin-top">
                 <span><h2 style="color:#748487">Ahout</h2></span>
                 <p style="color:#748487">The content of our websites are mainly referring the book "Netzwerk A1"</p>
-                <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang YuXuan</p>
+                <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang Yuxuan</p>
             </div>
             <div class="uk-width-large-1-3 uk-margin-top">
                 <span><h2 style="color:#748487">Contact us</h2></span>
