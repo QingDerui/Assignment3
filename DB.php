@@ -4,7 +4,8 @@
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
-
+require_once ('User.php');
+require_once ('Word.php');
 class DB_Controller
 {
     /**
@@ -175,5 +176,63 @@ class DB_Controller
             return $result;
         }
         return false;
+    }
+
+    /**
+     * @param $user
+     * @return bool: true if succeeded
+     */
+    public static function signUp($user)
+    {
+        $query = "insert into user (userid, password) values (?,?)";
+
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ss", $user->getUserID(), $user->getUserPW());
+            $result = $stmt->execute();
+            while ($stmt->fetch()) {
+                //printf("%s, %s\n", $field1, $field2);
+            }
+            $stmt->close();
+            return $result;
+        }
+        return false;
+    }
+
+    /**
+     * @param $userID
+     * @return bool: true if has there exists a user with the specified user ID
+     */
+    public static function checkUser($userID){
+        $query = "select userid from user where userid=?";
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("s", $userID);
+            $stmt->execute();
+            while ($stmt->fetch()) {
+                return true;
+            }
+            $stmt->close();
+            return false;
+        }
+    }
+
+    /**
+     * !!!call checkUser first!!!
+     * @param $user
+     * @return bool: true if the password is correct.
+     */
+    public static function checkPassword($user){
+        $query = "select userid from user where userid=? and password=?";
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ss", $user->getUserID(), $user->getUserPW());
+            $stmt->execute();
+            while ($stmt->fetch()) {
+                return true;
+            }
+            $stmt->close();
+            return false;
+        }
     }
 }
