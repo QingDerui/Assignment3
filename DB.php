@@ -4,8 +4,9 @@
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
-require_once ('User.php');
-require_once ('Word.php');
+require_once('User.php');
+require_once('Word.php');
+
 class DB_Controller
 {
     /**
@@ -204,7 +205,8 @@ class DB_Controller
      * @param $userID
      * @return bool: true if has there exists a user with the specified user ID
      */
-    public static function checkUser($userID){
+    public static function checkUser($userID)
+    {
         $query = "select userid from user where userid=?";
 
         if ($stmt = self::$con->prepare($query)) {
@@ -223,7 +225,8 @@ class DB_Controller
      * @param $user
      * @return bool: true if the password is correct.
      */
-    public static function checkPassword($user){
+    public static function checkPassword($user)
+    {
         $query = "select userid from user where userid=? and password=?";
 
         $userID = $user->getUserID();
@@ -237,6 +240,41 @@ class DB_Controller
             }
             $stmt->close();
             return false;
+        }
+    }
+
+
+    /**
+     * getting a list of 10 random words from word table with the specified section. this method is used when user is not signed in.
+     * @param $section
+     * @return array|null: the list of 10 random words
+     */
+    public static function getRandomList_XSigned($section)
+    {
+        $query = "select wordid, wordger, wordeng, example, genus from word where section=? order by rand() limit 10";
+
+        $wordid = '';
+        $wordeng = '';
+        $wordger = '';
+        $example = '';
+        $genus = '';
+        $section = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("s", $section);
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $word->setWordID($wordid);
+                $words[] = $word;
+            }
+            $stmt->close();
+            if (!empty($words)) {
+                return $words;
+            } else {
+                return null;
+            }
         }
     }
 }
