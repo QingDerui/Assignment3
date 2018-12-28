@@ -59,35 +59,6 @@ if (!empty($_POST['updateWord'])) {
             section
         </th>
     </tr>
-    <?php
-    DB_Controller::createConnection();
-    $words = DB_Controller::getAllWords();
-    DB_Controller::closeConnection();
-    if (is_null($words)) {
-        echo "<tr><td>no word</td></tr><";
-    } else {
-        foreach ($words as $word) {
-            $wordid = $word->getWordID();
-            $wordGer = $word->getWordGer();
-            $wordEng = $word->getWordEng();
-            $example = $word->getExample();
-            $genus = $word->getGenus();
-            $section = $word->getSection();
-            echo "<tr>\n";
-            echo "<form method='post' action='addWord(test).php'>\n";
-            echo "<td><input name='updateWord[wordID]' value='$wordid'></td>\n";
-            echo "<td><input name='updateWord[wordGer]' value='$wordGer'></td>\n";
-            echo "<td><input name='updateWord[wordEng]' value='$wordEng'></td>\n";
-            echo "<td ><input name='updateWord[example]' style='width: 650px;' value='$example'></td>\n";
-            echo "<td><input name='updateWord[genus]' style='width: 60px;' value='$genus'></td>\n";
-            echo "<td><input name='updateWord[section]' style='width: 60px;' value='$section'></td>\n";
-            echo "<td><button class='modify' href='javascript:;' type='button'>Modify</button></td>\n";
-            echo "<td><input type='submit' value='Update'></td>\n";
-            echo "</form>\n";
-            echo "</tr>\n";
-        }
-    }
-    ?>
     <tr>
         <form method="post" id="newWordFrom">
             <td>
@@ -139,6 +110,35 @@ if (!empty($_POST['updateWord'])) {
             </td>
         </form>
     </tr>
+    <?php
+    DB_Controller::createConnection();
+    $words = DB_Controller::getAllWords();
+    DB_Controller::closeConnection();
+    if (is_null($words)) {
+        echo "<tr><td>no word</td></tr><";
+    } else {
+        foreach ($words as $word) {
+            $wordid = $word->getWordID();
+            $wordGer = $word->getWordGer();
+            $wordEng = $word->getWordEng();
+            $example = $word->getExample();
+            $genus = $word->getGenus();
+            $section = $word->getSection();
+            echo "<tr>\n";
+            echo "<form method='post' action='addWord(test).php'>\n";
+            echo "<td><input name='updateWord[wordID]' value='$wordid'></td>\n";
+            echo "<td><input name='updateWord[wordGer]' value='$wordGer'></td>\n";
+            echo "<td><input name='updateWord[wordEng]' value='$wordEng'></td>\n";
+            echo "<td ><input name='updateWord[example]' style='width: 650px;' value='$example'></td>\n";
+            echo "<td><input name='updateWord[genus]' style='width: 60px;' value='$genus'></td>\n";
+            echo "<td><input name='updateWord[section]' style='width: 60px;' value='$section'></td>\n";
+            echo "<td><button class='modify' href='javascript:;' type='button'>Modify</button></td>\n";
+            echo "<td><input type='submit' value='Update'></td>\n";
+            echo "</form>\n";
+            echo "</tr>\n";
+        }
+    }
+    ?>
 </table>
 
 
