@@ -64,8 +64,7 @@
                             <label class="uk-form-label">Confirm your password</label>
                             <input type="password" name="passwordRepeat" value="" class="uk-form-large uk-width-1-1" maxlength="40" aria-autocomplete="list">
                         </div>
-                        <input type="hidden" name="_signup">
-                        <button id="signup-button" type="submit" name="_signup" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-large-top loader"> Sign up</button>
+                        <button id="signup-button" type="submit" name="signUp" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-large-top loader"> Sign up</button>
                     </form>
                 </div>
             </div>

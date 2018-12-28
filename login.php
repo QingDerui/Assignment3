@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
+<?php session_start(); ?>
 <head>
     <meta charset="UTF-8"><title>Title</title>
 
@@ -63,16 +64,28 @@
                             </div>
                         </div>
                         <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-top loader">Login</button>
-                        <div class="uk-grid uk-text uk-margin-large-top">
-                            <div class="uk-width-1-1 uk-align-center">
-                                <input type="checkbox" name="remember_me" value="yes"> Remember me? </div>
-                        </div>
+<!--                        <div class="uk-grid uk-text uk-margin-large-top">-->
+<!--                            <div class="uk-width-1-1 uk-align-center">-->
+<!--                                <input type="checkbox" name="remember_me" value="yes"> Remember me? -->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="uk-grid">
                             <div class="uk-width-1-1 uk-margin-top uk-text-right">
                                 Don't have an account? <a href="signUp.php">Sign up</a>
                             </div>
                         </div>
                     </form>
+                    <?php
+                        if(!isset($_SESSION['userExisted']) || $_SESSION['userExisted']===true){
+                            if(!isset($_SESSION['userPass']) || $_SESSION['userPass']===true){
+                            }else{
+                                echo "<div class='uk-alert uk-alert-warning uk-text-center'>Your password is wrong.</div>";
+                            }
+                        }else{
+                            echo "<div class='uk-alert uk-alert-warning uk-text-center'>This user does not exist.</div>";
+                        }
+                    ?>
+
                 </div>
             </div>
         </div>
