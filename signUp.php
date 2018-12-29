@@ -1,5 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="en">
+<?php session_start();
+unset($_SESSION['userExisted']);
+unset($_SESSION['userPass']);
+?>
 <head>
     <meta charset="UTF-8"><title>Title</title>
 
@@ -49,7 +53,7 @@
             <div class="uk-width-medium-1-1 uk-width-large-1-1 uk-width-small-1-1">
                 <h1 class="uk-h2 uk-text-center">Create Account</h1>
                 <div class="uk-container-center uk-width-medium-2-5 uk-width-large-3-10 uk-width-small-3-5 uk-margin-large-top">
-                    <form action="" method="post" class="uk-form uk-form-stacked">
+                    <form action="signUpAction.php" method="post" class="uk-form uk-form-stacked">
                         <div class="uk-form-row">
                             <label class="uk-form-label">Username</label>
                             <div class="uk-form-controls">
@@ -67,6 +71,26 @@
                         <button id="signup-button" type="submit" name="signUp" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-large-top loader"> Sign up</button>
                     </form>
                 </div>
+                <?php
+                if(!isset($_SESSION['nameNull']) || $_SESSION['nameNull']===false){
+                    if(!isset($_SESSION['signed']) || $_SESSION['signed']===false){
+                        if(!isset($_SESSION['pwPass'])) {
+
+                        }else{
+                            if($_SESSION['pwPass'] === true) {
+                                echo "<div class='uk-alert uk-alert-success uk-text-center uk-margin-top'>Account registered successfully. Please <a href='login.php'>login.</a></div>";
+                            }else{
+                                echo "<div class='uk-alert uk-alert-danger uk-text-center uk-margin-top'>Please check your passwords are the same.</div>";
+                            }
+
+                        }
+                    }else{
+                        echo "<div class='uk-alert uk-alert-danger uk-text-center uk-margin-top'>Your username has already been registered.</div>";
+                    }
+                }else{
+                    echo "<div class='uk-alert uk-alert-danger uk-text-center uk-margin-top'>Your username should not be empty</div>";
+                }
+                ?>
             </div>
         </div>
     </div>
