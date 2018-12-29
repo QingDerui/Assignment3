@@ -8,6 +8,8 @@ unset($_SESSION['nameNull']);
 require_once ('Word.php');
 require_once ('DB.php');
 require_once ('User.php');
+
+$section = $_POST['section'];
 ?>
 <html lang="en">
 <head>
@@ -94,14 +96,21 @@ require_once ('User.php');
             <main role="main" class="uk-width-medium-3-4 uk-width-large-5-6 uk-width-small-1-1" style="min-height: 800px">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-1-1">
-                        <h1>Section 1: List1</h1>
+                        <?php
+                        echo "<h1>Section ".$section;
+                        if( isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                            echo ": List"."<h1>";
+                        }else{
+                            echo ": Random List<h1>";
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="uk-margin-large-top">
                     <div class="uk-accordion" data-uk-accordion>
                         <?php
                         DB_Controller::createConnection();
-                        $words = DB_Controller::getRandomList_XSigned('1');
+                        $words = DB_Controller::getRandomList_XSigned($section);
                         foreach ($words as $word){
                             echo "<h3 class=\"uk-accordion-title uk-active\">".$word->getWordGer()."</h3>";
                             echo "<div class=\"uk-accordion-content uk-text-large\">";
@@ -119,9 +128,9 @@ require_once ('User.php');
                             echo "<p>".$word->getExample()."</p></div>";
                             echo "</div>";
                         }
-
-
                         ?>
+
+
                     </div>
                 </div>
             </main>
