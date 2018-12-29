@@ -68,7 +68,7 @@ unset($_SESSION['nameNull']);
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
-                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                if(isset($_SESSION['username'])){
                     echo "
                     <div>
                     <p>Section 1:</p>
@@ -99,7 +99,7 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <a class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%" href="memoryWords.php">Learn it now!</a>
+                                <a href="memoryWords.php" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</a>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 1:Guten Tag!</p>

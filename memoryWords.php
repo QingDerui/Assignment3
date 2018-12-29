@@ -5,7 +5,9 @@ unset($_SESSION['userPass']);
 unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
-
+require_once ('Word.php');
+require_once ('DB.php');
+require_once ('User.php');
 ?>
 <html lang="en">
 <head>
@@ -98,17 +100,28 @@ unset($_SESSION['nameNull']);
                 <div class="uk-margin-large-top">
                     <div class="uk-accordion" data-uk-accordion>
                         <?php
+                        DB_Controller::createConnection();
+                        $words = DB_Controller::getRandomList_XSigned('1');
+                        foreach ($words as $word){
+                            echo "<h3 class=\"uk-accordion-title uk-active\">".$word->getWordGer()."</h3>";
+                            echo "<div class=\"uk-accordion-content uk-text-large\">";
+                            echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
+                            echo $word->getGenus();
+                            echo "</div>";
+                            echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
+                            echo $word->getWordEng();
+                            echo "</div>";
+                            echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
+                            echo "<button class='uk-button-primary' type='button'>Know</button>";
+                            echo "<button class='uk-button-primary uk-margin-small-left' type='button'>Unknown</button>";
+                            echo "</div></div>";
+                            echo "<div class='uk-margin-top'><h3>Example:</h3>";
+                            echo "<p>".$word->getExample()."</p></div>";
+                            echo "</div>";
+                        }
 
 
                         ?>
-                        <h3 class="uk-accordion-title uk-active">Ein</h3>
-                        <div class="uk-accordion-content">...</div>
-
-                        <h3 class="uk-accordion-title">Zwei</h3>
-                        <div class="uk-accordion-content">...</div>
-
-                        <h3 class="uk-accordion-title">...</h3>
-                        <div class="uk-accordion-content">...</div>
                     </div>
                 </div>
             </main>
