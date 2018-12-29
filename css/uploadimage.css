@@ -1,8 +1,0 @@
-.contentDiv{text-align:center;display:inline-block;margin:5px auto;width:100px;height:100px;border-radius:100px;-webkit-border-radius:100px;-moz-border-radius:100px;border:2px solid #fff;box-shadow:0 0 4px #ccc;overflow:hidden;}
-.contentDiv img{ width:100%;min-height:100%;}
-.upload{position: relative;width: 80px;height: 18px;line-height: 18px;background: #2fc7c9;text-align: center;
-              color: #FFF;padding: 0px 5px;-webkit-border-radius: 2px;border-radius: 2px;
-              margin: 0 auto;
-              }
-.upload form{width:100%;position:absolute; left:0; top:0;opacity:0; filter:alpha(opacity=0);}
-.upload form input{width: 100%;}

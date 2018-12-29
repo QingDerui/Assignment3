@@ -99,7 +99,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="1">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 1:Guten Tag!</p>
@@ -108,7 +111,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="2">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 2:Freunde, Kollegen und ich</p>
@@ -117,7 +123,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button  class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="3">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 3:In der Stadt</p>
@@ -126,7 +135,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="4">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 4:Guten Appetit!</p>
@@ -135,7 +147,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="5">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 5:Tag für Tag</p>
@@ -144,7 +159,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="6">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 6:Zeit mit Freunden</p>
@@ -153,7 +171,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="7">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 7:Kontakte</p>
@@ -162,7 +183,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="8">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 8:Meine Wohnung</p>
@@ -171,7 +195,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="9">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 9:Alles Arbeit?</p>
@@ -180,7 +207,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="10">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 10:Kleidung und Mode</p>
@@ -189,7 +219,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="11">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 11:Gesund und munter</p>
@@ -198,7 +231,10 @@ unset($_SESSION['nameNull']);
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <button class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                <form action="memoryWords.php" method="post">
+                                    <input type="hidden" name="section" value="12">
+                                    <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
+                                </form>
                             </div>
                         </figure>
                         <p class="uk-text-center">Section 12:Ab in den Urlaub!</p>
