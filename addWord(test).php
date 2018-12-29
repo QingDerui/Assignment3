@@ -7,8 +7,8 @@
 </head>
 <body>
 <?php
-require('Word.php');
-require('DB.php');
+require_once ('Word.php');
+require_once ('DB.php');
 if (!empty($_POST['newWord'])) {
     DB_Controller::createConnection();
     DB_Controller::setWordCount();
@@ -96,9 +96,9 @@ if (!empty($_POST['updateWord'])) {
                 <select name="newWord[section]">
                     <option>1</option>
                     <option>2</option>
-                    <option selected>3</option>
+                    <option>3</option>
                     <option>4</option>
-                    <option>5</option>
+                    <option selected>5</option>
                     <option>6</option>
                     <option>7</option>
                     <option>8</option>
@@ -113,8 +113,8 @@ if (!empty($_POST['updateWord'])) {
             </td>
         </form>
     </tr>
-    <?php
-    DB_Controller::createConnection();
+<!--    --><?php
+/*    DB_Controller::createConnection();
     $words = DB_Controller::getAllWords();
     DB_Controller::closeConnection();
     if (is_null($words)) {
@@ -141,7 +141,7 @@ if (!empty($_POST['updateWord'])) {
             echo "</tr>\n";
         }
     }
-    ?>
+    */?>
 </table>
 
 
