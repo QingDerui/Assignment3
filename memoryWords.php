@@ -9,7 +9,10 @@ require_once ('Word.php');
 require_once ('DB.php');
 require_once ('User.php');
 
-$section = $_POST['section'];
+if(isset($_POST['section'])) {
+    $section = $_POST['section'];
+    $_SESSION['section'] = $section;
+}
 ?>
 <html lang="en">
 <head>
@@ -97,7 +100,7 @@ $section = $_POST['section'];
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-1-1">
                         <?php
-                        echo "<h1>Section ".$section;
+                        echo "<h1>Section ".$_SESSION['section'];
                         if( isset($_SESSION['username']) && !is_null($_SESSION['username'])){
                             echo ": List"."<h1>";
                         }else{
@@ -110,7 +113,7 @@ $section = $_POST['section'];
                     <div class="uk-accordion" data-uk-accordion>
                         <?php
                         DB_Controller::createConnection();
-                        $words = DB_Controller::getRandomList_XSigned($section);
+                        $words = DB_Controller::getRandomList_XSigned($_SESSION['section']);
                         foreach ($words as $word){
                             echo "<h3 class=\"uk-accordion-title uk-active\">".$word->getWordGer()."</h3>";
                             echo "<div class=\"uk-accordion-content uk-text-large\">";
@@ -121,8 +124,8 @@ $section = $_POST['section'];
                             echo $word->getWordEng();
                             echo "</div>";
                             echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
-                            echo "<button class='uk-button-primary' type='button'>Know</button>";
-                            echo "<button class='uk-button-primary uk-margin-small-left' type='button'>Unknown</button>";
+                            echo "<button class='uk-button-success' type='button'>Know</button>";
+                            echo "<button class='uk-button-danger uk-margin-small-left' type='button'>Unknown</button>";
                             echo "</div></div>";
                             echo "<div class='uk-margin-top'><h3>Example:</h3>";
                             echo "<p>".$word->getExample()."</p></div>";
@@ -131,6 +134,14 @@ $section = $_POST['section'];
                         ?>
 
 
+                    </div>
+                </div>
+
+                <div>
+
+                    <span>
+                        <a href="memoryWords.php" class="uk-text-middle uk-text-large"> Next List</a>
+                    </span>
                     </div>
                 </div>
             </main>
