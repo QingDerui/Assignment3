@@ -68,7 +68,7 @@ unset($_SESSION['nameNull']);
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
-                if(isset($_SESSION['username'])){
+                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
                     echo "
                     <div>
                     <p>Section 1:</p>

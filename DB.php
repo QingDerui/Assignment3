@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "";
+    private static $password = "password";
     /**
      * @var string
      */
@@ -282,11 +282,12 @@ class DB_Controller
      * This method is used for signed in users.
      * @param $section
      * @param $userID
+     * @param $listNumber
      * @return array|null :the list of 10 random words
      */
-    public static function getRandomList_signed($section, $userID)
+    public static function getRandomList_signed($section, $userID, $listNumber)
     {
-        $query = "select wordid, wordger, wordeng, example, genus from word where section=? and word.wordid not in (select wordid from user_word_status where userid=? and status='3') order by rand() limit 10";
+        $query = "select wordid, wordger, wordeng, example, genus from word where section=? and word.wordid not in (select wordid from user_word_status where userid=? and status=3) order by rand() limit 10";
 
         $wordid = '';
         $wordeng = '';
@@ -300,15 +301,135 @@ class DB_Controller
             $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
             while ($stmt->fetch()) {
                 $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $wordids[] = $wordid;
                 $word->setWordID($wordid);
                 $words[] = $word;
             }
             $stmt->close();
-            if (!empty($words)) {
-                return $words;
-            } else {
-                return null;
+        }
+
+        // save into user_word_status
+        $query = "insert into user_word_status (userid, wordid, listnumber) values (?, ?, ?)";
+
+
+        if ($stmt = self::$con->prepare($query)) {
+            foreach ($wordids as $wordid) {
+                $stmt->bind_param('sss', $userID, $wordid, $listNumber);
+                $stmt->execute();
+                while ($stmt->fetch()) {
+                    //null
+                }
             }
+            $stmt->close();
+        }
+
+
+        if (!empty($words)) {
+            return $words;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * this function is used to save status into user_word_status
+     * @param $userID
+     * @param $wordID
+     * @param $status
+     */
+    public static function saveWordStatus($userID, $wordID, $status)
+    {
+        $query = "update user_word_status set status=status+? where userid=? and wordid=?";
+
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('iss', $status, $userID, $wordID);
+            $stmt->execute();
+            while ($stmt->fetch()) {
+                // null
+            }
+            $stmt->close();
+        }
+    }
+
+    /**
+     * This function is used to get the number of the recognized words of the specified user and word section.
+     * @param $userid
+     * @param $section
+     * @return int|null : the number of the recognized words; return null when where is error
+     */
+    public static function getRecognizedWordNumber($userid, $section)
+    {
+        $query = "select count(*) from user_word_status where userid=? and user_word_status.wordid in (select wordid from word where section=?)";
+        $result = 0;
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('ss', $userid, $section);
+            $stmt->execute();
+            $stmt->bind_result($result);
+            while ($stmt->fetch()) {
+                return $result;
+            }
+            $stmt->close();
+        }
+        return null;
+    }
+
+    /**
+     * This function is used to get the number of the lists of the specified user and word section.
+     * @param $userid
+     * @param $section
+     * @return int|null the number of the lists; return null when where is error
+     */
+    public static function getListNumber($userid, $section)
+    {
+        $query = "select count(listnumber) from user_word_status where userid=? and user_word_status.wordid in (select wordid from word where section=?)";
+        $result = 0;
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('ss', $userid, $section);
+            $stmt->execute();
+            $stmt->bind_result($result);
+            while ($stmt->fetch()) {
+                return $result;
+            }
+            $stmt->close();
+        }
+        return null;
+    }
+
+    /**
+     * This function is used to get a list of words with the specified userid, word section, and list number.
+     * @param $userid
+     * @param $section
+     * @param $listNumber
+     * @return array|null array of words
+     */
+    public static function getListWords($userid, $section, $listNumber)
+    {
+        $query = "select wordid, wordger, wordeng, example, genus from word where word.wordid in (select wordid from user_word_status where userid=? and section=? and listnumber=?)";
+        $wordid = '';
+        $wordger = '';
+        $wordeng = '';
+        $example = '';
+        $genus = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('sss', $userid, $section, $listNumber);
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $word->setWordID($wordid);
+                $words[] = $word;
+            }
+            $stmt->close();
+        }
+
+        if (!empty($words)) {
+            return $words;
+        } else {
+            return null;
         }
     }
 }
