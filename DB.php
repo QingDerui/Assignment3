@@ -360,7 +360,7 @@ class DB_Controller
      */
     public static function getRecognizedWordNumber($userid, $section)
     {
-        $query = "select count(*) from user_word_status where userid=? and user_word_status.wordid in (select wordid from word where section=?)";
+        $query = "select count(*) from user_word_status where userid=? and status>0 and user_word_status.wordid in (select wordid from word where section=?)";
         $result = 0;
 
         if ($stmt = self::$con->prepare($query)) {
