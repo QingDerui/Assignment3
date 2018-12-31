@@ -407,27 +407,31 @@ class DB_Controller
      */
     public static function getListWords($userid, $section, $listNumber)
     {
-        $query = "select wordid, wordger, wordeng, example, genus from word where word.wordid in (select wordid from user_word_status where userid=? and section=? and listnumber=?)";
+        $query = "select word.wordid, word.wordger, word.wordeng, word.example, word.genus, user_word_status.status from word, user_word_status where word.wordid=user_word_status.wordid and user_word_status.userid=? and word.wordid in (select wordid from user_word_status where userid=? and section=? and listnumber=?)";
         $wordid = '';
         $wordger = '';
         $wordeng = '';
         $example = '';
         $genus = '';
+        $stauts = 0;
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param('sss', $userid, $section, $listNumber);
+            $stmt->bind_param('ssss', $userid, $userid, $section, $listNumber);
             $stmt->execute();
-            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $stauts);
             while ($stmt->fetch()) {
                 $word = new Word($wordger, $wordeng, $example, $genus, $section);
-                $word->setWordID($wordid);
-                $words[] = $word;
+                $word->setWordID();
+                $wordAndStatus = array();
+                $wordAndStatus[] = $word;
+                $wordAndStatus[] = $stauts;
+                $result[] = $wordAndStatus;
             }
             $stmt->close();
         }
 
-        if (!empty($words)) {
-            return $words;
+        if (!empty($result)) {
+            return $result;
         } else {
             return null;
         }
