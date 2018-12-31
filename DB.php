@@ -413,18 +413,18 @@ class DB_Controller
         $wordeng = '';
         $example = '';
         $genus = '';
-        $stauts = 0;
+        $status = 0;
 
         if ($stmt = self::$con->prepare($query)) {
             $stmt->bind_param('ssss', $userid, $userid, $section, $listNumber);
             $stmt->execute();
-            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $stauts);
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $status);
             while ($stmt->fetch()) {
                 $word = new Word($wordger, $wordeng, $example, $genus, $section);
                 $word->setWordID();
                 $wordAndStatus = array();
                 $wordAndStatus[] = $word;
-                $wordAndStatus[] = $stauts;
+                $wordAndStatus[] = $status;
                 $result[] = $wordAndStatus;
             }
             $stmt->close();
