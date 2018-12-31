@@ -436,4 +436,26 @@ class DB_Controller
             return null;
         }
     }
+
+    /**
+     * This function is used to get the number of words in a specified section
+     * @param $section
+     * @return int|null
+     */
+    public static function getSectionWordNumber($section){
+        $query = "select count(*) from word where section=?";
+
+        $result = 0;
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("s", $section);
+            $stmt->execute();
+            $stmt->bind_result($result);
+            while ($stmt->fetch()) {
+                return $result;
+            }
+            $stmt->close();
+            return null;
+        }
+    }
 }
