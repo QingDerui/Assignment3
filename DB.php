@@ -337,13 +337,13 @@ class DB_Controller
      * @param $wordID
      * @param $status
      */
-    public static function saveWordStatus($userID, $wordID, $status)
+    public static function saveWordStatus($userID, $wordID, $status, $listNumber)
     {
-        $query = "update user_word_status set status=status+? where userid=? and wordid=?";
+        $query = "update user_word_status set status=status+? where userid=? and wordid=? and listnumber=?";
 
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param('iss', $status, $userID, $wordID);
+            $stmt->bind_param('isss', $status, $userID, $wordID, $listNumber);
             $stmt->execute();
             while ($stmt->fetch()) {
                 // null
