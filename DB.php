@@ -383,7 +383,7 @@ class DB_Controller
      */
     public static function getListNumber($userid, $section)
     {
-        $query = "select distinct count(*) from (select listnumber from user_word_status where userid=? and user_word_status.wordid in (select wordid from word where section=?))";
+        $query = "select count(*) from (select distinct listnumber from user_word_status where userid=? and user_word_status.wordid in (select wordid from word where section=?))";
         $result = 0;
 
         if ($stmt = self::$con->prepare($query)) {
