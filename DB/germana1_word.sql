@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `germana1`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
@@ -23,14 +23,14 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `word`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `word` (
-  `wordid` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `wordger` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `wordeng` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `example` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `genus` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `section` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `wordid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wordger` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wordeng` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `example` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `genus` varchar(3) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `section` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

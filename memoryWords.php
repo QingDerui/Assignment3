@@ -12,6 +12,8 @@ require_once ('User.php');
 if(isset($_POST['section'])) {
     $section = $_POST['section'];
     $_SESSION['section'] = $section;
+}else{
+    $_SESSION['section'] = '1';
 }
 ?>
 <html lang="en">
@@ -111,11 +113,25 @@ if(isset($_POST['section'])) {
                 </div>
                 <div class="uk-margin-large-top">
                     <div class="uk-accordion" data-uk-accordion>
+                        <form action="nextList.php" method="post">
                         <?php
                         DB_Controller::createConnection();
-                        $words = DB_Controller::getRandomList_XSigned($_SESSION['section']);
+                        if(isset($_SESSION['username'])) {
+                            $listNumber = DB_Controller::getListNumber($_SESSION['username'],$_SESSION['section']);
+//                            $listNumber += 1;
+                            echo gettype($listNumber);
+                            echo $listNumber;
+                            $words = DB_Controller::getRandomList_signed($_SESSION['section'],$_SESSION['username'],$listNumber);
+                        }else{
+                            $words = DB_Controller::getRandomList_XSigned($_SESSION['section']);
+                        }
+                        $a = 1;
                         foreach ($words as $word){
-                            echo "<h3 class=\"uk-accordion-title uk-active\">".$word->getWordGer()."</h3>";
+                            echo "<h3 class=\"uk-accordion-title uk-active\">".$word->getWordGer();
+                            if(isset($_SESSION['username'])){
+                                echo "<div id='title".$a."' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                            }
+                            echo "</h3>";
                             echo "<div class=\"uk-accordion-content uk-text-large\">";
                             echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
                             echo $word->getGenus();
@@ -123,27 +139,36 @@ if(isset($_POST['section'])) {
                             echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
                             echo $word->getWordEng();
                             echo "</div>";
-                            echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
-                            echo "<button class='uk-button-success' type='button'>Know</button>";
-                            echo "<button class='uk-button-danger uk-margin-small-left' type='button'>Unknown</button>";
-                            echo "</div></div>";
+                            if(isset($_SESSION['username'])) {
+                                echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
+                                echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
+                                echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='unknown'>";
+                                echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
+                                echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
                             echo "<div class='uk-margin-top'><h3>Example:</h3>";
                             echo "<p>".$word->getExample()."</p></div>";
                             echo "</div>";
+                            $a++;
+                        }
+
+                        if(isset($_SESSION['username'])) {
+
+                            echo "<button type=\"submit\" value=\"\">Next List</button>";
+
+                        }else{
+                            echo "<a class='uk-button'>Next List</a>";
                         }
                         ?>
 
 
+                        </form>
                     </div>
                 </div>
 
-                <div>
 
-                    <span>
-                        <a href="memoryWords.php" class="uk-text-middle uk-text-large"> Next List</a>
-                    </span>
-                    </div>
-                </div>
             </main>
         </div>
     </div>
@@ -170,4 +195,29 @@ if(isset($_POST['section'])) {
 </footer>
 
 </body>
+
+<script>
+    function showStatus_Know(a){
+        var statusEleId = "status"+a;
+        var titleEleId = "title"+a
+        console.log(statusEleId);
+        var statusEle = document.getElementById(statusEleId);
+        statusEle.value = 'know';
+        var titleEle = document.getElementById(titleEleId);
+        titleEle.setAttribute("class","uk-badge uk-badge-success uk-margin-large-left");
+        titleEle.innerText = "know";
+    }
+
+    function showStatus_Unknown(a){
+        var statusEleId = "status"+a;
+        var titleEleId = "title"+a
+        console.log(statusEleId);
+        var statusEle = document.getElementById(statusEleId);
+        statusEle.value = 'unknown';
+        var titleEle = document.getElementById(titleEleId);
+        titleEle.setAttribute("class","uk-badge uk-badge-danger uk-margin-large-left");
+        titleEle.innerText = "unknown";
+    }
+
+</script>
 </html>
