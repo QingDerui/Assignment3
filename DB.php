@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "";
+    private static $password = "password";
     /**
      * @var string
      */
@@ -442,7 +442,26 @@ WHERE
      */
     public static function getListWords($userid, $section, $listNumber)
     {
-        $query = "select word.wordid, word.wordger, word.wordeng, word.example, word.genus, user_word_status.status from word, user_word_status where word.wordid=user_word_status.wordid and user_word_status.userid=? and word.wordid in (select wordid from user_word_status where userid=? and section=? and listnumber=?)";
+        $query = "SELECT 
+    word.wordid,
+    word.wordger,
+    word.wordeng,
+    word.example,
+    word.genus,
+    user_word_status.status
+FROM
+    word,
+    user_word_status
+WHERE
+    word.wordid = user_word_status.wordid
+        AND user_word_status.userid = ?
+        AND user_word_status.listnumber = ?
+        AND word.wordid IN (SELECT 
+            wordid
+        FROM
+            word
+        WHERE
+            section = ?)";
         $wordid = '';
         $wordger = '';
         $wordeng = '';
@@ -451,7 +470,7 @@ WHERE
         $status = 0;
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param('ssss', $userid, $userid, $section, $listNumber);
+            $stmt->bind_param('sss',$userid, $listNumber, $section);
             $stmt->execute();
             $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $status);
             while ($stmt->fetch()) {
