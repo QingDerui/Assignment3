@@ -5,7 +5,9 @@ unset($_SESSION['userPass']);
 unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
-
+require_once('Word.php');
+require_once('DB.php');
+require_once('User.php');
 ?>
 <html lang="en">
 <head>
@@ -62,20 +64,24 @@ unset($_SESSION['nameNull']);
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
-            <aside class="sidebar uk-width-medium-1-4 uk-width-large-1-6 uk-hidden-small uk-margin-large-top">
+            <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div class='uk-sticky-placeholder'>
-                    <div class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px'>
+                    <div id='aside' class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
                 if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
-                    echo "
-                    <div>
-                    <p>Section 1:</p>
-                    <div class='uk-progress uk-progress-striped'>
-                    <div class='uk-progress-bar' style='width: 40%;'>40%</div>
-                    </div>
-                    </div>";
+                    for($i = 1;$i<=6;$i++) {
+                        DB_Controller::createConnection();
+                        $sectionWords = DB_Controller::getSectionWordNumber(strval($i));
+                        $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'],strval($i));
+                        $progress = round($knownWords/$sectionWords * 100);
+                        echo "<div>";
+                        echo "<p>Section ".$i.":</p>";
+                        echo "<div class='uk-progress uk-progress-striped' style='width: 120px'>";
+                        echo "<div class='uk-progress-bar' style='width: ".$progress."%;'>".$progress."%</div>";
+                        echo "</div></div>";
+                    }
 
 
                 }else{
@@ -87,7 +93,7 @@ unset($_SESSION['nameNull']);
                     </div>
                 </div>
             </aside>
-            <main role="main" class="uk-width-medium-3-4 uk-width-large-5-6 uk-width-small-1-1 ">
+            <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1 ">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-2-3">
                     <h1>Welcome to xxx!</h1>
@@ -267,5 +273,16 @@ unset($_SESSION['nameNull']);
     </div>
 </footer>
 
+<script>
+    function showScrollBar(){
+        var side = document.getElementById('aside');
+        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
+    }
+
+    function hideScrollBar(){
+        var side = document.getElementById('aside');
+        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+    }
+</script>
 </body>
 </html>

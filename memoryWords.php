@@ -13,24 +13,32 @@ if (isset($_POST['section'])) {
     $section = $_POST['section'];
     $_SESSION['section'] = $section;
 } else {
-    $_SESSION['section'] = '1';
+    if(isset($_SESSION['section'])) {
+
+    }else{
+        $_SESSION['section'] = '1';
+    }
 }
 
 DB_Controller::createConnection();
 if (isset($_SESSION['username'])) {
+
     if (isset($_POST['list']) && !is_null($_POST['list'])) {
+        $trueList = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));
+        if($trueList == $_POST['list']){
+            $_SESSION['newList'] = true;
+        }else{
+            $_SESSION['newList'] = false;
+        }
         $_SESSION['list'] = $_POST['list'];
         $results = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
-        echo $_SESSION['username'];
-        echo $_SESSION['section'];
-        echo $_SESSION['list'];
         foreach ($results as $result) {
             $words[] = $result[0];
-//            $result->getWordID();
             $statuses[] = $result[1];
         }
 
     } else {
+        $_SESSION['newList'] = true;
         $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
         $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
     }
@@ -98,9 +106,9 @@ if (isset($_SESSION['username'])) {
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
-            <aside class="sidebar uk-width-medium-1-4 uk-width-large-1-6 uk-hidden-small uk-margin-large-top">
+            <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div class='uk-sticky-placeholder'>
-                    <div class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px'>
+                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                         <?php
@@ -109,14 +117,14 @@ if (isset($_SESSION['username'])) {
                             echo "
                                 <div>
                                 <p>Section " . $_SESSION['section'] . ":</p>
-                                <div class='uk-progress uk-progress-striped'>
+                                <div class='uk-progress uk-progress-striped' style='width: 120px'>
                                 <div class='uk-progress-bar' style='width: " . $knowPer . "%;'>" . $knowPer . "%</div>
                                 </div>
                                 </div>";
 
                             echo "<h3>Your word lists:</h3>";
                             echo "<hr class='uk-grid-divider'>";
-                            for ($i = 1; $i <= DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section'])-1; $i++) {
+                            for ($i = 1; $i <= DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']); $i++) {
                                 echo "<form id='form".$i."' action='memoryWords.php' method='post'>";
                                 echo "<input type='hidden' name='list' value='".$i."'>";
                                 echo "<a onclick='submitForm(".$i.")' >List " . $i . "</a><br>";
@@ -132,7 +140,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </div>
             </aside>
-            <main role="main" class="uk-width-medium-3-4 uk-width-large-5-6 uk-width-small-1-1"
+            <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1"
                   style="min-height: 800px">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-1-1">
@@ -155,7 +163,18 @@ if (isset($_SESSION['username'])) {
                             foreach ($words as $word) {
                                 echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
                                 if (isset($_SESSION['username'])) {
-                                    echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                                    if($_SESSION['newList']){
+                                        echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                                    }else{
+                                        if($statuses[$a-1]){
+                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
+                                        }else{
+                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+
+                                        }
+
+                                    }
+
                                 }
                                 echo "</h3>";
                                 echo "<div class=\"uk-accordion-content uk-text-large\">";
@@ -169,8 +188,10 @@ if (isset($_SESSION['username'])) {
                                     echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
                                     echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
                                     echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
-                                    echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
-                                    echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";
+                                    if($_SESSION['newList']) {
+                                        echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
+                                        echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";
+                                    }
                                     echo "</div>";
                                 }
                                 echo "</div>";
@@ -181,9 +202,9 @@ if (isset($_SESSION['username'])) {
                             }
 
                             if (isset($_SESSION['username'])) {
-
-                                echo "<button type=\"submit\" value=\"\">Next List</button>";
-
+                                if($_SESSION['newList']){
+                                    echo "<button type=\"submit\" value=\"\">New List</button>";
+                                }
                             } else {
                                 echo "<a class='uk-button' href='memoryWords.php'>Next List</a>";
                             }
@@ -251,5 +272,14 @@ if (isset($_SESSION['username'])) {
         form.submit();
     }
 
+    function showScrollBar(){
+        var side = document.getElementById('aside');
+        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
+    }
+
+    function hideScrollBar(){
+        var side = document.getElementById('aside');
+        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+    }
 </script>
 </html>

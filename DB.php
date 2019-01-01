@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "password";
+    private static $password = "";
     /**
      * @var string
      */
@@ -394,7 +394,7 @@ FROM
         userid = ? AND status = 1
     GROUP BY wordid) table2 ON table1.wordid = table2.wordid
 WHERE
-    section = ? AND (table2.count = 3)
+    section = ? AND (table2.count >= 1)
 ";
         $result = 0;
 
