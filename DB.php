@@ -143,7 +143,7 @@ class DB_Controller
      */
     public static function updateWord($wordID, $wordGer, $wordEng, $example, $genus, $section)
     {
-        $query = "update word set wordger = ?, wordeng = ?, example = ?, genus = ?, section = ? where wordid = ?";
+        $query = "use germana1;update word set wordger = ?, wordeng = ?, example = ?, genus = ?, section = ? where wordid = ?;";
 
 
         if ($stmt = self::$con->prepare($query)) {
@@ -287,7 +287,28 @@ class DB_Controller
      */
     public static function getRandomList_signed($section, $userID, $listNumber)
     {
-        $query = "select wordid, wordger, wordeng, example, genus from word where section=? and word.wordid not in (select wordid from user_word_status where userid=? and status=3) order by rand() limit 10";
+        $query = "SELECT 
+    table1.wordid,
+    wordger,
+    wordeng,
+    example,
+    genus
+FROM
+    word table1
+        LEFT JOIN
+    (SELECT 
+        wordid, COUNT(*) AS count
+    FROM
+        user_word_status
+    WHERE
+        userid = ? AND status = 1
+    GROUP BY wordid) table2 ON table1.wordid = table2.wordid
+WHERE
+    section = ?
+        AND (table2.count IS NULL
+        OR table2.count != 3)
+ORDER BY RAND()
+LIMIT 10";
 
         $wordid = '';
         $wordeng = '';
@@ -296,7 +317,7 @@ class DB_Controller
         $genus = '';
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("ss", $section, $userID);
+            $stmt->bind_param("ss", $userID, $section);
             $stmt->execute();
             $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus);
             while ($stmt->fetch()) {
@@ -332,14 +353,14 @@ class DB_Controller
     }
 
     /**
-     * this function is used to save status into user_word_status
+     * This function is used to save status into user_word_status
      * @param $userID
      * @param $wordID
      * @param $status
      */
     public static function saveWordStatus($userID, $wordID, $status, $listNumber)
     {
-        $query = "update user_word_status set status=status+? where userid=? and wordid=? and listnumber=?";
+        $query = "update user_word_status set status=status+? where userid=? and wordid=? and listnumber=?;";
 
 
         if ($stmt = self::$con->prepare($query)) {
@@ -360,7 +381,21 @@ class DB_Controller
      */
     public static function getRecognizedWordNumber($userid, $section)
     {
-        $query = "select count(*) from user_word_status where userid=? and status>0 and user_word_status.wordid in (select wordid from word where section=?)";
+        $query = "SELECT 
+    COUNT(*)
+FROM
+    word table1
+        LEFT JOIN
+    (SELECT 
+        wordid, COUNT(*) AS count
+    FROM
+        user_word_status
+    WHERE
+        userid = ? AND status = 1
+    GROUP BY wordid) table2 ON table1.wordid = table2.wordid
+WHERE
+    section = ? AND (table2.count = 3)
+";
         $result = 0;
 
         if ($stmt = self::$con->prepare($query)) {
@@ -421,7 +456,7 @@ class DB_Controller
             $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $status);
             while ($stmt->fetch()) {
                 $word = new Word($wordger, $wordeng, $example, $genus, $section);
-                $word->setWordID();
+                $word->setWordID($wordid);
                 $wordAndStatus = array();
                 $wordAndStatus[] = $word;
                 $wordAndStatus[] = $status;
