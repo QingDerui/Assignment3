@@ -18,6 +18,7 @@ require_once('User.php');
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
+    <script src="supportFunctions.js"></script>
 </head>
 <body>
 <nav class="uk-navbar">
@@ -273,16 +274,5 @@ require_once('User.php');
     </div>
 </footer>
 
-<script>
-    function showScrollBar(){
-        var side = document.getElementById('aside');
-        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
-    }
-
-    function hideScrollBar(){
-        var side = document.getElementById('aside');
-        side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
-    }
-</script>
 </body>
 </html>
