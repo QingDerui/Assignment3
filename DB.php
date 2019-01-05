@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "";
+    private static $password = "password";
     /**
      * @var string
      */
@@ -434,11 +434,11 @@ WHERE
     }
 
     /**
-     * This function is used to get a list of words with the specified userid, word section, and list number.
+     * This function is used to get a list of words, along with their status, with the specified userid, word section, and list number.
      * @param $userid
      * @param $section
      * @param $listNumber
-     * @return array|null array of words
+     * @return array|null {word object, $status}
      */
     public static function getListWords($userid, $section, $listNumber)
     {
@@ -470,7 +470,7 @@ WHERE
         $status = 0;
 
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param('sss',$userid, $listNumber, $section);
+            $stmt->bind_param('sss', $userid, $listNumber, $section);
             $stmt->execute();
             $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $status);
             while ($stmt->fetch()) {
@@ -496,7 +496,8 @@ WHERE
      * @param $section
      * @return int|null
      */
-    public static function getSectionWordNumber($section){
+    public static function getSectionWordNumber($section)
+    {
         $query = "select count(*) from word where section=?";
 
         $result = 0;
@@ -509,6 +510,46 @@ WHERE
                 return $result;
             }
             $stmt->close();
+            return null;
+        }
+    }
+
+    /**
+     * Get all words which a specified user has learned, from a specified section
+     * @param $userID
+     * @param $section
+     * @return array|null {word object, $status}
+     */
+    public static function getLearnedWords($userID, $section)
+    {
+        $query = "SELECT      word.wordid,     word.wordger,     word.wordeng,     word.example,     word.genus,     user_word_status.status,     MAX(user_word_status.listnumber) FROM     word,     user_word_status WHERE     word.wordid = user_word_status.wordid         AND user_word_status.userid = ?         AND word.wordid IN (SELECT              wordid         FROM             word         WHERE             section = ?) GROUP BY wordid";
+
+        $wordid = '';
+        $wordger = '';
+        $wordeng = '';
+        $example = '';
+        $genus = '';
+        $status = '';
+        $listnumber = 1;
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('ss', $userID, $section);
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $example, $genus, $status, $listnumber);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, $section);
+                $word->setWordID($wordid);
+                $wordAndStatus = array();
+                $wordAndStatus[] = $word;
+                $wordAndStatus[] = $status;
+                $result[] = $wordAndStatus;
+            }
+            $stmt->close();
+        }
+
+        if (!empty($result)) {
+            return $result;
+        } else {
             return null;
         }
     }

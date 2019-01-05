@@ -43,7 +43,7 @@ require_once('User.php');
                     </ul>
                 </div>
             </li>
-            <li><a href="">Review</a></li>
+            <li><a href="review.php">Review</a></li>
             <li><a href="">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
@@ -249,7 +249,6 @@ require_once('User.php');
                 </ul>
 
             </main>
-            <div><div>
         </div>
     </div>
 </div>
