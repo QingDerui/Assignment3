@@ -143,7 +143,8 @@
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-1-1">
                         <?php
-                        echo "<h1>Reviewing</h1>";
+                        $section = $_SESSION['section'];
+                        echo "<h1>Review of section $section</h1>";
                         ?>
                     </div>
                 </div>
