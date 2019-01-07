@@ -1,0 +1,46 @@
+function addWord(){
+    console.log('yeyeyeye');
+    var parentTable = document.getElementById("wordTable");
+    var tr = document.createElement("tr");
+    var rows = parentTable.rows.length;
+    var tdNo = document.createElement("td");
+    var pNo = document.createElement("p");
+    pNo.innerHTML =rows+1;
+    tdNo.appendChild(pNo);
+
+    var tdGerman = document.createElement("td");
+    var germanInput = document.createElement("input");
+    germanInput.setAttribute("type","text");
+    germanInput.setAttribute("name","wordGer");
+    tdGerman.appendChild(germanInput);
+
+    var tdEnglish = document.createElement("td");
+    var englishInput = document.createElement("input");
+    englishInput.setAttribute("type","text");
+    englishInput.setAttribute("name","wordEng");
+    tdGerman.appendChild(tdEnglish);
+
+    var tdGenus = document.createElement("td");
+    var genusSelect = document.createElement("select")
+    genusSelect.setAttribute("name","genus");
+    var mOption = document.createElement("option");
+    var fOption = document.createElement("option");
+    var nOption = document.createElement("option");
+    var plOption = document.createElement("option");
+    mOption.innerHTML ="m.";
+    fOption.innerHTML ="f.";
+    nOption.innerHTML ="n.";
+    plOption.innerHTML ="pl.";
+    genusSelect.appendChild(mOption);
+    genusSelect.appendChild(fOption);
+    genusSelect.appendChild(nOption);
+    genusSelect.appendChild(plOption);
+    tdGenus.appendChild(genusSelect);
+
+    tr.appendChild(tdNo);
+    tr.appendChild(tdGerman);
+    tr.appendChild(tdEnglish);
+    tr.appendChild(tdGenus);
+
+    parentTable.appendChild(tr);
+    }
