@@ -607,4 +607,67 @@ WHERE
         }
     }
 
+    /**
+     * This function is used to get the list names uploaded by the specified user.
+     * @param $userID
+     * @return array|null
+     */
+    public static function getListNames_userList($userID)
+    {
+        $query = "select listname from listfromuser where userid=?";
+
+        $listname = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('s', $userID);
+            $stmt->execute();
+            $stmt->bind_result($listname);
+            while ($stmt->fetch()) {
+                $listNames[] = $listname;
+            }
+            $stmt->close();
+        }
+
+        if (!empty($listNames)) {
+            return $listNames;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     *This function is used to get the words in the list uploaded by the specified user, with the specified list name
+     * @param $userID
+     * @param $listName
+     * @return array|null
+     */
+    public static function getListWords_userList($userID, $listName)
+    {
+        $query = "SELECT wordid, wordger, wordeng, genus, example FROM listfromuser where userid=? and listname=?";
+
+        $wordid = '';
+        $wordger = '';
+        $wordeng = '';
+        $genus = '';
+        $example = '';
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param('ss', $userID, $listName);
+            $stmt->execute();
+            $stmt->bind_result($wordid, $wordger, $wordeng, $genus, $example);
+            while ($stmt->fetch()) {
+                $word = new Word($wordger, $wordeng, $example, $genus, '0');
+                $word->setWordID($wordid);
+                $words[] = $word;
+            }
+            $stmt->close();
+        }
+
+        if (!empty($words)) {
+            return $words;
+        } else {
+            return null;
+        }
+
+    }
 }
