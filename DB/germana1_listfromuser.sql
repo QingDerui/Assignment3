@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci*/;
+CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `germana1`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
@@ -23,12 +23,15 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `listfromuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8 ;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `listfromuser` (
-  `userid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `wordid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `wordger` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `wordeng` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+  `userid` varchar(20) DEFAULT NULL,
+  `wordid` varchar(20) DEFAULT NULL,
+  `wordger` varchar(90) DEFAULT NULL,
+  `wordeng` varchar(200) DEFAULT NULL,
+  `genus` varchar(20) DEFAULT NULL,
+  `example` varchar(255) DEFAULT NULL,
+  `listname` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,6 +41,7 @@ CREATE TABLE `listfromuser` (
 
 LOCK TABLES `listfromuser` WRITE;
 /*!40000 ALTER TABLE `listfromuser` DISABLE KEYS */;
+INSERT INTO `listfromuser` VALUES ('Yuxuan Wang','w1','muessen','must','-','Muss ich arbeiten?','my test list 3');
 /*!40000 ALTER TABLE `listfromuser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-31  3:32:38
+-- Dump completed on 2019-01-08 21:16:33

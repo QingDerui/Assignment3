@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+CREATE DATABASE  IF NOT EXISTS `germana1` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `germana1`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
@@ -23,7 +23,7 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `word`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8 ;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `word` (
   `wordid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `wordger` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-31  3:32:37
+-- Dump completed on 2019-01-08 21:16:33
