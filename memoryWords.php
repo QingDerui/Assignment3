@@ -108,8 +108,8 @@ if (isset($_SESSION['username'])) {
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
+                <div>
+                    <div id="aside" style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                         <?php
@@ -148,7 +148,7 @@ if (isset($_SESSION['username'])) {
                         <?php
                         echo "<h1>Section " . $_SESSION['section'];
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                            echo ": List" . $_SESSION['list'] . "<h1>";
+                            echo ": List " . $_SESSION['list'] . "<h1>";
                         } else {
                             echo ": Random List<h1>";
                         }
@@ -161,46 +161,49 @@ if (isset($_SESSION['username'])) {
                             <?php
 
                             $a = 1;
-                            foreach ($words as $word) {
-                                echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
-                                if (isset($_SESSION['username'])) {
-                                    if($_SESSION['newList']){
-                                        echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
-                                    }else{
-                                        if($statuses[$a-1]){
-                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
-                                        }else{
+
+                            if(isset($words) && !is_null($words)) {
+                                foreach ($words as $word) {
+                                    echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
+                                    if (isset($_SESSION['username'])) {
+                                        if ($_SESSION['newList']) {
                                             echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                                        } else {
+                                            if ($statuses[$a - 1]) {
+                                                echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
+                                            } else {
+                                                echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+
+                                            }
 
                                         }
 
                                     }
-
-                                }
-                                echo "</h3>";
-                                echo "<div class=\"uk-accordion-content uk-text-large\">";
-                                echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
-                                echo $word->getGenus();
-                                echo "</div>";
-                                echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
-                                echo $word->getWordEng();
-                                echo "</div>";
-                                if (isset($_SESSION['username'])) {
-                                    echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
-                                    echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
-                                    echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
-                                    if($_SESSION['newList']) {
-                                        echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
-                                        echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";
+                                    echo "</h3>";
+                                    echo "<div class=\"uk-accordion-content uk-text-large\">";
+                                    echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
+                                    echo $word->getGenus();
+                                    echo "</div>";
+                                    echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
+                                    echo $word->getWordEng();
+                                    echo "</div>";
+                                    if (isset($_SESSION['username'])) {
+                                        echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
+                                        echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
+                                        echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
+                                        if ($_SESSION['newList']) {
+                                            echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
+                                            echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";
+                                        }
+                                        echo "</div>";
                                     }
                                     echo "</div>";
+                                    echo "<div class='uk-margin-top'><h3>Example:</h3>";
+                                    echo "<p>" . $word->getExample() . "</p></div>";
+                                    echo "</div>";
+                                    $a++;
                                 }
-                                echo "</div>";
-                                echo "<div class='uk-margin-top'><h3>Example:</h3>";
-                                echo "<p>" . $word->getExample() . "</p></div>";
-                                echo "</div>";
-                                $a++;
-                            }
+
 
                             if (isset($_SESSION['username'])) {
                                 if($_SESSION['newList']){
@@ -208,6 +211,13 @@ if (isset($_SESSION['username'])) {
                                 }
                             } else {
                                 echo "<a class='uk-button' href='memoryWords.php'>Next List</a>";
+                            }
+
+                            }else{
+
+                                echo "<div class=\" uk-text-large uk-text-success uk-margin-large-left\">Congratulations
+! You have finish this section. Please return to the <a href='index.php'>main page</a> and start a new section!</div>";
+
                             }
                             ?>
 
@@ -241,6 +251,11 @@ if (isset($_SESSION['username'])) {
         </div>
     </div>
 </footer>
+<?php
+
+DB_Controller::closeConnection();  // Close the connection
+
+?>
 
 </body>
 

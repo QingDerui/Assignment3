@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
 <?php session_start();
-unset($_SESSION['userExisted']);
-unset($_SESSION['userPass']);
-unset($_SESSION['signed']);
-unset($_SESSION['pwPass']);
-unset($_SESSION['nameNull']);
+
+// This part is to release the information in the session
+unset($_SESSION['userExisted']);  //Release the flag which name whether the user is existed when users sign in
+unset($_SESSION['userPass']);  //Release the flag which name whether the username is correct when signing in.
+unset($_SESSION['signed']);  //Release the flag which name whether the username has been registered.
+unset($_SESSION['pwPass']);  //Release the flag which name whether two passwords are the same when registering.
+unset($_SESSION['nameNull']); //Release the flag which name whether the registering name is null
 require_once('Word.php');
 require_once('DB.php');
 require_once('User.php');
+DB_Controller::createConnection();  // start connection
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8"><title>Title</title>
-
     <link rel="stylesheet" type="text/css" href="css/uikit.css" />
     <link rel="stylesheet" type="text/css" href="css/components/sticky.css" />
     <script src="jquery-3.3.1.js"></script>
@@ -48,7 +50,10 @@ require_once('User.php');
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
+
                 <?php
+
+                    // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
                     if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
                         echo "<li><a href='signOut.php'>Sign out</a></li>";
                     }else{
@@ -66,15 +71,15 @@ require_once('User.php');
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id='aside' class='uk-panel' data-uk-sticky='{top:50}' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
+                <div>
+                    <div id='aside' class='uk-panel' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                 <?php
+                // This part is to show the learning progress of each section
                 if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
                     for($i = 1;$i<=6;$i++) {
-                        DB_Controller::createConnection();
-                        $sectionWords = DB_Controller::getSectionWordNumber(strval($i));
+                        $sectionWords = DB_Controller::getSectionWordNumber(strval($i)); // Get the number of words of a certain section
                         $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'],strval($i));
                         $progress = round($knownWords/$sectionWords * 100);
                         echo "<div>";
@@ -249,7 +254,7 @@ require_once('User.php');
                 </ul>
 
             </main>
-            <div><div>
+
         </div>
     </div>
 </div>
@@ -274,5 +279,9 @@ require_once('User.php');
     </div>
 </footer>
 
+<?php
+DB_Controller::closeConnection();
+
+?>
 </body>
 </html>
