@@ -81,7 +81,7 @@
                 </div>
             </li>
             <li><a href="review.php">Review</a></li>
-            <li><a href="">Upload your own list</a></li>
+            <li><a href="upload.php">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
