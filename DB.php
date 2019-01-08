@@ -553,4 +553,58 @@ WHERE
             return null;
         }
     }
+
+    public static function addWord_userList($word, $userID, $listName)
+    {
+        $query = "insert into listfromuser (userid,wordid, wordger, wordeng, example, genus, listname) values (?, ?, ?, ?, ?, ?,?)";
+        if ($stmt = self::$con->prepare($query)) {
+            $wordid = $word->getWordID();
+            $wordGer = $word->getWordGer();
+            $wordEng = $word->getWordEng();
+            $example = $word->getExample();
+            $genus = $word->getGenus();
+            $stmt->bind_param("sssssss", $userID, $wordid, $wordGer, $wordEng, $example, $genus, $listName);
+            $result = $stmt->execute();
+            $stmt->close();
+            return $result;
+        }
+        return false;
+    }
+
+    public static function setWordCount_userList($listname, $userid)
+    {
+        $query = "select wordid from listfromuser where listname = ? and userid = ? ";
+        $wordid = '';
+        $maxid = 0;
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ss", $listname, $userid);
+            $stmt->execute();
+            $stmt->bind_result($wordid);
+            while ($stmt->fetch()) {
+                $wordid = substr($wordid, 1, strlen($wordid) - 1);
+                $wordid_int = intval($wordid);
+                if ($wordid_int > $maxid) {
+                    $maxid = $wordid_int;
+                }
+            }
+            $stmt->close();
+        }
+        Word::setId('w' . strval($maxid));
+        Word::setCount(strv($maxid));
+    }
+
+    public static function checkListName($listname)
+    {
+        $query = "select listname from listfromuser where listname = ?";
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("s", $listname);
+            $stmt->execute();
+            if (!($stmt->fetch() == NULL)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
 }
