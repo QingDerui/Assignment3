@@ -596,7 +596,7 @@ WHERE
 
         $query = "select listname from listfromuser where listname = ?";
 
-        if($stmt = self::$com->prepare($query)){
+        if($stmt = self::$con->prepare($query)){
             $stmt->bind_param("s",$listname);
             $stmt->execute();
 

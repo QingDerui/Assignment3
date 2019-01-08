@@ -16,17 +16,27 @@ if(isset($_POST['wordList'])&& isset($_SESSION['username'])){
     $data = $_POST['wordList'];
     $arr_word = (array)(json_decode($data));
     $wordList = (array)($arr_word['dataWord']);
+    $wordListName = trim($arr_word['name']);
     $wordID = Word::getCount();
 
-    for($i=0;$i<count($wordList);$i++){
+    if(DB_Controller::checkListName($wordListName)) {
 
-        $wordItem = (array)($wordList[$i]);
+        $result['type'] = 1;
+        $result['message'] = $wordListName;
 
-        $wordObj = new Word($wordItem['wordGer'],$wordItem['wordEng'],$wordItem['wordExample'],$wordItem['wordGenus'],0);
-        $wordObj->setWordID("w".strval($wordID+$i+1));
+        for ($i = 0; $i < count($wordList); $i++) {
 
-        DB_Controller::addWord_userList($wordObj,$_SESSION['username'],$wordItem['listName']);
+            $wordItem = (array)($wordList[$i]);
 
+            $wordObj = new Word($wordItem['wordGer'], $wordItem['wordEng'], $wordItem['wordExample'], $wordItem['wordGenus'], 0);
+            $wordObj->setWordID("w" . strval($wordID + $i + 1));
+
+            DB_Controller::addWord_userList($wordObj, $_SESSION['username'], $wordListName);
+        }
+    }else{
+        $result['type'] = 0;
+        $result['message'] = "wordlist repeated";
     }
+    echo json_encode($result);
 }
 ?>

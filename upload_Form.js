@@ -172,7 +172,6 @@ function jsonSubmit(){
         wordEng:"",
         wordGenus:"",
         wordExample:"",
-        listName:""
     }
 
     var jsObj = JSON.parse("{\"name\":\"\",\"dataWord\":[]}");
@@ -181,8 +180,8 @@ function jsonSubmit(){
 
     var table = document.getElementById("wordTable");
 
-    if(rows>=1){
-        for(var i=0;i<rows;i++){
+    if(rows>=1) {
+        for (var i = 0; i < rows; i++) {
             var wordJS = new Object();
 
             wordJS.wordGer = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
@@ -194,32 +193,41 @@ function jsonSubmit(){
 
             wordJS.wordExample = table.rows[i].cells[5].getElementsByTagName("textarea")[0].value;
 
-            wordJS.listName= listNamepb;
-
-            if(!((wordJS.wordGer=="")||(wordJS.wordEng==""))){
+            if (!((wordJS.wordGer == "") || (wordJS.wordEng == ""))) {
                 jsObj.dataWord.push(wordJS);
             }
         }
-        console.log(jsObj.dataWord);
-        var word = JSON.stringify(jsObj);
 
-        $.ajax({
-            type:"post",
-            url:"upload_Submit.php",
-            data:{'wordList':word},
-            datatype:"json",
-            success:function(data){
-                //window.location.href ="upload_Submit.php";
-                console.log("ok");
-                debugger;
-                var obj = eval("("+data+")");
-                console.log(obj);
-                alert(obj.wordEng);
-                    //location.reload()
-            }
-        });
+        jsObj.name = listNamepb;
 
-    }else{
-        alert("No word could be added!");
+        if (!(jsObj.dataWord.length == 0)) {
+
+            var word = JSON.stringify(jsObj);
+
+            $.ajax({
+                type: "post",
+                url: "upload_Submit.php",
+                data: {'wordList': word},
+                datatype: "json",
+                success: function (data) {
+                    //window.location.href ="upload_Submit.php";
+                    var obj = eval("(" + data + ")");
+
+                    if(obj.type==1) {
+                        alert(obj.message + " has been added successfully!");
+                    }
+
+                    if(obj.type==0){
+                        alert("The list name has already existed!");
+                    }
+                },
+                error:function () {
+                    alert("Unexpected error")
+                }
+            });
+
+        } else {
+            alert("Please add at least one word!!!")
+        }
     }
 }

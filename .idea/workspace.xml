@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99466281-50c4-4092-ae99-11af76fed3b9" name="Default Changelist" comment="" />
+    <list default="true" id="99466281-50c4-4092-ae99-11af76fed3b9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/DB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload_Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/upload_Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload_Submit.php" beforeDir="false" afterPath="$PROJECT_DIR$/upload_Submit.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +14,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DB.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="591" column="37" lean-forward="true" selection-start-line="591" selection-start-column="37" selection-end-line="591" selection-end-column="37" />
+            <state relative-caret-position="237">
+              <caret line="597" lean-forward="true" selection-start-line="597" selection-end-line="597" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/upload_Form.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3420" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/upload_Submit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -66,6 +86,9 @@
       </file>
     </leaf>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -81,15 +104,15 @@
         <option value="$PROJECT_DIR$/../assignment2_new/testtwo.php" />
         <option value="$PROJECT_DIR$/../test.php" />
         <option value="$PROJECT_DIR$/upload_Submit.php" />
-        <option value="$PROJECT_DIR$/DB.php" />
         <option value="$PROJECT_DIR$/js/upload.js" />
         <option value="$PROJECT_DIR$/upload.php" />
+        <option value="$PROJECT_DIR$/DB.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="712" />
-    <option name="y" value="64" />
+    <option name="x" value="45" />
+    <option name="y" value="1" />
     <option name="width" value="1776" />
     <option name="height" value="1020" />
   </component>
@@ -132,10 +155,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86654000" />
+    <option name="totallyTimeSpent" value="86820000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="475" y="43" width="1184" height="680" extended-state="0" />
+    <frame x="41" y="70" width="1184" height="680" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -208,7 +232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/upload_Submit.php" />
     <entry file="file://$PROJECT_DIR$/memoryWords.php" />
     <entry file="file://$PROJECT_DIR$/js/upload_Form.js" />
     <entry file="file://$PROJECT_DIR$/upload.php" />
@@ -270,8 +293,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DB.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="591" column="37" lean-forward="true" selection-start-line="591" selection-start-column="37" selection-end-line="591" selection-end-column="37" />
+        <state relative-caret-position="237">
+          <caret line="597" lean-forward="true" selection-start-line="597" selection-end-line="597" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload_Form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3420" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload_Submit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
         </state>
       </provider>
     </entry>
