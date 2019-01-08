@@ -26,18 +26,18 @@ require_once('Word.php');//why cannot use require;fatal error
                 <a href="index.php"><i class="uk-icon-bars"></i> Words</a>
                 <div class="uk-dropdown uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
-                        <li><a>Section 1</a></li>
-                        <li><a>Section 2</a></li>
-                        <li><a>Section 3</a></li>
-                        <li><a>Section 4</a></li>
-                        <li><a>Section 5</a></li>
-                        <li><a>Section 6</a></li>
-                        <li><a>Section 7</a></li>
-                        <li><a>Section 8</a></li>
-                        <li><a>Section 9</a></li>
-                        <li><a>Section 10</a></li>
-                        <li><a>Section 11</a></li>
-                        <li><a>Section 12</a></li>
+                        <li><a onclick="onClick_section(1)">Section 1</a></li>
+                        <li><a onclick="onClick_section(2)">Section 2</a></li>
+                        <li><a onclick="onClick_section(3)">Section 3</a></li>
+                        <li><a onclick="onClick_section(4)">Section 4</a></li>
+                        <li><a onclick="onClick_section(5)">Section 5</a></li>
+                        <li><a onclick="onClick_section(6)">Section 6</a></li>
+                        <li><a onclick="onClick_section(7)">Section 7</a></li>
+                        <li><a onclick="onClick_section(8)">Section 8</a></li>
+                        <li><a onclick="onClick_section(9)">Section 9</a></li>
+                        <li><a onclick="onClick_section(10)">Section 10</a></li>
+                        <li><a onclick="onClick_section(11)">Section 11</a></li>
+                        <li><a onclick="onClick_section(12)">Section 12</a></li>
                     </ul>
                 </div>
             </li>

@@ -20,18 +20,25 @@ function showStatus_Unknown(a) {
     titleEle.innerText = "unknown";
 }
 
-function submitForm(a){
-    var formName = 'form'+a;
+function submitForm(a) {
+    var formName = 'form' + a;
     var form = document.getElementById(formName);
     form.submit();
 }
 
-function showScrollBar(){
+function showScrollBar() {
     var side = document.getElementById('aside');
-    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
+    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:scroll;')
 }
 
-function hideScrollBar(){
+function hideScrollBar() {
     var side = document.getElementById('aside');
-    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+}
+
+function onClick_section(section) {
+    var button = document.getElementById('button_section'.concat(section));
+    var event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click');
+    button.dispatchEvent(event);
 }
