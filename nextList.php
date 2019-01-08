@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: rose
+ * To store the status of the words in a list of a certain user into the database and point the flag to the next list.
+ * User: Qing Derui
  * Date: 12/30/2018
  * Time: 6:42 PM
  */
@@ -12,14 +12,18 @@ require_once('User.php');
 session_start();
 
 DB_Controller::createConnection();
-for ($a = 1; $a < 11; $a++) {
 
-    if (isset($_POST[$a]) && !is_null($_POST[$a])) {
 
-        $wordId = $_POST[$a];
-        $statusName = 'status' . strval($a);
-        $wordStatus = $_POST[$statusName];
-        DB_Controller::saveWordStatus($_SESSION['username'], $wordId, intval($wordStatus), strval($_SESSION['list']));
+for ($a = 1; $a < 11; $a++) { // A list has maximum 10 words
+
+    if (isset($_GET[$a]) && !is_null($_GET[$a])) { // Test whether the form has been posted.
+
+
+        $wordId = $_GET[$a]; // Get the wordid.
+        $statusName = 'status' . strval($a); // Get the status of a certain word
+        $wordStatus = $_GET[$statusName]; // Get the userid
+
+        DB_Controller::saveWordStatus($_SESSION['username'], $wordId, intval($wordStatus), strval($_SESSION['list'])); // store the status.
 
 
     }
@@ -27,5 +31,8 @@ for ($a = 1; $a < 11; $a++) {
 
 }
 
-DB_Controller::closeConnection();
-echo "<script>location.href='memoryWords.php'</script>";
+$_SESSION['goToNextList'] = true; // Set the flag so that the memory interface will change to the next list
+
+DB_Controller::closeConnection(); // Close DB connection
+
+echo "<script>location.href='memoryWords.php'</script>"; //Back to the website

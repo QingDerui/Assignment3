@@ -10,7 +10,7 @@ unset($_SESSION['nameNull']); //Release the flag which name whether the register
 require_once('Word.php');
 require_once('DB.php');
 require_once('User.php');
-DB_Controller::createConnection();  // start connection
+DB_Controller::createConnection();  // start DB connection
 ?>
 <html lang="en">
 <head>
@@ -23,6 +23,7 @@ DB_Controller::createConnection();  // start connection
     <script src="supportFunctions.js"></script>
 </head>
 <body>
+<!--Navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
@@ -67,9 +68,12 @@ DB_Controller::createConnection();  // start connection
         </div>
     </div>
 </nav>
+<!--End of navigation bar-->
+<!--Body part-->
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
+<!--            Side navigation of body part-->
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div>
                     <div id='aside' class='uk-panel' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
@@ -99,6 +103,8 @@ DB_Controller::createConnection();  // start connection
                     </div>
                 </div>
             </aside>
+<!--            End of the side navigation-->
+<!--            Main part-->
             <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1 ">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-2-3">
@@ -111,7 +117,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="1">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -123,7 +129,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="2">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -135,7 +141,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="3">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -147,7 +153,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="4">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -159,7 +165,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="5">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -171,7 +177,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="6">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -183,7 +189,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="7">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -195,7 +201,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="8">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -207,7 +213,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="9">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -219,7 +225,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="10">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -231,7 +237,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="11">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -243,7 +249,7 @@ DB_Controller::createConnection();  // start connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="12">
                                     <button type="submit" class="uk-button uk-button-primary" style="margin-top: 30%;margin-left:26%">Learn it now!</button>
                                 </form>
@@ -254,10 +260,12 @@ DB_Controller::createConnection();  // start connection
                 </ul>
 
             </main>
+<!--            End of main part-->
 
         </div>
     </div>
 </div>
+<!--End of body part-->
 <footer>
     <div style="background-color: #002833;height:200px;margin-top: 80px">
         <div class="uk-container uk-container-center uk-grid">
@@ -280,7 +288,7 @@ DB_Controller::createConnection();  // start connection
 </footer>
 
 <?php
-DB_Controller::closeConnection();
+DB_Controller::closeConnection(); // Close DB connection
 
 ?>
 </body>

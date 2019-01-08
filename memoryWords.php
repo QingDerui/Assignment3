@@ -1,16 +1,20 @@
 <!DOCTYPE HTML>
 <?php session_start();
+
+// Release the flags
 unset($_SESSION['userExisted']);
 unset($_SESSION['userPass']);
 unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
+
 require_once('Word.php');
 require_once('DB.php');
 require_once('User.php');
 
-if (isset($_POST['section'])) {
-    $section = $_POST['section'];
+// Get the current section or give section a certain content.
+if (isset($_GET['section'])) {
+    $section = $_GET['section'];
     $_SESSION['section'] = $section;
 } else {
     if(isset($_SESSION['section'])) {
@@ -20,30 +24,63 @@ if (isset($_POST['section'])) {
     }
 }
 
-DB_Controller::createConnection();
-if (isset($_SESSION['username'])) {
+DB_Controller::createConnection(); // DB connection
 
-    if (isset($_POST['list']) && !is_null($_POST['list'])) {
-        $trueList = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));
-        if($trueList == $_POST['list']){
+
+// This part of coding decides which words to take out from the DB
+if (isset($_SESSION['username'])) { // Test whether a user has logged in.
+
+    if (isset($_GET['list']) && !is_null($_GET['list'])) { // Test if there is something posted
+
+        //If the list has been posted, get the list number and show the list
+
+        $trueList = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));// Get the total list number
+
+        //If this is the newest list, show the "nextList" button
+        if($trueList == $_GET['list']){
             $_SESSION['newList'] = true;
         }else{
             $_SESSION['newList'] = false;
         }
-        $_SESSION['list'] = $_POST['list'];
-        $results = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
-        foreach ($results as $result) {
+
+        $_SESSION['list'] = $_GET['list']; //Store the list number flag
+
+        // Get the certain list from the DB
+        $results_Link = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
+        foreach ($results_Link as $result) {
             $words[] = $result[0];
             $statuses[] = $result[1];
         }
 
     } else {
+
+        // If the user enter this page from the main page, the displayed list will be the newest list of that section. If there is no list, a new list will be created and shown.
         $_SESSION['newList'] = true;
-        $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
-        $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
+        $listNumber = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));
+
+        if($listNumber == '0' ){
+            // If it is the newest list, than get a random list from the unfamiliar word library
+            $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
+            $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
+        }else{
+
+            if(isset($_SESSION['goToNextList']) && $_SESSION['goToNextList']){
+                $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
+                $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
+            }else {
+                $_SESSION['list'] = $listNumber;
+                $results_Initial = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
+                foreach ($results_Initial as $result) {
+                    $words[] = $result[0];
+                    $statuses[] = $result[1];
+                }
+            }
+
+        }
     }
 
 } else {
+    //If no user has logged in, show a random list
     $words = DB_Controller::getRandomList_XSigned($_SESSION['section']);
 }
 
@@ -63,6 +100,7 @@ if (isset($_SESSION['username'])) {
     <script src="supportFunctions.js"></script>
 </head>
 <body>
+<!--The navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
@@ -90,7 +128,9 @@ if (isset($_SESSION['username'])) {
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
+
                 <?php
+                // Show the interface depending on user
                 if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
                     echo "<li><a href='signOut.php'>Sign out</a></li>";
                 } else {
@@ -104,16 +144,21 @@ if (isset($_SESSION['username'])) {
         </div>
     </div>
 </nav>
+<!--End of navigation part-->
+<!--Body Part-->
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
+<!--            Side navigation part-->
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div>
                     <div id="aside" style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                         <?php
+                        //Show the progress of the current section
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                            // Show the progress bar when user has logged in
                             $knowPer = round(DB_Controller::getRecognizedWordNumber($_SESSION['username'], $_SESSION['section']) / DB_Controller::getSectionWordNumber($_SESSION['section'] ) *100);
                             echo "
                                 <div>
@@ -125,8 +170,9 @@ if (isset($_SESSION['username'])) {
 
                             echo "<h3>Your word lists:</h3>";
                             echo "<hr class='uk-grid-divider'>";
+                            // Show all links of the existed list
                             for ($i = 1; $i <= DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']); $i++) {
-                                echo "<form id='form".$i."' action='memoryWords.php' method='post'>";
+                                echo "<form id='form".$i."' action='memoryWords.php' method='get'>";
                                 echo "<input type='hidden' name='list' value='".$i."'>";
                                 echo "<a onclick='submitForm(".$i.")' >List " . $i . "</a><br>";
                                 echo "</form>";
@@ -141,11 +187,14 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </div>
             </aside>
+<!--            End of side navigation-->
+<!--            Main part-->
             <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1"
                   style="min-height: 800px">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-1-1">
                         <?php
+                        // Display the title depend on logging status
                         echo "<h1>Section " . $_SESSION['section'];
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
                             echo ": List " . $_SESSION['list'] . "<h1>";
@@ -157,11 +206,12 @@ if (isset($_SESSION['username'])) {
                 </div>
                 <div class="uk-margin-large-top">
                     <div class="uk-accordion" data-uk-accordion>
-                        <form action="nextList.php" method="post">
+                        <form action="nextList.php" method="get">
                             <?php
 
                             $a = 1;
 
+                            // Show the words of the list
                             if(isset($words) && !is_null($words)) {
                                 foreach ($words as $word) {
                                     echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
@@ -228,9 +278,11 @@ if (isset($_SESSION['username'])) {
 
 
             </main>
+<!--            End of the main part-->
         </div>
     </div>
 </div>
+<!--End of the body part-->
 <footer>
     <div style="background-color: #002833;height:200px;margin-top: 80px">
         <div class="uk-container uk-container-center uk-grid">
@@ -252,7 +304,7 @@ if (isset($_SESSION['username'])) {
     </div>
 </footer>
 <?php
-
+unset($_SESSION['goToNextList']); // Release the flag
 DB_Controller::closeConnection();  // Close the connection
 
 ?>
