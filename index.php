@@ -8,20 +8,21 @@ unset($_SESSION['nameNull']);
 require_once('Word.php');
 require_once('DB.php');
 require_once('User.php');
+DB_Controller::createConnection();  // start DB connection
 ?>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"><title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
-    <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
+    <link rel="stylesheet" type="text/css" href="css/uikit.css" />
+    <link rel="stylesheet" type="text/css" href="css/components/sticky.css" />
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
     <script src="supportFunctions.js"></script>
 </head>
 <body>
+<!--Navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
@@ -44,73 +45,78 @@ require_once('User.php');
                     </ul>
                 </div>
             </li>
-            <li><a href="review.php">Review</a></li>
-            <li><a href="upload.php">Upload your own list</a></li>
+            <li><a href="">Review</a></li>
+            <li><a href="">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
-                <?php
-                if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                    echo "<li><a href='signOut.php'>Sign out</a></li>";
-                } else {
-                    echo "<li><a href='login.php'>Login</a></li>";
-                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
-                }
 
-                ?>
+                <?php
+
+                    // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
+                    if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                        echo "<li><a href='signOut.php'>Sign out</a></li>";
+                    }else{
+                        echo "<li><a href='login.php'>Login</a></li>";
+                        echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    }
+
+                    ?>
 
             </ul>
         </div>
     </div>
 </nav>
+<!--End of navigation bar-->
+<!--Body part-->
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
+<!--            Side navigation of body part-->
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id='aside' class='uk-panel' data-uk-sticky='{top:50}'
-                         style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
-                         onmouseleave="hideScrollBar()">
+                <div>
+                    <div id='aside' class='uk-panel' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
-                        <?php
-                        if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                            for ($i = 1; $i <= 6; $i++) {
-                                DB_Controller::createConnection();
-                                $sectionWords = DB_Controller::getSectionWordNumber(strval($i));
-                                $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'], strval($i));
-                                $progress = round($knownWords / $sectionWords * 100);
-                                echo "<div>";
-                                echo "<p>Section " . $i . ":</p>";
-                                echo "<div class='uk-progress uk-progress-striped' style='width: 120px'>";
-                                echo "<div class='uk-progress-bar' style='width: " . $progress . "%;'>" . $progress . "%</div>";
-                                echo "</div></div>";
-                            }
+                <?php
+                // This part is to show the learning progress of each section
+                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
+                    for($i = 1;$i<=6;$i++) {
+                        $sectionWords = DB_Controller::getSectionWordNumber(strval($i)); // Get the number of words of a certain section
+                        $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'],strval($i));
+                        $progress = round($knownWords/$sectionWords * 100);
+                        echo "<div>";
+                        echo "<p>Section ".$i.":</p>";
+                        echo "<div class='uk-progress uk-progress-striped' style='width: 120px'>";
+                        echo "<div class='uk-progress-bar' style='width: ".$progress."%;'>".$progress."%</div>";
+                        echo "</div></div>";
+                    }
 
 
-                        } else {
-                            echo "
+                }else{
+                    echo"
                     <p>Please <a href='login.php'>login</a> to get your progress</p>
                     ";
-                        }
-                        ?>
+                }
+                ?>
                     </div>
                 </div>
             </aside>
+<!--            End of the side navigation-->
+<!--            Main part-->
             <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1 ">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-2-3">
-                        <h1>Welcome to xxx!</h1>
+                    <h1>Welcome to xxx!</h1>
                     </div>
 
                 </div>
-                <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-2 uk-grid-width-large-1-3"
-                    data-uk-grid-margin="">
+                <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid-margin="">
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="1">
                                     <button id="button_section1" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -124,7 +130,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="2">
                                     <button id="button_section2" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -138,7 +144,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="3">
                                     <button id="button_section3" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -152,7 +158,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="4">
                                     <button id="button_section4" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -166,7 +172,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="5">
                                     <button id="button_section5" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -180,7 +186,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="6">
                                     <button id="button_section6" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -194,7 +200,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="7">
                                     <button id="button_section7" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -208,7 +214,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="8">
                                     <button id="button_section8" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -222,7 +228,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="9">
                                     <button id="button_section9" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -236,7 +242,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="10">
                                     <button id="button_section10" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -250,7 +256,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="11">
                                     <button id="button_section11" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -264,7 +270,7 @@ require_once('User.php');
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="post">
+                                <form action="memoryWords.php" method="get">
                                     <input type="hidden" name="section" value="12">
                                     <button id="button_section12" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -277,9 +283,12 @@ require_once('User.php');
                 </ul>
 
             </main>
+<!--            End of main part-->
+
         </div>
     </div>
 </div>
+<!--End of body part-->
 <footer>
     <div style="background-color: #002833;height:200px;margin-top: 80px">
         <div class="uk-container uk-container-center uk-grid">
@@ -301,5 +310,9 @@ require_once('User.php');
     </div>
 </footer>
 
+<?php
+DB_Controller::closeConnection(); // Close DB connection
+
+?>
 </body>
 </html>

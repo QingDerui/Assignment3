@@ -9,6 +9,10 @@ function showStatus_Know(a) {
     titleEle.innerText = "know";
 }
 
+/**
+ * This function is to change an element in the website while clicking a certain button
+ * @param a The flag naming which element to change
+ */
 function showStatus_Unknown(a) {
     var statusEleId = "status" + a;
     var titleEleId = "title" + a
@@ -20,20 +24,30 @@ function showStatus_Unknown(a) {
     titleEle.innerText = "unknown";
 }
 
-function submitForm(a) {
-    var formName = 'form' + a;
+/**
+ * To submit a form by <a> element
+ * @param a
+ */
+function submitForm(a){
+    var formName = 'form'+a;
     var form = document.getElementById(formName);
     form.submit();
 }
 
-function showScrollBar() {
+/**
+ * To show the scroll bar of the aside element when mouse moves on to it
+ */
+function showScrollBar(){
     var side = document.getElementById('aside');
-    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:scroll;')
+    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
 }
 
-function hideScrollBar() {
+/**
+ * To hide the scroll bar of the aside element when mouse leaves it
+ */
+function hideScrollBar(){
     var side = document.getElementById('aside');
-    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
 }
 
 function onClick_section(section) {
