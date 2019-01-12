@@ -12,10 +12,11 @@ DB_Controller::createConnection();  // start DB connection
 ?>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="css/uikit.css" />
-    <link rel="stylesheet" type="text/css" href="css/components/sticky.css" />
+    <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
+    <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
@@ -45,23 +46,23 @@ DB_Controller::createConnection();  // start DB connection
                     </ul>
                 </div>
             </li>
-            <li><a href="">Review</a></li>
-            <li><a href="">Upload your own list</a></li>
+            <li><a href="review.php">Review</a></li>
+            <li><a href="upload.php">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
 
                 <?php
 
-                    // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
-                    if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
-                        echo "<li><a href='signOut.php'>Sign out</a></li>";
-                    }else{
-                        echo "<li><a href='login.php'>Login</a></li>";
-                        echo "<li><a href=\"signUp.php\">Sign up</a></li>";
-                    }
+                // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
+                if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                    echo "<li><a href='signOut.php'>Sign out</a></li>";
+                } else {
+                    echo "<li><a href='login.php'>Login</a></li>";
+                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                }
 
-                    ?>
+                ?>
 
             </ul>
         </div>
@@ -72,46 +73,48 @@ DB_Controller::createConnection();  // start DB connection
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
-<!--            Side navigation of body part-->
+            <!--            Side navigation of body part-->
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div>
-                    <div id='aside' class='uk-panel' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
+                    <div id='aside' class='uk-panel' style='margin-top: 50px;max-height: 500px;overflow-y:hidden;'
+                         onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
-                <?php
-                // This part is to show the learning progress of each section
-                if(isset($_SESSION['username']) && !is_null($_SESSION['username'])){
-                    for($i = 1;$i<=6;$i++) {
-                        $sectionWords = DB_Controller::getSectionWordNumber(strval($i)); // Get the number of words of a certain section
-                        $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'],strval($i));
-                        $progress = round($knownWords/$sectionWords * 100);
-                        echo "<div>";
-                        echo "<p>Section ".$i.":</p>";
-                        echo "<div class='uk-progress uk-progress-striped' style='width: 120px'>";
-                        echo "<div class='uk-progress-bar' style='width: ".$progress."%;'>".$progress."%</div>";
-                        echo "</div></div>";
-                    }
+                        <?php
+                        // This part is to show the learning progress of each section
+                        if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                            for ($i = 1; $i <= 9; $i++) {
+                                $sectionWords = DB_Controller::getSectionWordNumber(strval($i)); // Get the number of words of a certain section
+                                $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'], strval($i));
+                                $progress = round($knownWords / $sectionWords * 100);
+                                echo "<div>";
+                                echo "<p>Section " . $i . ":</p>";
+                                echo "<div class='uk-progress uk-progress-striped' style='width: 120px'>";
+                                echo "<div class='uk-progress-bar' style='width: " . $progress . "%;'>" . $progress . "%</div>";
+                                echo "</div></div>";
+                            }
 
 
-                }else{
-                    echo"
+                        } else {
+                            echo "
                     <p>Please <a href='login.php'>login</a> to get your progress</p>
                     ";
-                }
-                ?>
+                        }
+                        ?>
                     </div>
                 </div>
             </aside>
-<!--            End of the side navigation-->
-<!--            Main part-->
+            <!--            End of the side navigation-->
+            <!--            Main part-->
             <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1 ">
                 <div class="uk-grid">
                     <div class="uk-container-center uk-width-large-2-3">
-                    <h1>Welcome to xxx!</h1>
+                        <h1>Welcome to xxx!</h1>
                     </div>
 
                 </div>
-                <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid-margin="">
+                <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-2 uk-grid-width-large-1-3"
+                    data-uk-grid-margin="">
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
@@ -124,7 +127,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 1:Guten Tag!</p>
+                        <p class="uk-text-center">Section 1: Guten Tag!</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -138,7 +141,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 2:Freunde, Kollegen und ich</p>
+                        <p class="uk-text-center">Section 2: Freunde, Kollegen und ich</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -152,7 +155,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 3:In der Stadt</p>
+                        <p class="uk-text-center">Section 3: In der Stadt</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -166,7 +169,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 4:Guten Appetit!</p>
+                        <p class="uk-text-center">Section 4: Guten Appetit!</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -180,7 +183,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 5:Tag für Tag</p>
+                        <p class="uk-text-center">Section 5: Tag für Tag</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -194,7 +197,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 6:Zeit mit Freunden</p>
+                        <p class="uk-text-center">Section 6: Zeit mit Freunden</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -208,7 +211,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 7:Kontakte</p>
+                        <p class="uk-text-center">Section 7: Kontakte</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -222,7 +225,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 8:Meine Wohnung</p>
+                        <p class="uk-text-center">Section 8: Meine Wohnung</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -236,7 +239,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 9:Alles Arbeit?</p>
+                        <p class="uk-text-center">Section 9: Alles Arbeit?</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -250,7 +253,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 10:Kleidung und Mode</p>
+                        <p class="uk-text-center">Section 10: Kleidung und Mode</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -264,7 +267,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 11:Gesund und munter</p>
+                        <p class="uk-text-center">Section 11: Gesund und munter</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
@@ -278,12 +281,12 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 12:Ab in den Urlaub!</p>
+                        <p class="uk-text-center">Section 12: Ab in den Urlaub!</p>
                     </li>
                 </ul>
 
             </main>
-<!--            End of main part-->
+            <!--            End of main part-->
 
         </div>
     </div>
@@ -299,7 +302,7 @@ DB_Controller::createConnection();  // start DB connection
             </div>
             <div class="uk-width-large-1-3 uk-margin-top">
                 <span><h2 style="color:#748487">Contact us</h2></span>
-                <p style="color:#748487">E-mail:574696335@qq.com</p>
+                <p style="color:#748487">E-mail: 574696335@qq.com</p>
             </div>
         </div>
     </div>

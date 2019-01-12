@@ -1,3 +1,11 @@
+/**
+ *Author:Pan Xinyi
+ * Date:2019-1-12
+ */
+
+/**
+ * add the word to table within add button.
+ */
 function addWord() {
     var parentTable = document.getElementById("wordTable");
     var tr = document.createElement("tr");
@@ -60,6 +68,9 @@ function addWord() {
     parentTable.appendChild(tr);
 }
 
+/**
+ * delete the word from the table within the delete button.
+ */
 function deleteWord() {
     var table = document.getElementById("wordTable");
     var checkbox = document.getElementsByName("selected");
@@ -116,6 +127,9 @@ function deleteWord() {
     }
 }
 
+/**
+ * show the check boxes which are hidden before the delete button is activated.
+ */
 function showCheckBox() {
     var title = document.getElementById("titleHidden");
     title.style.display = "block";
@@ -142,6 +156,9 @@ function showCheckBox() {
     cancelButton.removeAttribute("hidden");
 }
 
+/**
+ * cancel the operation of delete.
+ */
 function cancelDelete() {
 
     var newTable = document.getElementById("wordTable");
@@ -166,6 +183,10 @@ function cancelDelete() {
     title.style.display = "none";
 }
 
+/**
+ * confirm the operation of delete within the confirm button.
+ * using ajax and json encapsulation of data and interact with back-end.
+ */
 function jsonSubmit() {
     var WordJS = {
         wordGer: "",
@@ -210,11 +231,11 @@ function jsonSubmit() {
                 data: {'wordList': word},
                 datatype: "json",
                 success: function (data) {
-                    //window.location.href ="upload_Submit.php";
                     var obj = eval("(" + data + ")");
 
                     if (obj.type == 1) {
                         alert(obj.message + " has been added successfully!");
+                        window.location.href = "checkUserList.php?listName=" + obj.message;
                     }
 
                     if (obj.type == 0) {

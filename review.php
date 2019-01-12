@@ -104,8 +104,8 @@
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}'
+                <div>
+                    <div id="aside" class='uk-panel'
                          style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
                          onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
@@ -114,7 +114,7 @@
                         // logged in user
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
                             // section 8-12 are still not ready
-                            for ($i = 1; $i <= 7; $i++) {
+                            for ($i = 1; $i <= 9; $i++) {
                                 DB_Controller::createConnection();
                                 $sectionWords = DB_Controller::getSectionWordNumber(strval($i));
                                 $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'], strval($i));

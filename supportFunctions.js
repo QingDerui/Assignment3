@@ -28,8 +28,8 @@ function showStatus_Unknown(a) {
  * To submit a form by <a> element
  * @param a
  */
-function submitForm(a){
-    var formName = 'form'+a;
+function submitForm(a) {
+    var formName = 'form' + a;
     var form = document.getElementById(formName);
     form.submit();
 }
@@ -37,17 +37,17 @@ function submitForm(a){
 /**
  * To show the scroll bar of the aside element when mouse moves on to it
  */
-function showScrollBar(){
+function showScrollBar() {
     var side = document.getElementById('aside');
-    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:scroll;')
+    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:scroll;')
 }
 
 /**
  * To hide the scroll bar of the aside element when mouse leaves it
  */
-function hideScrollBar(){
+function hideScrollBar() {
     var side = document.getElementById('aside');
-    side.setAttribute('style','margin-top: 50px;max-height: 500px;overflow-y:hidden;')
+    side.setAttribute('style', 'margin-top: 50px;max-height: 500px;overflow-y:hidden;')
 }
 
 function onClick_section(section) {
@@ -55,4 +55,13 @@ function onClick_section(section) {
     var event = document.createEvent('MouseEvents');
     event.initMouseEvent('click');
     button.dispatchEvent(event);
+}
+
+function checkLogin(login){
+    var aref = document.getElementById("upload");
+    if(login){
+        aref.setAttribute("href","upload.php");
+    }else{
+        aref.setAttribute("href","login.php");
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Author: Yuxuan Wang
+ * Author: Yuxuan Wang, Xinyi Pan
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
@@ -554,6 +554,12 @@ WHERE
         }
     }
 
+    /**This function is used to add words from users to the listfromuser form
+     * @param $word
+     * @param $userID
+     * @param $listName
+     * @return bool
+     */
     public static function addWord_userList($word, $userID, $listName)
     {
         $query = "insert into listfromuser (userid,wordid, wordger, wordeng, example, genus, listname) values (?, ?, ?, ?, ?, ?,?)";
@@ -571,6 +577,10 @@ WHERE
         return false;
     }
 
+    /**This function is to reset the maximun word id.
+     * @param $listname
+     * @param $userid
+     */
     public static function setWordCount_userList($listname, $userid)
     {
         $query = "select wordid from listfromuser where listname = ? and userid = ? ";
@@ -593,6 +603,11 @@ WHERE
         Word::setCount(strv($maxid));
     }
 
+    /**This function is used to check the depulicated list in the database
+     * @param $listname
+     * @param $userid
+     * @return bool
+     */
     public static function checkListName($listname)
     {
         $query = "select listname from listfromuser where listname = ?";
@@ -614,7 +629,7 @@ WHERE
      */
     public static function getListNames_userList($userID)
     {
-        $query = "select listname from listfromuser where userid=?";
+        $query = "select distinct listname from listfromuser where userid=?";
 
         $listname = '';
 
@@ -632,6 +647,54 @@ WHERE
             return $listNames;
         } else {
             return null;
+        }
+    }
+
+    /**This function is used to add the listname from user.
+     * @param $userid
+     * @param $listname
+     * @return bool
+     */
+    public static function addlistName_user($userid, $listname)
+    {
+
+        $query = "insert into listname_user(userid,listname) values(?,?)";
+
+        if ($stmt = self::$con->prepare($query)) {
+            $stmt->bind_param("ss", $userid, $listname);
+            $stmt->execute();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**This function is used to get all the listnames from the user.
+     * @param $userid
+     * @return array|bool
+     */
+    public static function getAllUserWordList($userid)
+    {
+
+        $query = "select listname from listname_user where userid = ?";
+        $listname = "";
+
+        if ($stmt = self::$con->prepare($query)) {
+
+            $stmt->bind_param("s", $userid);
+            $stmt->execute();
+            $stmt->bind_result($listname);
+
+            $result = array();
+
+            while ($stmt->fetch()) {
+                array_push($result, $listname);
+            }
+
+            return $result;
+        } else {
+            return false;
         }
     }
 

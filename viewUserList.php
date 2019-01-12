@@ -37,9 +37,13 @@
         DB_Controller::closeConnection();
     }
 
-    if (sizeof($listNames) == 0) {
-        // null
-    } else {
+    if (!empty($listNames)) {
+        if (sizeof($listNames) == 0) {
+            // null
+        } else {
+            //null}
+        }
+
 
         if (!empty($_GET['listName'])) {
             $listName = $_GET['listName'];
@@ -54,6 +58,8 @@
             $words = DB_Controller::getListWords_userList($_SESSION['username'], $_SESSION['listName']);
         }
         DB_Controller::closeConnection();
+    } else {
+        //null
     }
 
     ?>
@@ -114,90 +120,95 @@
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}'
-                         style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
-                         onmouseleave="hideScrollBar()">
-                        <h3>Study progress:</h3>
-                        <hr class='uk-grid-divider'>
-                        <?php
-                        // logged in user
-                        if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                            for ($i = 0; $i < sizeof($listNames); $i++) {
-                                echo "<div>";
-                                echo "<form method='get' action='viewUserList.php'>";
-                                echo "<input name='listName' hidden value='" . strval($listNames[$i]) . "'>";
-                                echo "<p class='myGet' style='cursor: pointer;'>" . strval($listNames[$i]) . "</p>";
-                                echo "</form>";
-                            }
-                            // not logged in
-                        } else {
-                            echo "
+                <div
+                '>
+                <div id="aside" class='uk-panel'
+                     style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
+                     onmouseleave="hideScrollBar()">
+                    <h3>Study progress:</h3>
+                    <hr class='uk-grid-divider'>
+                    <?php
+                    // logged in user
+                    if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                        for ($i = 0;
+                             $i < sizeof($listNames);
+                             $i++) {
+                            echo "<div>";
+                            echo "<form method='get' action='viewUserList.php'>";
+                            echo "<input name='listName' hidden value='" . strval($listNames[$i]) . "'>";
+                            echo "<p class='myGet' style='cursor: pointer;'>" . strval($listNames[$i]) . "</p>";
+                            echo "</form>";
+                        }
+                        // not logged in
+                    } else {
+                        echo "
                             <p>Please <a href='login.php'>login</a> to get your own list</p>
                                ";
+                    }
+                    ?>
+                </div>
+        </div>
+        </aside>
+        <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1"
+              style="min-height: 800px">
+            <div class="uk-grid">
+                <div class="uk-container-center uk-width-large-1-1">
+                    <?php
+                    if (!empty($listNames)) {
+                        echo "<h1>$listName</h1>";
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="uk-margin-large-top">
+                <div class="uk-accordion" data-uk-accordion>
+                    <form action="nextList.php" method="post">
+                        <?php
+                        if (!empty($words)) {
+                            $a = 1;
+                            foreach ($words as $word) {
+                                echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
+                                /*if (isset($_SESSION['username'])) {
+                                    if ($statuses[$a - 1]) {
+                                        echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
+                                    } else {
+                                        echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                                    }
+                                }*/
+                                echo "</h3>";
+                                echo "<div class=\"uk-accordion-content uk-text-large\">";
+                                echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
+                                echo $word->getGenus();
+                                echo "</div>";
+                                echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
+                                echo $word->getWordEng();
+                                echo "</div>";
+                                if (isset($_SESSION['username'])) {
+                                    echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
+                                    echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
+                                    echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
+                                    echo "</div>";
+                                }
+                                echo "</div>";
+                                echo "<div class='uk-margin-top'><h3>Example:</h3>";
+                                echo "<p>" . $word->getExample() . "</p></div>";
+                                echo "</div>";
+                                $a++;
+                            }
+                        } else {
                         }
                         ?>
-                    </div>
+
+
+                    </form>
                 </div>
-            </aside>
-            <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1"
-                  style="min-height: 800px">
-                <div class="uk-grid">
-                    <div class="uk-container-center uk-width-large-1-1">
-                        <?php
-                        echo "<h1>$listName</h1>";
-                        ?>
-                    </div>
-                </div>
-                <div class="uk-margin-large-top">
-                    <div class="uk-accordion" data-uk-accordion>
-                        <form action="nextList.php" method="post">
-                            <?php
-                            if (!empty($words)) {
-                                $a = 1;
-                                foreach ($words as $word) {
-                                    echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
-                                    /*if (isset($_SESSION['username'])) {
-                                        if ($statuses[$a - 1]) {
-                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
-                                        } else {
-                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
-                                        }
-                                    }*/
-                                    echo "</h3>";
-                                    echo "<div class=\"uk-accordion-content uk-text-large\">";
-                                    echo "<div class='uk-grid'><div  class='uk-grid-width-1-3' style='width:20%'>";
-                                    echo $word->getGenus();
-                                    echo "</div>";
-                                    echo "<div  class='uk-grid-width-1-3' style='width:33%'>";
-                                    echo $word->getWordEng();
-                                    echo "</div>";
-                                    if (isset($_SESSION['username'])) {
-                                        echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
-                                        echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
-                                        echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
-                                        echo "</div>";
-                                    }
-                                    echo "</div>";
-                                    echo "<div class='uk-margin-top'><h3>Example:</h3>";
-                                    echo "<p>" . $word->getExample() . "</p></div>";
-                                    echo "</div>";
-                                    $a++;
-                                }
-                            } else {
-                            }
-                            ?>
+            </div>
 
 
-                        </form>
-                    </div>
-                </div>
+        </main>
 
-
-            </main>
-
-        </div>
     </div>
+</div>
 </div>
 
 
