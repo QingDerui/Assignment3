@@ -17,12 +17,71 @@ DB_Controller::createConnection();  // start DB connection
 
     <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
     <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
+    <link rel="stylesheet" type="text/css" href="css/uploadimage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/selfdefined.css"/>
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
     <script src="supportFunctions.js"></script>
 </head>
 <body>
+
+<!--Drawer bar-->
+<div class="uk-offcanvas" id="drawer">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-show">
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li style="text-align: center">
+                <?php
+                if(!(isset($_SESSION['username'])&&!is_null($_SESSION['username']))){
+                    echo"<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+
+            <div style='position: relative;left:-45px;'>
+                <a class='login' href='login.php'>Login</a>
+            </div>
+
+            <div style='position: relative;left: 145px;top:-23px;width:40px;'>
+                <a class='login' href='signUp.php'>Sign up</a>
+            </div>
+
+            <div style='position: relative;top:-46px;left:116px;width:5px;height:2px'>
+                <p style='font-size: 20px;color:gainsboro'>|</p>
+            </div>";}else{
+                    echo"<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+            </li>
+            
+            <li class='uk-active' style='text-align: center;font-size:22px;font-family: \"Curlz MT\"'>
+                <a>Guten Tag! Dear  ".$_SESSION['username']."</a>";
+                }
+                ?>
+            </li>
+
+            <li>
+                <a href="review.php">Review A1 words</a>
+            </li>
+
+            <li>
+                <a href="upload.php">Upload Word List</a>
+            </li>
+
+            <li>
+                <a href="myWordList.php">My Word List</a>
+            </li>
+
+            <li>
+                <a href="index.php">Homepage</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!--End of drawer bar-->
+
 <!--Navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
@@ -47,7 +106,8 @@ DB_Controller::createConnection();  // start DB connection
                 </div>
             </li>
             <li><a href="review.php">Review</a></li>
-            <li><a href="upload.php">Upload your own list</a></li>
+            <li><a id="upload" <?php $login=isset($_SESSION["username"])&&!is_null($_SESSION["username"]);
+            echo"onclick='checkLogin($login)'>Upload your own list</a></li>";?>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
@@ -56,6 +116,7 @@ DB_Controller::createConnection();  // start DB connection
 
                 // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
                 if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                    echo "<li><a href='#drawer'data-uk-offcanvas >Hi! ".$_SESSION['username']."</li>";
                     echo "<li><a href='signOut.php'>Sign out</a></li>";
                 } else {
                     echo "<li><a href='login.php'>Login</a></li>";

@@ -26,18 +26,21 @@ function addWord() {
 
     var tdGerman = document.createElement("td");
     var germanInput = document.createElement("input");
+    germanInput.setAttribute("class", "input_ger");
     germanInput.setAttribute("type", "text");
     germanInput.setAttribute("name", "wordGer");
     tdGerman.appendChild(germanInput);
 
     var tdEnglish = document.createElement("td");
     var englishInput = document.createElement("input");
+    englishInput.setAttribute("class", "input_eng");
     englishInput.setAttribute("type", "text");
     englishInput.setAttribute("name", "wordEng");
     tdEnglish.appendChild(englishInput);
 
     var tdGenus = document.createElement("td");
-    var genusSelect = document.createElement("select")
+    var genusSelect = document.createElement("select");
+    genusSelect.setAttribute("class", "select_genus");
     genusSelect.setAttribute("name", "genus");
     var mOption = document.createElement("option");
     var fOption = document.createElement("option");
@@ -55,6 +58,7 @@ function addWord() {
 
     var tdExample = document.createElement("td");
     var example = document.createElement("textarea");
+    example.setAttribute("class", "textarea_example");
     example.setAttribute("name", "example");
     tdExample.appendChild(example);
 

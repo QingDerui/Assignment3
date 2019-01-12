@@ -334,11 +334,13 @@ LIMIT 10";
 
 
         if ($stmt = self::$con->prepare($query)) {
-            foreach ($wordids as $wordid) {
-                $stmt->bind_param('sss', $userID, $wordid, $listNumber);
-                $stmt->execute();
-                while ($stmt->fetch()) {
-                    //null
+            if (!empty($wordids)) {
+                foreach ($wordids as $wordid) {
+                    $stmt->bind_param('sss', $userID, $wordid, $listNumber);
+                    $stmt->execute();
+                    while ($stmt->fetch()) {
+                        //null
+                    }
                 }
             }
             $stmt->close();
@@ -647,54 +649,6 @@ WHERE
             return $listNames;
         } else {
             return null;
-        }
-    }
-
-    /**This function is used to add the listname from user.
-     * @param $userid
-     * @param $listname
-     * @return bool
-     */
-    public static function addlistName_user($userid, $listname)
-    {
-
-        $query = "insert into listname_user(userid,listname) values(?,?)";
-
-        if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("ss", $userid, $listname);
-            $stmt->execute();
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**This function is used to get all the listnames from the user.
-     * @param $userid
-     * @return array|bool
-     */
-    public static function getAllUserWordList($userid)
-    {
-
-        $query = "select listname from listname_user where userid = ?";
-        $listname = "";
-
-        if ($stmt = self::$con->prepare($query)) {
-
-            $stmt->bind_param("s", $userid);
-            $stmt->execute();
-            $stmt->bind_result($listname);
-
-            $result = array();
-
-            while ($stmt->fetch()) {
-                array_push($result, $listname);
-            }
-
-            return $result;
-        } else {
-            return false;
         }
     }
 

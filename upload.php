@@ -11,14 +11,73 @@ require_once('Word.php');//why cannot use require;fatal error
     <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
     <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
     <link rel="stylesheet" type="text/css" href="css/upload.css"/>
+    <link rel="stylesheet" type="text/css" href="css/uploadimage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/selfdefined.css"/>
     <script src="jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
     <script src="supportFunctions.js"></script>
     <script src="upload_Form.js"></script>
+    <script src="Validation/upload.js"></script>
 
 </head>
 <body>
+<!--Drawer bar-->
+<div class="uk-offcanvas" id="drawer">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-show">
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li style="text-align: center">
+                <?php
+                if (!(isset($_SESSION['username']) && !is_null($_SESSION['username']))) {
+                    echo "<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+
+            <div style='position: relative;left:-45px;'>
+                <a class='login' href='login.php'>Login</a>
+            </div>
+
+            <div style='position: relative;left: 145px;top:-23px;width:40px;'>
+                <a class='login' href='signUp.php'>Sign up</a>
+            </div>
+
+            <div style='position: relative;top:-46px;left:116px;width:5px;height:2px'>
+                <p style='font-size: 20px;color:gainsboro'>|</p>
+            </div>";
+                } else {
+                    echo "<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+            </li>
+            
+            <li class='uk-active' style='text-align: center;font-size:22px;font-family: \"Curlz MT\"'>
+                <a>Guten Tag! Dear  " . $_SESSION['username'] . "</a>";
+                }
+                ?>
+            </li>
+
+            <li>
+                <a href="review.php">Review A1 words</a>
+            </li>
+
+            <li>
+                <a href="upload.php">Upload Word List</a>
+            </li>
+
+            <li>
+                <a href="myWordList.php">My Word List</a>
+            </li>
+
+            <li>
+                <a href="index.php">Homepage</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!--End of drawer bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
@@ -42,12 +101,14 @@ require_once('Word.php');//why cannot use require;fatal error
                 </div>
             </li>
             <li><a href="review.php">Review</a></li>
-            <li><a href="upload.php">Upload your own list</a></li>
+            <li><a id="upload" <?php $login = isset($_SESSION["username"]) && !is_null($_SESSION["username"]);
+            echo "onclick='checkLogin($login)'>Upload your own list</a></li>"; ?>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
                 <?php
                 if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
+                    echo "<li><a href='#drawer'data-uk-offcanvas >Hi! " . $_SESSION['username'] . "</li>";
                     echo "<li><a href='signOut.php'>Sign out</a></li>";
                 } else {
                     echo "<li><a href='login.php'>Login</a></li>";
@@ -98,30 +159,29 @@ require_once('Word.php');//why cannot use require;fatal error
                             <th style="width:208px;">German</th>
                             <th>English</th>
                             <th style="width: 20px;">Genus</th>
-                            <th style="width: 230px;">Example</th>
+                            <th style="width: 280px;">Example</th>
                         </tr>
                     </table>
                 </div>
 
-                <form width="100%" method="post" action="">
-                    <div style="height:700px;overflow: auto">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="uploadcss"
-                               style="text-align: center;" id="wordTable">
-                            <?php
-                            for ($i = 1; $i <= 19; $i++) {
-                                echo "<tr>";
-                                echo "<td style='display: none;height:36.33px;''>";
-                                echo "<input type='checkbox'name='selected'/>";
-                                echo "</td>";
-                                echo "<td>";
-                                echo "<p name='number'>" . $i . "</p>";
-                                echo "</td>";
-                                echo "<td width:50px>";
-                                echo "<input type='text' name='wordGer'id='ger'></td>";
-                                echo "<td>";
-                                echo "<input type='text' name='wordEng' id='eng'/></td>";
-                                echo "<td>
-                                            <select name='genus'>
+                <div style="height:700px;overflow: auto">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="uploadcss"
+                           style="text-align: center;" id="wordTable">
+                        <?php
+                        for ($i = 1; $i <= 19; $i++) {
+                            echo "<tr>";
+                            echo "<td style='display: none;height:36.33px;'>";
+                            echo "<input type='checkbox'name='selected'/>";
+                            echo "</td>";
+                            echo "<td>";
+                            echo "<p name='number'>" . $i . "</p>";
+                            echo "</td>";
+                            echo "<td width:50px>";
+                            echo "<input class='input_ger' type='text' name='wordGer'id='ger'></td>";
+                            echo "<td>";
+                            echo "<input class='input_eng' type='text' name='wordEng' id='eng'/></td>";
+                            echo "<td>
+                                            <select class='select_genus' name='genus'>
                                                 <option>m.</option>
                                                 <option>f.</option>
                                                 <option>n.</option>
@@ -129,20 +189,19 @@ require_once('Word.php');//why cannot use require;fatal error
                                                 <option>-</option>
                                             </select>
                                         </td>";
-                                echo "<td>";
-                                echo "<textarea name='example'></textarea>";
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </table>
-                    </div>
+                            echo "<td>";
+                            echo "<textarea class='textarea_example' name='example'></textarea>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
 
-                    <div style="text-align: center;margin-top:10px;"
-                    ">
-                    <Button type="submit" id="submitWord" onclick="jsonSubmit()">Submit your wordlist</Button>
+                <div style="text-align: center;margin-top:10px;"
+                ">
+                <Button type="submit" id="submitWord" onclick="jsonSubmit()">Submit your wordlist</Button>
             </div>
-            </form>
         </main>
         <div class="uk-width" style="position: absolute;right:7px; width:100px; top:590px">
             <button id="add" onclick="addWord()" style="width: 100%" class="uk-button-success">Add Word</button>

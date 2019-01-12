@@ -65,3 +65,4 @@ function checkLogin(login){
         aref.setAttribute("href","login.php");
     }
 }
+
