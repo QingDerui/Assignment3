@@ -200,7 +200,7 @@ require_once('Word.php');//why cannot use require;fatal error
 
                 <div style="text-align: center;margin-top:10px;"
                 ">
-                <Button type="submit" id="submitWord" onclick="jsonSubmit()">Submit your wordlist</Button>
+                <Button type="submit" id="submitWord" onclick="submit()">Submit your wordlist</Button>
             </div>
         </main>
         <div class="uk-width" style="position: absolute;right:7px; width:100px; top:590px">

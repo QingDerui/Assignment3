@@ -210,7 +210,7 @@ function jsonSubmit() {
             var wordJS = new Object();
 
             wordJS.wordGer = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
-            wordJS.wordEng = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
+            wordJS.wordEng = table.rows[i].cells[3].getElementsByTagName("input")[0].value;
 
             var select = table.rows[i].cells[4].getElementsByTagName("select")[0];
             var index = select.selectedIndex;
