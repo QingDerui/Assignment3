@@ -5,9 +5,9 @@ unset($_SESSION['userPass']);
 unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
-require_once('Word.php');
-require_once('DB.php');
-require_once('User.php');
+require_once('../Models/Word.php');
+require_once('../DB/DB.php');
+require_once('../Models/User.php');
 DB_Controller::createConnection();  // start DB connection
 ?>
 <html lang="en">
@@ -15,14 +15,73 @@ DB_Controller::createConnection();  // start DB connection
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
-    <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
-    <script src="jquery-3.3.1.js"></script>
-    <script src="js/uikit.js"></script>
-    <script src="js/components/sticky.js"></script>
-    <script src="supportFunctions.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/uikit.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/components/sticky.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/uploadimage.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/selfdefined.css"/>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/uikit.js"></script>
+    <script src="../js/components/sticky.js"></script>
+    <script src="../js/supportFunctions.js"></script>
 </head>
 <body>
+
+<!--Drawer bar-->
+<div class="uk-offcanvas" id="drawer">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-show">
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li style="text-align: center">
+                <?php
+                if(!(isset($_SESSION['username'])&&!is_null($_SESSION['username']))){
+                    echo "<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+
+            <div style='position: relative;left:-45px;'>
+                <a class='login' href='../LogIn&LogOut/login.php'>LogIn&LogOut</a>
+            </div>
+
+            <div style='position: relative;left: 145px;top:-23px;width:40px;'>
+                <a class='login' href='../LogIn&LogOut/signUp.php'>Sign up</a>
+            </div>
+
+            <div style='position: relative;top:-46px;left:116px;width:5px;height:2px'>
+                <p style='font-size: 20px;color:gainsboro'>|</p>
+            </div>";}else{
+                    echo"<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+            </li>
+            
+            <li class='uk-active' style='text-align: center;font-size:22px;font-family: \"Curlz MT\"'>
+                <a>Guten Tag! Dear  ".$_SESSION['username']."</a>";
+                }
+                ?>
+            </li>
+
+            <li>
+                <a href="../Review/review.php">Review A1 words</a>
+            </li>
+
+            <li>
+                <a href="../Upload/upload.php">Upload Word List</a>
+            </li>
+
+            <li>
+                <a href="../MyList/myWordList.php">My Word List</a>
+            </li>
+
+            <li>
+                <a href="index.php">Homepage</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!--End of drawer bar-->
+
 <!--Navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
@@ -46,8 +105,8 @@ DB_Controller::createConnection();  // start DB connection
                     </ul>
                 </div>
             </li>
-            <li><a href="review.php">Review</a></li>
-            <li><a href="upload.php">Upload your own list</a></li>
+            <li><a href="../Review/review.php">Review</a></li>
+            <li><a href="../Upload/upload.php">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
@@ -56,10 +115,11 @@ DB_Controller::createConnection();  // start DB connection
 
                 // If the user has logged in then there is no need to show login or sign in button, replace them by sign out button
                 if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                    echo "<li><a href='signOut.php'>Sign out</a></li>";
+                    echo "<li><a href='#drawer'data-uk-offcanvas >Hi! ".$_SESSION['username']."</li>";
+                    echo "<li><a href='../LogIn&LogOut/signOut.php'>Sign out</a></li>";
                 } else {
-                    echo "<li><a href='login.php'>Login</a></li>";
-                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    echo "<li><a href='../LogIn&LogOut/login.php'>Login</a></li>";
+                    echo "<li><a href='../LogIn&LogOut/signUp.php'>Sign up</a></li>";
                 }
 
                 ?>
@@ -97,7 +157,7 @@ DB_Controller::createConnection();  // start DB connection
 
                         } else {
                             echo "
-                    <p>Please <a href='login.php'>login</a> to get your progress</p>
+                    <p>Please <a href='../LogIn&LogOut/login.php'>login</a> to get your progress</p>
                     ";
                         }
                         ?>
@@ -117,9 +177,9 @@ DB_Controller::createConnection();  // start DB connection
                     data-uk-grid-margin="">
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!">
+                            <img src="../PIC/gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="1">
                                     <button id="button_section1" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -131,9 +191,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="friend&ich.jpg" alt="Freunde, Kollegen und ich!" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/friend&ich.jpg" alt="Freunde, Kollegen und ich!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="2">
                                     <button id="button_section2" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -145,9 +205,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="city.jpg" alt="In der Stadt" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/city.jpg" alt="In der Stadt" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="3">
                                     <button id="button_section3" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -159,9 +219,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="food.jpg" alt="Guten Appetit!" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/food.jpg" alt="Guten Appetit!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="4">
                                     <button id="button_section4" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -173,9 +233,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="tag%20for%20tag.jpg" alt="Tag für Tag" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/tag%20for%20tag.jpg" alt="Tag für Tag" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="5">
                                     <button id="button_section5" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -187,9 +247,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="withFriends.jpg" alt="Zeit mit Freunden" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/withFriends.jpg" alt="Zeit mit Freunden" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="6">
                                     <button id="button_section6" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -201,9 +261,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="contact.jpg" alt="Kontakte" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/contact.jpg" alt="Kontakte" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="7">
                                     <button id="button_section7" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -215,9 +275,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="livingroom.jpg" alt="Meine Wohnung" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/livingroom.jpg" alt="Meine Wohnung" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="8">
                                     <button id="button_section8" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -229,9 +289,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="job.jpg" alt="Alles Arbeit?" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/job.jpg" alt="Alles Arbeit?" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="9">
                                     <button id="button_section9" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -243,9 +303,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="buyClothes.jpg" alt="Kleidung und Mode" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/buyClothes.jpg" alt="Kleidung und Mode" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="10">
                                     <button id="button_section10" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -257,9 +317,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="health.jpg" alt="Gesund und munter" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/health.jpg" alt="Gesund und munter" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="11">
                                     <button id="button_section11" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -271,9 +331,9 @@ DB_Controller::createConnection();  // start DB connection
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="holiday.jpg" alt="Ab in den Urlaub!" style="width:273px;height: 204.74px;">
+                            <img src="../PIC/holiday.jpg" alt="Ab in den Urlaub!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memorizeWords.php" method="get">
+                                <form action="../MemorizeWord/memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="12">
                                     <button id="button_section12" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!

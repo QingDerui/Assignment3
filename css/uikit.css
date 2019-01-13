@@ -1362,7 +1362,7 @@ html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
   outline: none;
 }
 html .uk-nav.uk-nav-offcanvas > li.uk-active > a {
-  background: #1a1a1a;
+  background: #008888;
   color: #ffffff;
 }
 .uk-nav-offcanvas .uk-nav-header {
@@ -5738,7 +5738,7 @@ a.uk-thumbnail:focus {
   z-index: 1001;
   width: 270px;
   max-width: 100%;
-  background: #333333;
+  background: #007799;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -webkit-transition: -webkit-transform 0.3s ease-in-out;

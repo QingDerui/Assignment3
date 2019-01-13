@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <title>Adding Words (for developers)</title>
 </head>
 <body>
 <?php
-require_once ('Word.php');
-require_once ('DB.php');
+require_once('Models/Word.php');
+require_once('DB/DB.php');
 if (!empty($_POST['newWord'])) {
     DB_Controller::createConnection();
     DB_Controller::setWordCount();
@@ -102,10 +102,10 @@ if (!empty($_POST['updateWord'])) {
                     <option>6</option>
                     <option>7</option>
                     <option>8</option>
-                    <option selected>9</option>
+                    <option>9</option>
                     <option>10</option>
                     <option>11</option>
-                    <option>12</option>
+                    <option selected>12</option>
                 </select>
             </td>
             <td>

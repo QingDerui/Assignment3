@@ -1,0 +1,16 @@
+.uploadcss td{height:30px; border:#CCCCCC 1px solid;}
+
+#submitWord {
+    width:140px;
+    height:40px;
+    border-width:0px;
+    background-color:whitesmoke;
+    cursor:pointer;
+    outline:none;
+    font-family: "Lucida Sans";
+    font-size:14px;
+}
+
+#submitWord:hover {
+    background-color:tan;
+}

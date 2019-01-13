@@ -26,18 +26,25 @@ function addWord() {
 
     var tdGerman = document.createElement("td");
     var germanInput = document.createElement("input");
+    germanInput.setAttribute("class", "input_ger");
     germanInput.setAttribute("type", "text");
     germanInput.setAttribute("name", "wordGer");
+    germanInput.style.width = "100%";
+    germanInput.style.height = "100%";
     tdGerman.appendChild(germanInput);
 
     var tdEnglish = document.createElement("td");
     var englishInput = document.createElement("input");
+    englishInput.setAttribute("class", "input_eng");
     englishInput.setAttribute("type", "text");
     englishInput.setAttribute("name", "wordEng");
+    englishInput.style.width = "100%";
+    englishInput.style.height = "100%";
     tdEnglish.appendChild(englishInput);
 
     var tdGenus = document.createElement("td");
-    var genusSelect = document.createElement("select")
+    var genusSelect = document.createElement("select");
+    genusSelect.setAttribute("class", "select_genus");
     genusSelect.setAttribute("name", "genus");
     var mOption = document.createElement("option");
     var fOption = document.createElement("option");
@@ -51,11 +58,16 @@ function addWord() {
     genusSelect.appendChild(fOption);
     genusSelect.appendChild(nOption);
     genusSelect.appendChild(plOption);
+    genusSelect.style.width = "100%";
+    genusSelect.style.height = "100%";
     tdGenus.appendChild(genusSelect);
 
     var tdExample = document.createElement("td");
     var example = document.createElement("textarea");
+    example.setAttribute("class", "textarea_example");
     example.setAttribute("name", "example");
+    example.style.width = "100%";
+    example.style.height = "100%";
     tdExample.appendChild(example);
 
     tr.appendChild(tdCheckbox);
@@ -206,7 +218,7 @@ function jsonSubmit() {
             var wordJS = new Object();
 
             wordJS.wordGer = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
-            wordJS.wordEng = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
+            wordJS.wordEng = table.rows[i].cells[3].getElementsByTagName("input")[0].value;
 
             var select = table.rows[i].cells[4].getElementsByTagName("select")[0];
             var index = select.selectedIndex;
@@ -227,7 +239,7 @@ function jsonSubmit() {
 
             $.ajax({
                 type: "post",
-                url: "upload_Submit.php",
+                url: "../Upload/upload_Submit.php",
                 data: {'wordList': word},
                 datatype: "json",
                 success: function (data) {
@@ -235,7 +247,7 @@ function jsonSubmit() {
 
                     if (obj.type == 1) {
                         alert(obj.message + " has been added successfully!");
-                        window.location.href = "checkUserList.php?listName=" + obj.message;
+                        window.location.href = "../MyWordList/checkUserList.php?listName=" + obj.message;
                     }
 
                     if (obj.type == 0) {

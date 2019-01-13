@@ -5,8 +5,8 @@
  * Date: 12/28/2018
  * Time: 2:31 PM
  */
-require_once ('User.php');
-require_once ('DB.php');
+require_once('../Models/User.php');
+require_once('../DB/DB.php');
 
 $signUpId = $_POST['username'];
 $signUpPw = $_POST['password'];

@@ -8,9 +8,9 @@ unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
 
-require_once('Word.php');
-require_once('DB.php');
-require_once('User.php');
+require_once('../Models/Word.php');
+require_once('../DB/DB.php');
+require_once('../Models/User.php');
 
 // Get the current section or give section a certain content.
 if (isset($_GET['section'])) {
@@ -90,22 +90,80 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
-    <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
-    <link rel="stylesheet" type="text/css" href="css/components/accordion.css"/>
-    <script src="jquery-3.3.1.js"></script>
-    <script src="js/uikit.js"></script>
-    <script src="js/components/sticky.js"></script>
-    <script src="js/components/accordion.js"></script>
-    <script src="supportFunctions.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/uikit.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/components/sticky.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/components/accordion.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/uploadimage.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/selfdefined.css"/>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/uikit.js"></script>
+    <script src="../js/components/sticky.js"></script>
+    <script src="../js/components/accordion.js"></script>
+    <script src="../js/supportFunctions.js"></script>
 </head>
 <body>
+<!--Drawer bar-->
+<div class="uk-offcanvas" id="drawer">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-show">
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li style="text-align: center">
+                <?php
+                if (!(isset($_SESSION['username']) && !is_null($_SESSION['username']))) {
+                    echo "<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+
+            <div style='position: relative;left:-45px;'>
+                <a class='login' href='../LogIn&LogOut/login.php'>LogIn&LogOut</a>
+            </div>
+
+            <div style='position: relative;left: 145px;top:-23px;width:40px;'>
+                <a class='login' href='../LogIn&LogOut/signUp.php'>Sign up</a>
+            </div>
+
+            <div style='position: relative;top:-46px;left:116px;width:5px;height:2px'>
+                <p style='font-size: 20px;color:gainsboro'>|</p>
+            </div>";
+                } else {
+                    echo "<div class='contentDiv'>
+                <img src='icons/userImageDef.jpg'/>
+            </div>
+            <br><br>
+            </li>
+            
+            <li class='uk-active' style='text-align: center;font-size:22px;font-family: \"Curlz MT\"'>
+                <a>Guten Tag! Dear  " . $_SESSION['username'] . "</a>";
+                }
+                ?>
+            </li>
+
+            <li>
+                <a href="../Review/review.php">Review A1 words</a>
+            </li>
+
+            <li>
+                <a href="../Upload/upload.php">Upload Word List</a>
+            </li>
+
+            <li>
+                <a href="../MyList/myWordList.php">My Word List</a>
+            </li>
+
+            <li>
+                <a href="../Index/index.php">Homepage</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!--End of drawer bar-->
 <!--The navigation bar-->
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
             <li class="uk-parent" data-uk-dropdown aria-haspopup="true" aria-expanded="false">
-                <a href="index.php"><i class="uk-icon-bars"></i> Words</a>
+                <a href="../Index/index.php"><i class="uk-icon-bars"></i> Words</a>
                 <div class="uk-dropdown uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
                         <li><a>Section 1</a></li>
@@ -123,8 +181,9 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                     </ul>
                 </div>
             </li>
-            <li><a href="">Review</a></li>
-            <li><a href="">Upload your own list</a></li>
+            <li><a href="../Review/review.php">Review</a></li>
+            <li><a id="upload" <?php $login = isset($_SESSION["username"]) && !is_null($_SESSION["username"]);
+            echo "onclick='checkLogin($login)'>Upload your own list</a></li>"; ?>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
@@ -132,10 +191,11 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                 <?php
                 // Show the interface depending on user
                 if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                    echo "<li><a href='signOut.php'>Sign out</a></li>";
+                    echo "<li><a href='#drawer'data-uk-offcanvas >Hi! " . $_SESSION['username'] . "</li>";
+                    echo "<li><a href='../LogIn&LogOut/signOut.php'>Sign out</a></li>";
                 } else {
-                    echo "<li><a href='login.php'>Login</a></li>";
-                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    echo "<li><a href='../LogIn&LogOut/login.php'>LogIn&LogOut</a></li>";
+                    echo ">Sign up</a></li>";
                 }
 
                 ?>
@@ -180,7 +240,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
                         } else {
                             echo "
-                            <p>Please <a href='login.php'>login</a> to get your progress</p>
+                            <p>Please <a href='../LogIn&LogOut/login.php'>login</a> to get your progress</p>
                                ";
                         }
                         ?>
@@ -265,8 +325,8 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
                             }else{
 
-                                echo "<div class=\" uk-text-large uk-text-success uk-margin-large-left\">Congratulations
-! You have finish this section. Please return to the <a href='index.php'>main page</a> and start a new section!</div>";
+                                echo "> Congratulations
+! You have finish this section. Please return to the <a href='../Index/index.php'>main page</a> and start a new section!</div>";
 
                             }
                             ?>

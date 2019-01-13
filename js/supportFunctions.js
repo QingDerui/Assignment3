@@ -60,8 +60,9 @@ function onClick_section(section) {
 function checkLogin(login){
     var aref = document.getElementById("upload");
     if(login){
-        aref.setAttribute("href","upload.php");
+        aref.setAttribute("href","../Upload/upload.php");
     }else{
-        aref.setAttribute("href","login.php");
+        aref.setAttribute("href","../LogIn&LogOut/login.php");
     }
 }
+

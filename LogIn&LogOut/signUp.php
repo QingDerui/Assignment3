@@ -7,18 +7,20 @@ unset($_SESSION['userPass']);
 <head>
     <meta charset="UTF-8"><title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="css/uikit.css" />
-    <link rel="stylesheet" type="text/css" href="css/components/sticky.css" />
-    <script src="jquery-3.3.1.js"></script>
-    <script src="js/uikit.js"></script>
-    <script src="js/components/sticky.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/uikit.css" />
+    <link rel="stylesheet" type="text/css" href="../css/components/sticky.css" />
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/uikit.js"></script>
+    <script src="../js/components/sticky.js"></script>
+    <script src="../Validation/signUp.js"></script>
+
 </head>
 <body>
 <nav class="uk-navbar">
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
             <li class="uk-parent" data-uk-dropdown aria-haspopup="true" aria-expanded="false" >
-                <a href="index.php"><i class="uk-icon-bars"></i>  Words</a>
+                <a href="../Index/index.php"><i class="uk-icon-bars"></i>  Words</a>
                 <div class="uk-dropdown uk-dropdown-navbar" >
                     <ul class="uk-nav uk-nav-navbar" >
                         <li><a>Section 1</a></li>
@@ -53,22 +55,22 @@ unset($_SESSION['userPass']);
             <div class="uk-width-medium-1-1 uk-width-large-1-1 uk-width-small-1-1">
                 <h1 class="uk-h2 uk-text-center">Create Account</h1>
                 <div class="uk-container-center uk-width-medium-2-5 uk-width-large-3-10 uk-width-small-3-5 uk-margin-large-top">
-                    <form action="signUpAction.php" method="post" class="uk-form uk-form-stacked">
+                    <form id="form_user" action="signUpAction.php" method="post" class="uk-form uk-form-stacked">
                         <div class="uk-form-row">
                             <label class="uk-form-label">Username</label>
                             <div class="uk-form-controls">
-                                <input type="text" name="username" value="" class="uk-form-large uk-width-1-1" maxlength="40">
+                                <input id="input_userID" type="text" name="username" value="" class="uk-form-large uk-width-1-1" maxlength="40">
                             </div>
                         </div>
                         <div class="uk-form-row">
                             <label class="uk-form-label">Password</label>
-                            <input type="password" name="password" value="" class="uk-form-large uk-width-1-1" maxlength="40">
+                            <input id="input_userPW" type="password" name="password" value="" class="uk-form-large uk-width-1-1" maxlength="40">
                         </div>
                         <div class="uk-form-row">
                             <label class="uk-form-label">Confirm your password</label>
-                            <input type="password" name="passwordRepeat" value="" class="uk-form-large uk-width-1-1" maxlength="40" aria-autocomplete="list">
+                            <input id="input_userPWRE" type="password" name="passwordRepeat" value="" class="uk-form-large uk-width-1-1" maxlength="40" aria-autocomplete="list">
                         </div>
-                        <button id="signup-button" type="submit" name="signUp" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-large-top loader"> Sign up</button>
+                        <button id="signup-button" onclick="submitForm()" type="button" name="signUp" class="uk-button uk-button-primary uk-width-1-1 uk-button-large uk-margin-large-top loader"> Sign up</button>
                     </form>
                 </div>
                 <?php
