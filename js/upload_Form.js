@@ -29,6 +29,8 @@ function addWord() {
     germanInput.setAttribute("class", "input_ger");
     germanInput.setAttribute("type", "text");
     germanInput.setAttribute("name", "wordGer");
+    germanInput.style.width = "100%";
+    germanInput.style.height = "100%";
     tdGerman.appendChild(germanInput);
 
     var tdEnglish = document.createElement("td");
@@ -36,6 +38,8 @@ function addWord() {
     englishInput.setAttribute("class", "input_eng");
     englishInput.setAttribute("type", "text");
     englishInput.setAttribute("name", "wordEng");
+    englishInput.style.width = "100%";
+    englishInput.style.height = "100%";
     tdEnglish.appendChild(englishInput);
 
     var tdGenus = document.createElement("td");
@@ -54,12 +58,16 @@ function addWord() {
     genusSelect.appendChild(fOption);
     genusSelect.appendChild(nOption);
     genusSelect.appendChild(plOption);
+    genusSelect.style.width = "100%";
+    genusSelect.style.height = "100%";
     tdGenus.appendChild(genusSelect);
 
     var tdExample = document.createElement("td");
     var example = document.createElement("textarea");
     example.setAttribute("class", "textarea_example");
     example.setAttribute("name", "example");
+    example.style.width = "100%";
+    example.style.height = "100%";
     tdExample.appendChild(example);
 
     tr.appendChild(tdCheckbox);

@@ -4,8 +4,8 @@
  * Date: 2018-12-27
  * Time: 3:03 AM
  */
-require_once('User.php');
-require_once('Word.php');
+require_once('Models/User.php');
+require_once('Models/Word.php');
 
 class DB_Controller
 {

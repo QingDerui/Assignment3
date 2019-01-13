@@ -5,8 +5,8 @@
  * Date: 12/27/2018
  * Time: 5:20 PM
  */
-require_once ('DB.php');
-require_once ('User.php');
+require_once('DB/DB.php');
+require_once('Models/User.php');
 
 session_start();
 $loginUser = new User();

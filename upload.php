@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('DB.php');
-require_once('Word.php');//why cannot use require;fatal error
+require_once('DB/DB.php');
+require_once('Models/Word.php');//why cannot use require;fatal error
 ?>
 <html lang="en">
 <head>
@@ -13,11 +13,11 @@ require_once('Word.php');//why cannot use require;fatal error
     <link rel="stylesheet" type="text/css" href="css/upload.css"/>
     <link rel="stylesheet" type="text/css" href="css/uploadimage.css"/>
     <link rel="stylesheet" type="text/css" href="css/selfdefined.css"/>
-    <script src="jquery-3.3.1.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
-    <script src="supportFunctions.js"></script>
-    <script src="upload_Form.js"></script>
+    <script src="js/supportFunctions.js"></script>
+    <script src="js/upload_Form.js"></script>
     <script src="Validation/upload.js"></script>
 
 </head>
@@ -112,7 +112,7 @@ require_once('Word.php');//why cannot use require;fatal error
                     echo "<li><a href='signOut.php'>Sign out</a></li>";
                 } else {
                     echo "<li><a href='login.php'>Login</a></li>";
-                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    echo ";
                 }
                 ?>
             </ul>
@@ -156,10 +156,10 @@ require_once('Word.php');//why cannot use require;fatal error
                         <tr>
                             <th id="titleHidden" style='display: none;width:8px;'></th>
                             <th style="width:20px;">No.</th>
-                            <th style="width:208px;">German</th>
+                            <th style="width:230px;">German</th>
                             <th>English</th>
                             <th style="width: 20px;">Genus</th>
-                            <th style="width: 280px;">Example</th>
+                            <th style="width: 435px;">Example</th>
                         </tr>
                     </table>
                 </div>
@@ -176,12 +176,12 @@ require_once('Word.php');//why cannot use require;fatal error
                             echo "<td>";
                             echo "<p name='number'>" . $i . "</p>";
                             echo "</td>";
-                            echo "<td width:50px>";
-                            echo "<input class='input_ger' type='text' name='wordGer'id='ger'></td>";
-                            echo "<td>";
-                            echo "<input class='input_eng' type='text' name='wordEng' id='eng'/></td>";
-                            echo "<td>
-                                            <select class='select_genus' name='genus'>
+                            echo "<td style='width:200px'>";
+                            echo "<input class='input_ger' style='height:100%;width:100%' type='text' name='wordGer'id='ger'></td>";
+                            echo "<td style='width:200px'>";
+                            echo "<input class='input_eng' style='height:100%; width:100%' type='text' name='wordEng' id='eng'/></td>";
+                            echo "<td style='width:50px;'>
+                                            <select class='select_genus' style='height:100%;width:100%;' name='genus'>
                                                 <option>m.</option>
                                                 <option>f.</option>
                                                 <option>n.</option>
@@ -189,8 +189,8 @@ require_once('Word.php');//why cannot use require;fatal error
                                                 <option>-</option>
                                             </select>
                                         </td>";
-                            echo "<td>";
-                            echo "<textarea class='textarea_example' name='example'></textarea>";
+                            echo "<td style='width:430px;'>";
+                            echo "<textarea style='height:100%;width:100%;' class='textarea_example' name='example'></textarea>";
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -203,16 +203,16 @@ require_once('Word.php');//why cannot use require;fatal error
                 <Button type="submit" id="submitWord" onclick="submit()">Submit your wordlist</Button>
             </div>
         </main>
-        <div class="uk-width" style="position: absolute;right:7px; width:100px; top:590px">
+        <div class="uk-width" style="position: absolute;right:30px; width:100px; top:590px">
             <button id="add" onclick="addWord()" style="width: 100%" class="uk-button-success">Add Word</button>
         </div>
-        <div class="uk-width" style="position: absolute;right:0px; top:630px;width:100px;">
+        <div class="uk-width" style="position: absolute;right:25px; top:630px;width:100px;">
             <button id="delete" onclick="showCheckBox()" class="uk-button-danger">Delete Word</button>
         </div>
-        <div class="uk-width" style="position: absolute;right:-7px; width:100px; top:590px">
+        <div class="uk-width" style="position: absolute;right:30px; width:100px; top:590px">
             <button id="confirmDel" hidden onclick="deleteWord()" class="uk-button-success">Confirm</button>
         </div>
-        <div class="uk-width" style="position: absolute;right:12px; top:630px;width:80px;">
+        <div class="uk-width" style="position: absolute;right:50px; top:630px;width:80px;">
             <button id="cancelDel" onclick="cancelDelete()" hidden class="uk-button-danger" style="width:62px;">Cancel
             </button>
         </div>

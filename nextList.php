@@ -6,9 +6,9 @@
  * Time: 6:42 PM
  */
 
-require_once('DB.php');
-require_once('Word.php');
-require_once('User.php');
+require_once('DB/DB.php');
+require_once('Models/Word.php');
+require_once('Models/User.php');
 session_start();
 
 DB_Controller::createConnection();
@@ -35,4 +35,4 @@ $_SESSION['goToNextList'] = true; // Set the flag so that the memory interface w
 
 DB_Controller::closeConnection(); // Close DB connection
 
-echo "<script>location.href='memoryWords.php'</script>"; //Back to the website
+echo "<script>location.href=mmemorizeWords.phpp</script>"; //Back to the website

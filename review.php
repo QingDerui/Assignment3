@@ -6,10 +6,10 @@
 
     <link rel="stylesheet" type="text/css" href="css/uikit.css"/>
     <link rel="stylesheet" type="text/css" href="css/components/sticky.css"/>
-    <script src="jquery-3.3.1.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
-    <script src="supportFunctions.js"></script>
+    <script src="js/supportFunctions.js"></script>
 
     <?php
 
@@ -21,9 +21,9 @@
     unset($_SESSION['pwPass']);
     unset($_SESSION['nameNull']);
 
-    require_once('Word.php');
-    require_once('DB.php');
-    require_once('User.php');
+    require_once('DB/DB.php');
+    require_once('Models/User.php');
+    require_once('Models/Word.php');
 
     if (!empty($_GET['section'])) {
         $section = $_GET['section'];
@@ -90,7 +90,7 @@
                     echo "<li><a href='signOut.php'>Sign out</a></li>";
                 } else {
                     echo "<li><a href='login.php'>Login</a></li>";
-                    echo "<li><a href=\"signUp.php\">Sign up</a></li>";
+                    echo ">Sign up</a></li>";
                 }
 
                 ?>

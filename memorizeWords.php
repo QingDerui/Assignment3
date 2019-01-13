@@ -8,18 +8,18 @@ unset($_SESSION['signed']);
 unset($_SESSION['pwPass']);
 unset($_SESSION['nameNull']);
 
-require_once('Word.php');
-require_once('DB.php');
-require_once('User.php');
+require_once('Models/Word.php');
+require_once('DB/DB.php');
+require_once('Models/User.php');
 
 // Get the current section or give section a certain content.
 if (isset($_GET['section'])) {
     $section = $_GET['section'];
     $_SESSION['section'] = $section;
 } else {
-    if (isset($_SESSION['section'])) {
+    if(isset($_SESSION['section'])) {
 
-    } else {
+    }else{
         $_SESSION['section'] = '1';
     }
 }
@@ -37,9 +37,9 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
         $trueList = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));// Get the total list number
 
         //If this is the newest list, show the "nextList" button
-        if ($trueList == $_GET['list']) {
+        if($trueList == $_GET['list']){
             $_SESSION['newList'] = true;
-        } else {
+        }else{
             $_SESSION['newList'] = false;
         }
 
@@ -58,16 +58,16 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
         $_SESSION['newList'] = true;
         $listNumber = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));
 
-        if ($listNumber == '0') {
+        if($listNumber == '0' ){
             // If it is the newest list, than get a random list from the unfamiliar word library
             $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
             $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
-        } else {
+        }else{
 
-            if (isset($_SESSION['goToNextList']) && $_SESSION['goToNextList']) {
+            if(isset($_SESSION['goToNextList']) && $_SESSION['goToNextList']){
                 $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
                 $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
-            } else {
+            }else {
                 $_SESSION['list'] = $listNumber;
                 $results_Initial = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
                 foreach ($results_Initial as $result) {
@@ -95,11 +95,11 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
     <link rel="stylesheet" type="text/css" href="css/components/accordion.css"/>
     <link rel="stylesheet" type="text/css" href="css/uploadimage.css"/>
     <link rel="stylesheet" type="text/css" href="css/selfdefined.css"/>
-    <script src="jquery-3.3.1.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
     <script src="js/uikit.js"></script>
     <script src="js/components/sticky.js"></script>
     <script src="js/components/accordion.js"></script>
-    <script src="supportFunctions.js"></script>
+    <script src="js/supportFunctions.js"></script>
 </head>
 <body>
 <!--Drawer bar-->
@@ -209,18 +209,17 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 <div class="" style="margin-top: 50px;">
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
-            <!--            Side navigation part-->
+<!--            Side navigation part-->
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div>
-                    <div id="aside" style='margin-top: 50px;max-height: 500px;overflow-y:hidden;'
-                         onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
+                    <div id="aside" style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()" onmouseleave="hideScrollBar()">
                         <h3>Study progress:</h3>
                         <hr class='uk-grid-divider'>
                         <?php
                         //Show the progress of the current section
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
                             // Show the progress bar when user has logged in
-                            $knowPer = round(DB_Controller::getRecognizedWordNumber($_SESSION['username'], $_SESSION['section']) / DB_Controller::getSectionWordNumber($_SESSION['section']) * 100);
+                            $knowPer = round(DB_Controller::getRecognizedWordNumber($_SESSION['username'], $_SESSION['section']) / DB_Controller::getSectionWordNumber($_SESSION['section'] ) *100);
                             echo "
                                 <div>
                                 <p>Section " . $_SESSION['section'] . ":</p>
@@ -233,9 +232,9 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                             echo "<hr class='uk-grid-divider'>";
                             // Show all links of the existed list
                             for ($i = 1; $i <= DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']); $i++) {
-                                echo "<form id='form" . $i . "' action='memoryWords.php' method='get'>";
-                                echo "<input type='hidden' name='list' value='" . $i . "'>";
-                                echo "<a onclick='submitForm(" . $i . ")' >List " . $i . "</a><br>";
+                                echo "<form id='form".$i."' action='memorizeWords.php' method='get'>";
+                                echo "<input type='hidden' name='list' value='".$i."'>";
+                                echo "<a onclick='submitForm(".$i.")' >List " . $i . "</a><br>";
                                 echo "</form>";
                             }
 
@@ -248,8 +247,8 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                     </div>
                 </div>
             </aside>
-            <!--            End of side navigation-->
-            <!--            Main part-->
+<!--            End of side navigation-->
+<!--            Main part-->
             <main role="main" class="uk-width-medium-3-4 uk-width-large-4-5 uk-width-small-1-1"
                   style="min-height: 800px">
                 <div class="uk-grid">
@@ -273,7 +272,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                             $a = 1;
 
                             // Show the words of the list
-                            if (isset($words) && !is_null($words)) {
+                            if(isset($words) && !is_null($words)) {
                                 foreach ($words as $word) {
                                     echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
                                     if (isset($_SESSION['username'])) {
@@ -316,17 +315,17 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                                 }
 
 
-                                if (isset($_SESSION['username'])) {
-                                    if ($_SESSION['newList']) {
-                                        echo "<button type=\"submit\" value=\"\">New List</button>";
-                                    }
-                                } else {
-                                    echo "<a class='uk-button' href='memoryWords.php'>Next List</a>";
+                            if (isset($_SESSION['username'])) {
+                                if($_SESSION['newList']){
+                                    echo "<button type=\"submit\" value=\"\">New List</button>";
                                 }
-
                             } else {
+                                echo "<a class='uk-button' href='memorizeWords.php'>Next List</a>";
+                            }
 
-                                echo "<div class=\" uk-text-large uk-text-success uk-margin-large-left\">Congratulations
+                            }else{
+
+                                echo ">Congratulations
 ! You have finish this section. Please return to the <a href='index.php'>main page</a> and start a new section!</div>";
 
                             }
@@ -339,7 +338,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
 
             </main>
-            <!--            End of the main part-->
+<!--            End of the main part-->
         </div>
     </div>
 </div>

@@ -5,8 +5,8 @@
  */
 //validation();
 session_start();
-require_once("DB.php");
-require_once("Word.php");
+require_once("Models/DB.php");
+require_once("Models/Word.php");
 DB_Controller::createConnection();
 if (isset($_POST['wordList']) && isset($_SESSION['username'])) {
     $data = $_POST['wordList'];
