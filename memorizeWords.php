@@ -172,7 +172,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                             echo "<hr class='uk-grid-divider'>";
                             // Show all links of the existed list
                             for ($i = 1; $i <= DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']); $i++) {
-                                echo "<form id='form".$i."' action='memoryWords.php' method='get'>";
+                                echo "<form id='form".$i."' action='memorizeWords.php' method='get'>";
                                 echo "<input type='hidden' name='list' value='".$i."'>";
                                 echo "<a onclick='submitForm(".$i.")' >List " . $i . "</a><br>";
                                 echo "</form>";
@@ -260,7 +260,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                                     echo "<button type=\"submit\" value=\"\">New List</button>";
                                 }
                             } else {
-                                echo "<a class='uk-button' href='memoryWords.php'>Next List</a>";
+                                echo "<a class='uk-button' href='memorizeWords.php'>Next List</a>";
                             }
 
                             }else{

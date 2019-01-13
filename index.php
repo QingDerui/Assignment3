@@ -83,7 +83,7 @@ DB_Controller::createConnection();  // start DB connection
                         <?php
                         // This part is to show the learning progress of each section
                         if (isset($_SESSION['username']) && !is_null($_SESSION['username'])) {
-                            for ($i = 1; $i <= 9; $i++) {
+                            for ($i = 1; $i <= 12; $i++) {
                                 $sectionWords = DB_Controller::getSectionWordNumber(strval($i)); // Get the number of words of a certain section
                                 $knownWords = DB_Controller::getRecognizedWordNumber($_SESSION['username'], strval($i));
                                 $progress = round($knownWords / $sectionWords * 100);
@@ -119,7 +119,7 @@ DB_Controller::createConnection();  // start DB connection
                         <figure class="uk-overlay uk-overlay-hover">
                             <img src="gutenTag.jpg" alt="Guten Tag!">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="1">
                                     <button id="button_section1" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -127,13 +127,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 1: Guten Tag!</p>
+                        <p class="uk-text-center" title="picture reference: https://cn.dreamstime.com/%E4%BD%A0%E5%A5%BD%E8%AF%8D%E4%BA%91%E5%BD%A9%E6%8B%BC%E8%B4%B4%E7%94%BB%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E8%A8%80-image100776481, last access 12.1.2019">Section 1: Guten Tag!</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="friend&ich.jpg" alt="Freunde, Kollegen und ich!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="2">
                                     <button id="button_section2" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -141,13 +141,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 2: Freunde, Kollegen und ich</p>
+                        <p class="uk-text-center" title="picture reference: https://stock.tuchong.com/image/creative?imageId=57401542134863252&source=baiduimage, last access 12.1.2019">Section 2: Freunde, Kollegen und ich</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="city.jpg" alt="In der Stadt" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="3">
                                     <button id="button_section3" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -155,13 +155,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 3: In der Stadt</p>
+                        <p class="uk-text-center" title="picture reference: https://dp.pconline.com.cn/dphoto/list_3410659.html, last access on 12.1.2019">Section 3: In der Stadt</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="food.jpg" alt="Guten Appetit!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="4">
                                     <button id="button_section4" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -169,13 +169,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 4: Guten Appetit!</p>
+                        <p class="uk-text-center" title="picture reference: http://www.sohu.com/a/203374173_99908299, last access on 12.1.2019">Section 4: Guten Appetit!</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="tag%20for%20tag.jpg" alt="Tag für Tag" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="5">
                                     <button id="button_section5" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -183,13 +183,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 5: Tag für Tag</p>
+                        <p class="uk-text-center" title="picture reference: http://www.3lian.com/gif/2015/05-14/82102.html, last access on 12.1.2019">Section 5: Tag für Tag</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="withFriends.jpg" alt="Zeit mit Freunden" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="6">
                                     <button id="button_section6" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -197,13 +197,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 6: Zeit mit Freunden</p>
+                        <p class="uk-text-center" title="picture reference: https://news.qq.com/a/20140724/022822.htm#p=25, last access on 12.1.2019">Section 6: Zeit mit Freunden</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="contact.jpg" alt="Kontakte" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="7">
                                     <button id="button_section7" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -211,13 +211,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 7: Kontakte</p>
+                        <p class="uk-text-center" title="picture reference: http://aso.aizhan.com/all/1899268.html, last access on 12.1.2019">Section 7: Kontakte</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="livingroom.jpg" alt="Meine Wohnung" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="8">
                                     <button id="button_section8" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -225,13 +225,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 8: Meine Wohnung</p>
+                        <p class="uk-text-center" title="picture reference: https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E5%AE%A4%E5%86%85&step_word=&hs=2&pn=69&spn=0&di=81319131520&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=1012886403%2C1639147329&os=1139614575%2C3313093080&simid=3389750440%2C59006398&adpicid=0&lpn=0&ln=1911&fr=&fmq=1547334096593_R&fm=result&ic=undefined&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimg.zx123.cn%2FResources%2Fzx123cn%2Fuploadfile%2F2017%2F0720%2Fe7e2109b6104dd810a16317be37ec15a.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bzx8dn_z%26e3BvgAzdH3Fxtw5275p7AzdH3Fda80a0da8nmlblm_z%26e3Bip4s&gsm=1e&rpstart=0&rpnum=0&islist=&querylist=&force=undefined, last access on 12.1.2019">Section 8: Meine Wohnung</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="job.jpg" alt="Alles Arbeit?" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="9">
                                     <button id="button_section9" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -239,13 +239,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 9: Alles Arbeit?</p>
+                        <p class="uk-text-center" title="picture reference: https://www.tooopen.com/view/1543045.html, last access on 12.1.2019">Section 9: Alles Arbeit?</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="buyClothes.jpg" alt="Kleidung und Mode" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="10">
                                     <button id="button_section10" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -253,13 +253,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 10: Kleidung und Mode</p>
+                        <p class="uk-text-center" title="picture reference: http://www.efnanjing.com/news.php?cid=1190, last access on 12.1.2019">Section 10: Kleidung und Mode</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="health.jpg" alt="Gesund und munter" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="11">
                                     <button id="button_section11" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -267,13 +267,13 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 11: Gesund und munter</p>
+                        <p class="uk-text-center" title="picture reference: https://news.91160.com/xinwen/yiliao/10728.html, last access on 12.1.2019">Section 11: Gesund und munter</p>
                     </li>
                     <li>
                         <figure class="uk-overlay uk-overlay-hover">
-                            <img src="gutenTag.jpg" alt="Guten Tag!" width="300" height="250">
+                            <img src="holiday.jpg" alt="Ab in den Urlaub!" style="width:273px;height: 204.74px;">
                             <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background">
-                                <form action="memoryWords.php" method="get">
+                                <form action="memorizeWords.php" method="get">
                                     <input type="hidden" name="section" value="12">
                                     <button id="button_section12" type="submit" class="uk-button uk-button-primary"
                                             style="margin-top: 30%;margin-left:26%">Learn it now!
@@ -281,7 +281,7 @@ DB_Controller::createConnection();  // start DB connection
                                 </form>
                             </div>
                         </figure>
-                        <p class="uk-text-center">Section 12: Ab in den Urlaub!</p>
+                        <p class="uk-text-center" title="picture reference: https://www.16pic.com/psd/pic_494513.html, last access on 12.1.2019">Section 12: Ab in den Urlaub!</p>
                     </li>
                 </ul>
 

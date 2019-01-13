@@ -35,4 +35,4 @@ $_SESSION['goToNextList'] = true; // Set the flag so that the memory interface w
 
 DB_Controller::closeConnection(); // Close DB connection
 
-echo "<script>location.href='memoryWords.php'</script>"; //Back to the website
+echo "<script>location.href=mmemorizeWords.phpp</script>"; //Back to the website
