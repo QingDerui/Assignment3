@@ -30,7 +30,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                 <?php
                 if (!(isset($_SESSION['username']) && !is_null($_SESSION['username']))) {
                     echo "<div class='contentDiv'>
-                <img alt='userIcon' title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='icons/userImageDef.jpg'/>
+                <img alt='userIcon' title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
 
@@ -47,7 +47,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
             </div>";
                 } else {
                     echo "<div class='contentDiv'>
-                <img alt='userIcon' title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='icons/userImageDef.jpg'/>
+                <img alt='userIcon' title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
             </li>
@@ -171,7 +171,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                         <?php
                         for ($i = 1; $i <= 5; $i++) {
                             echo "<tr>";
-                            echo "<td style='display: none;height:36.33px;'>";
+                            echo "<td style='display: none; height: 36.33px;'>";
                             echo "<input type='checkbox' name='selected'/>";
                             echo "</td>";
                             echo "<td>";
@@ -191,16 +191,15 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                                             </select>
                                         </td>";
                             echo "<td style='width:430px;'>";
-                            echo "echo \"<textarea style='height:100%;width:100%;resize:none' class='textarea_example' name='example'>";
+                            echo "<textarea style='height:100%;width:100%;resize:none;' class='textarea_example' name='example'></textarea>";
                             echo "</td>";
                             echo "</tr>";
                         }
                         ?>
                     </table>
                 </div>
-
-                <div style="text-align: center;margin-top:10px;"
-                ">
+            </div>
+            <div style="text-align: center;margin-top:10px;">
                 <Button type="submit" id="submitWord" onclick="submit()">Submit your wordlist</Button>
             </div>
         </main>
