@@ -9,16 +9,16 @@ function validate() {
     } else {
         var error = '';
         if (!checkUserID()) {
-            error += 'user name; ';
+            error += 'user name should contain at least 8 and at most 20 characters; ';
         }
         if (!checkUserPassword()) {
-            error += 'password; ';
+            error += 'password should contain at least 8 and at most 20 characters; ';
         }
         if (!checkUserPassword_Re()) {
-            error += 'repeated password; ';
+            error += 'repeated password should contain at least 8 and at most 20 characters; ';
         }
         error = error.substring(0, error.length - 2);
-        window.alert("The following content is not validate: " + error + ".");
+        window.alert("Your input is not valid: " + error + ".");
         return false;
     }
 }
@@ -29,7 +29,7 @@ function validate() {
  */
 function checkUserID() {
     var userID = document.getElementById('input_userID').value;
-    if (userID.length > 0 && userID.length <= 20) {
+    if (userID.length >= 8 && userID.length <= 20) {
         return true;
     } else {
         return false;
@@ -42,7 +42,7 @@ function checkUserID() {
  */
 function checkUserPassword() {
     var userPW = document.getElementById('input_userPW').value;
-    if (userPW.length > 0 && userPW.length <= 25) {
+    if (userPW.length >= 8 && userPW.length <= 25) {
         return true;
     } else {
         return false;
@@ -55,7 +55,7 @@ function checkUserPassword() {
  */
 function checkUserPassword_Re() {
     var userPW_Re = document.getElementById('input_userPWRE').value;
-    if (userPW_Re.length > 0 && userPW_Re.length <= 25) {
+    if (userPW_Re.length >= 8 && userPW_Re.length <= 25) {
         return true;
     } else {
         return false;
