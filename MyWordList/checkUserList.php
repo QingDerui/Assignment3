@@ -164,7 +164,7 @@
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
                 <div class='uk-sticky-placeholder'>
-                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}'
+                    <div id="aside"
                          style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
                          onmouseleave="hideScrollBar()">
                         <h3>Your word list:</h3>

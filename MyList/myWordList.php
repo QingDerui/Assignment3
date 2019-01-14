@@ -149,8 +149,8 @@
     <div class="uk-container uk-container-center">
         <div class="uk-grid uk-grid-divider">
             <aside class="uk-width-medium-1-4 uk-width-large-1-5 uk-hidden-small uk-margin-large-top">
-                <div class='uk-sticky-placeholder'>
-                    <div id="aside" class='uk-panel' data-uk-sticky='{top:50}'
+                <div>
+                    <div id="aside"
                          style='margin-top: 50px;max-height: 500px;overflow-y:hidden;' onmouseover="showScrollBar()"
                          onmouseleave="hideScrollBar()">
 
@@ -184,7 +184,7 @@
                         if (!empty($listArr)) {
                             $a = 1;
                             foreach ($listArr as $name) {
-                                echo "<a href=\"checkUserList.php?listName=$name\"><h3 class=\"uk-accordion-title uk-active listNames\" id='" . $name . "'>" . $name . "</h3></a>";
+                                echo "<a href=\"../MyWordList/checkUserList.php?listName=$name\"><h3 class=\"uk-accordion-title uk-active listNames\" id='" . $name . "'>" . $name . "</h3></a>";
                             }
                         } else {
                             echo "<h3 class=\"uk-accordion-title uk-active listNames\">No word list!";

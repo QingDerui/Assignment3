@@ -5,7 +5,7 @@
  */
 //validation();
 session_start();
-require_once("../Models/DB.php");
+require_once("../DB/DB.php");
 require_once("../Models/Word.php");
 DB_Controller::createConnection();
 if (isset($_POST['wordList']) && isset($_SESSION['username'])) {
@@ -14,7 +14,7 @@ if (isset($_POST['wordList']) && isset($_SESSION['username'])) {
     $wordList = (array)($arr_word['dataWord']);
     $wordListName = trim($arr_word['name']);
     $wordID = Word::getCount();
-    if (DB_Controller::checkListName($wordListName)) {
+    if (DB_Controller::checkListName($wordListName,$_SESSION['username'])) {
         $result['type'] = 1;
         $result['message'] = $wordListName;
         for ($i = 0; $i < count($wordList); $i++) {

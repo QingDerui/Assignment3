@@ -23,7 +23,7 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `listfromuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `listfromuser` (
   `userid` varchar(20) DEFAULT NULL,
   `wordid` varchar(20) DEFAULT NULL,

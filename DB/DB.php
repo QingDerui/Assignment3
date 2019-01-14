@@ -610,11 +610,11 @@ WHERE
      * @param $userid
      * @return bool
      */
-    public static function checkListName($listname)
+    public static function checkListName($listname,$userid)
     {
-        $query = "select listname from listfromuser where listname = ?";
+        $query = "select listname from listfromuser where listname = ? and userid= ?";
         if ($stmt = self::$con->prepare($query)) {
-            $stmt->bind_param("s", $listname);
+            $stmt->bind_param("ss", $listname,$userid);
             $stmt->execute();
             if (!($stmt->fetch() == NULL)) {
                 return false;
@@ -623,6 +623,8 @@ WHERE
             }
         }
     }
+
+
 
     /**
      * This function is used to get the list names uploaded by the specified user.
