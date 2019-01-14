@@ -9,13 +9,13 @@ function validate() {
     } else {
         var error = '';
         if (!checkUserID()) {
-            error += 'user name; ';
+            error += 'user name too short or too long; ';
         }
         if (!checkUserPassword()) {
-            error += 'password; ';
+            error += 'password too short or too long; ';
         }
         error = error.substring(0, error.length - 2);
-        window.alert("The following content is not validate: " + error + ".");
+        window.alert("The following content is not valid: " + error + ".");
         return false;
     }
 }
