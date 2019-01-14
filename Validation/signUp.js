@@ -9,7 +9,7 @@ function validate() {
     } else {
         var error = '';
         if (!checkUserID()) {
-            error += 'user name should contain at least 8 and at most 20 characters; ';
+            error += 'user name should contain at least 6 and at most 20 characters and does not contain space; ';
         }
         if (!checkUserPassword()) {
             error += 'password should contain at least 8 and at most 20 characters; ';
@@ -29,8 +29,13 @@ function validate() {
  */
 function checkUserID() {
     var userID = document.getElementById('input_userID').value;
-    if (userID.length >= 8 && userID.length <= 20) {
-        return true;
+    if (userID.length >= 6 && userID.length <= 20) {
+        var regex = /[ ]/g;
+        if (regex.test(userID)) {
+            return false;
+        } else {
+            return true;
+        }
     } else {
         return false;
     }

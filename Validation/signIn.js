@@ -26,7 +26,7 @@ function validate() {
  */
 function checkUserID() {
     var userID = document.getElementById('input_userID').value;
-    if (userID.length >= 8 && userID.length <= 20) {
+    if (userID.length >= 6 && userID.length <= 20) {
         return true;
     } else {
         return false;
