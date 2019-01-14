@@ -206,12 +206,12 @@
         <div class="uk-container uk-container-center uk-grid">
             <div class="uk-width-large-2-3 uk-margin-top">
                 <span><h2 style="color:#748487">About</h2></span>
-                <p style="color:#748487">The content of our websites are mainly referring the book "Netzwerk A1"</p>
                 <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang Yuxuan</p>
+                <p style="color:#748487">The content of our websites is mainly referring this book: Dengler, S., Rusch, P., Schmitz, H. and Sieber, T. (2012). Netzwerk. München: Langenscheidt.</p>
             </div>
             <div class="uk-width-large-1-3 uk-margin-top">
                 <span><h2 style="color:#748487">Contact us</h2></span>
-                <p style="color:#748487">E-mail:574696335@qq.com</p>
+                <p style="color:#748487">E-mail: derui.qing@th-luebeck.de</p>
             </div>
         </div>
     </div>
