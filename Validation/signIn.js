@@ -26,7 +26,7 @@ function validate() {
  */
 function checkUserID() {
     var userID = document.getElementById('input_userID').value;
-    if (userID.length > 0 && userID.length <= 20) {
+    if (userID.length >= 8 && userID.length <= 20) {
         return true;
     } else {
         return false;
@@ -39,7 +39,7 @@ function checkUserID() {
  */
 function checkUserPassword() {
     var userPW = document.getElementById('input_userPW').value;
-    if (userPW.length > 0 && userPW.length <= 25) {
+    if (userPW.length >= 8 && userPW.length <= 25) {
         return true;
     } else {
         return false;
