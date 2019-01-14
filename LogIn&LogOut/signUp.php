@@ -43,8 +43,8 @@ unset($_SESSION['userPass']);
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="signUp.php">Sign up</a></li>
+                <li><a href="../LogIn&LogOut/login.php">Login</a></li>
+                <li><a href="../LogIn&LogOut/signUp.php">Sign up</a></li>
             </ul>
         </div>
     </div>
@@ -80,7 +80,7 @@ unset($_SESSION['userPass']);
 
                         }else{
                             if($_SESSION['pwPass'] === true) {
-                                echo "<div class='uk-alert uk-alert-success uk-text-center uk-margin-top'>Account registered successfully. Please <a href='login.php'>login.</a></div>";
+                                echo "<div class='uk-alert uk-alert-success uk-text-center uk-margin-top'>Account registered successfully. Please <a href='../LogIn&LogOut/login.php'>login.</a></div>";
                             }else{
                                 echo "<div class='uk-alert uk-alert-danger uk-text-center uk-margin-top'>Please check your passwords are the same.</div>";
                             }

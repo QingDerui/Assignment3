@@ -45,8 +45,8 @@ unset($_SESSION['nameNull']);
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="signUp.php">Sign up</a></li>
+                <li><a href="../LogIn&LogOut/login.php">Login</a></li>
+                <li><a href="../LogIn&LogOut/signUp.php">Sign up</a></li>
             </ul>
         </div>
     </div>
@@ -83,7 +83,7 @@ unset($_SESSION['nameNull']);
                         <!--                        </div>-->
                         <div class="uk-grid">
                             <div class="uk-width-1-1 uk-margin-top uk-text-right">
-                                Don't have an account? <a href="signUp.php">Sign up</a>
+                                Don't have an account? <a href="../LogIn&LogOut/signUp.php">Sign up</a>
                             </div>
                         </div>
                     </form>

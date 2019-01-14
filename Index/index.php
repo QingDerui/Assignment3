@@ -74,7 +74,7 @@ DB_Controller::createConnection();  // start DB connection
             </li>
 
             <li>
-                <a href="index.php">Homepage</a>
+                <a href="../Index/index.php">Homepage</a>
             </li>
 
         </ul>
@@ -87,7 +87,7 @@ DB_Controller::createConnection();  // start DB connection
     <div class="uk-container uk-container-center">
         <ul class="uk-navbar-nav">
             <li class="uk-parent" data-uk-dropdown aria-haspopup="true" aria-expanded="false">
-                <a href="index.php"><i class="uk-icon-bars"></i> Words</a>
+                <a href="../Index/index.php"><i class="uk-icon-bars"></i> Words</a>
                 <div class="uk-dropdown uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
                         <li><a href="../MemorizeWord/memorizeWords.php?section=1">Section 1</a></li>
