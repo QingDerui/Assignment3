@@ -83,7 +83,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="review.php">Review</a></li>
+            <li><a href="../Review/review.php">Review</a></li>
             <li><a href="../Upload/upload.php">Upload your own list</a></li>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
