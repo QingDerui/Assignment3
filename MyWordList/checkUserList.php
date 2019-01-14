@@ -69,7 +69,7 @@
                 <?php
                 if (!(isset($_SESSION['username']) && !is_null($_SESSION['username']))) {
                     echo "<div class='contentDiv'>
-                <img src='icons/userImageDef.jpg'/>
+                <img src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
 
@@ -86,7 +86,7 @@
             </div>";
                 } else {
                     echo "<div class='contentDiv'>
-                <img src='icons/userImageDef.jpg'/>
+                <img src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
             </li>
