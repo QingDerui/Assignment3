@@ -68,6 +68,7 @@ function addWord() {
     example.setAttribute("name", "example");
     example.style.width = "100%";
     example.style.height = "100%";
+    example.style.resize = "none";
     tdExample.appendChild(example);
 
     tr.appendChild(tdCheckbox);

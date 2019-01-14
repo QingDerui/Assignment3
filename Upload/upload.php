@@ -191,7 +191,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                                             </select>
                                         </td>";
                             echo "<td style='width:430px;'>";
-                            echo "<textarea style='height:100%;width:100%;' class='textarea_example' name='example'></textarea>";
+                            echo "echo \"<textarea style='height:100%;width:100%;resize:none' class='textarea_example' name='example'>";
                             echo "</td>";
                             echo "</tr>";
                         }
