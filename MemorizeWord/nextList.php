@@ -14,24 +14,27 @@ session_start();
 DB_Controller::createConnection();
 
 
-for ($a = 1; $a < 11; $a++) { // A list has maximum 10 words
+if($_SESSION['noMoreStatus']) {
+    for ($a = 1; $a < 11; $a++) { // A list has maximum 10 words
 
-    if (isset($_GET[$a]) && !is_null($_GET[$a])) { // Test whether the form has been posted.
+        if (isset($_GET[$a]) && !is_null($_GET[$a])) { // Test whether the form has been posted.
 
 
-        $wordId = $_GET[$a]; // Get the wordid.
-        $statusName = 'status' . strval($a); // Get the status of a certain word
-        $wordStatus = $_GET[$statusName]; // Get the userid
+            $wordId = $_GET[$a]; // Get the wordid.
+            $statusName = 'status' . strval($a); // Get the status of a certain word
+            $wordStatus = $_GET[$statusName]; // Get the userid
 
-        DB_Controller::saveWordStatus($_SESSION['username'], $wordId, intval($wordStatus), strval($_SESSION['list'])); // store the status.
+            DB_Controller::saveWordStatus($_SESSION['username'], $wordId, intval($wordStatus), strval($_SESSION['list'])); // store the status.
+
+
+        }
 
 
     }
-
-
 }
 
 $_SESSION['goToNextList'] = true; // Set the flag so that the memory interface will change to the next list
+unset($_SESSION['noMoreStatus']);
 
 DB_Controller::closeConnection(); // Close DB connection
 
