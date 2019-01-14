@@ -12,6 +12,7 @@ require_once('../Models/Word.php');
 require_once('../DB/DB.php');
 require_once('../Models/User.php');
 
+$_SESSION['noMoreStatus'] = true;
 // Get the current section or give section a certain content.
 if (isset($_GET['section'])) {
     $section = $_GET['section'];
@@ -54,6 +55,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
     } else {
 
+
         // If the user enter this page from the main page, the displayed list will be the newest list of that section. If there is no list, a new list will be created and shown.
         $_SESSION['newList'] = true;
         $listNumber = strval(DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']));
@@ -64,12 +66,15 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
             $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
         }else{
 
+
             if(isset($_SESSION['goToNextList']) && $_SESSION['goToNextList']){
                 $_SESSION['list'] = DB_Controller::getListNumber($_SESSION['username'], $_SESSION['section']) + 1;
                 $words = DB_Controller::getRandomList_signed($_SESSION['section'], $_SESSION['username'], $_SESSION['list']);
             }else {
                 $_SESSION['list'] = $listNumber;
+                $_SESSION['noMoreStatus'] = false;
                 $results_Initial = DB_Controller::getListWords($_SESSION['username'], $_SESSION['section'], $_SESSION['list']);
+
                 foreach ($results_Initial as $result) {
                     $words[] = $result[0];
                     $statuses[] = $result[1];
@@ -276,9 +281,9 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                                 foreach ($words as $word) {
                                     echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
                                     if (isset($_SESSION['username'])) {
-                                        if ($_SESSION['newList']) {
-                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
-                                        } else {
+//                                        if ($_SESSION['newList']) {
+//                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+//                                        } else {
                                             if ($statuses[$a - 1]) {
                                                 echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
                                             } else {
@@ -286,7 +291,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
                                             }
 
-                                        }
+//                                        }
 
                                     }
                                     echo "</h3>";
