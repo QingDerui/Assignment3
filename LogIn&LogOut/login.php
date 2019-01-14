@@ -104,26 +104,7 @@ unset($_SESSION['nameNull']);
     </div>
 </div>
 
-<footer>
-    <div style="background-color: #002833;height:200px;margin-top: 80px">
-        <div class="uk-container uk-container-center uk-grid">
-            <div class="uk-width-large-2-3 uk-margin-top">
-                <span><h2 style="color:#748487">About</h2></span>
-                <p style="color:#748487">Authors: Qing Derui, Pan Xinyi, Wang Yuxuan</p>
-                <p style="color:#748487">The content of our websites is mainly referring this book: Dengler, S., Rusch, P., Schmitz, H. and Sieber, T. (2012). Netzwerk. München: Langenscheidt.</p>
-            </div>
-            <div class="uk-width-large-1-3 uk-margin-top">
-                <span><h2 style="color:#748487">Contact us</h2></span>
-                <p style="color:#748487">E-mail: derui.qing@th-luebeck.de</p>
-            </div>
-        </div>
-    </div>
-    <div style="background-color: #003038">
-        <div class="uk-container uk-container-center">
-            <div class="uk-margin-top"><p style="color:#748487">©2018 German Words. All rights reserved. </p></div>
-        </div>
-    </div>
-</footer>
+
 
 </body>
 </html>
