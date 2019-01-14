@@ -40,6 +40,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
         //If this is the newest list, show the "nextList" button
         if ($trueList == $_GET['list']) {
             $_SESSION['newList'] = true;
+            $_SESSION['noMoreStatus'] = false;
         } else {
             $_SESSION['newList'] = false;
         }
@@ -282,9 +283,21 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                                 foreach ($words as $word) {
                                     echo "<h3 class=\"uk-accordion-title uk-active\">" . $word->getWordGer();
                                     if (isset($_SESSION['username'])) {
-//                                        if ($_SESSION['newList']) {
-//                                            echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
-//                                        } else {
+                                        if ($_SESSION['newList']) {
+                                            if ($_SESSION['noMoreStatus']) {
+                                                echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+                                            }else{
+
+                                                if ($statuses[$a - 1]) {
+                                                    echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
+                                                } else {
+                                                    echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-danger uk-margin-large-left\">unknown</div>";
+
+                                                }
+
+                                            }
+                                        }
+                                        else {
                                         if ($statuses[$a - 1]) {
                                             echo "<div id='title" . $a . "' class=\"uk-badge uk-badge-success uk-margin-large-left\">know</div>";
                                         } else {
@@ -292,7 +305,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
 
                                         }
 
-//                                        }
+                                        }
 
                                     }
                                     echo "</h3>";
@@ -304,9 +317,14 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                                     echo $word->getWordEng();
                                     echo "</div>";
                                     if (isset($_SESSION['username'])) {
-                                        echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
-                                        echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
-                                        echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
+
+                                            echo "<div  class='uk-grid-width-1-3' style='width:30%'>";
+                                            echo "<input name='" . $a . "' type='hidden' value='" . $word->getWordID() . "'>";
+                                        if($_SESSION['noMoreStatus']) {
+                                            echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='0'>";
+                                        }else{
+                                            echo "<input name='status" . $a . "' type='hidden' id='status" . $a . "' value='".$statuses[$a - 1]."'>";
+                                        }
                                         if ($_SESSION['newList']) {
                                             echo "<button id='know" . $a . "' class='uk-button-success' type='button' onclick='showStatus_Know(" . $a . ")'>Know</input>";
                                             echo "<button id='unknow" . $a . "' class='uk-button-danger uk-margin-small-left' type='button' onclick='showStatus_Unknown(" . $a . ")' >Unknown</input>";

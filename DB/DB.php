@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "password";
+    private static $password = "";
     /**
      * @var string
      */
@@ -362,7 +362,7 @@ LIMIT 10";
      */
     public static function saveWordStatus($userID, $wordID, $status, $listNumber)
     {
-        $query = "update user_word_status set status=status+? where userid=? and wordid=? and listnumber=?;";
+        $query = "update user_word_status set status=? where userid=? and wordid=? and listnumber=?;";
 
 
         if ($stmt = self::$con->prepare($query)) {

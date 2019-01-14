@@ -14,7 +14,7 @@ session_start();
 DB_Controller::createConnection();
 
 
-if($_SESSION['noMoreStatus']) {
+//if($_SESSION['noMoreStatus']) {
     for ($a = 1; $a < 11; $a++) { // A list has maximum 10 words
 
         if (isset($_GET[$a]) && !is_null($_GET[$a])) { // Test whether the form has been posted.
@@ -31,7 +31,7 @@ if($_SESSION['noMoreStatus']) {
 
 
     }
-}
+//}
 
 $_SESSION['goToNextList'] = true; // Set the flag so that the memory interface will change to the next list
 unset($_SESSION['noMoreStatus']);
