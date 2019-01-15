@@ -548,7 +548,7 @@ FROM
                 section = ?)) AS a
 WHERE
     listnumber = (SELECT 
-            MAX(listnumber)
+            MAX(convert(listnumber, signed))
         FROM
             user_word_status AS b
         WHERE
