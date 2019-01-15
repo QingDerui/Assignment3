@@ -34,7 +34,7 @@ DB_Controller::createConnection();  // start DB connection
                 <?php
                 if(!(isset($_SESSION['username'])&&!is_null($_SESSION['username']))){
                     echo "<div class='contentDiv'>
-                <img src='../icons/userImageDef.jpg'/>
+                <img title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
 
@@ -50,7 +50,7 @@ DB_Controller::createConnection();  // start DB connection
                 <p style='font-size: 20px;color:gainsboro'>|</p>
             </div>";}else{
                     echo"<div class='contentDiv'>
-                <img src='../icons/userImageDef.jpg'/>
+                <img title='dAKirby309, http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309/Folders-OS-User-No-Frame-Metro-icon.html, last access data 14.01.2019 ' src='../icons/userImageDef.jpg'/>
             </div>
             <br><br>
             </li>

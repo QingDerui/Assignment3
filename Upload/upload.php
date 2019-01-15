@@ -168,7 +168,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="uploadcss"
                            style="text-align: center;" id="wordTable">
                         <?php
-                        for ($i = 1; $i <= 5; $i++) {
+                        for ($i = 1; $i <= 19; $i++) {
                             echo "<tr>";
                             echo "<td style='display: none; height: 36.33px;'>";
                             echo "<input type='checkbox' name='selected'/>";
