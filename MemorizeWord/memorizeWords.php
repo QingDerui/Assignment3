@@ -121,7 +121,7 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
             <br><br>
 
             <div style='position: relative;left:-45px;'>
-                <a class='login' href='../LogIn&LogOut/login.php'>LogIn&LogOut</a>
+                <a class='login' href='../LogIn&LogOut/login.php'>Login</a>
             </div>
 
             <div style='position: relative;left: 145px;top:-23px;width:40px;'>
@@ -200,8 +200,8 @@ if (isset($_SESSION['username'])) { // Test whether a user has logged in.
                     echo "<li><a href='#drawer'data-uk-offcanvas >Hi! " . $_SESSION['username'] . "</li>";
                     echo "<li><a href='../LogIn&LogOut/signOut.php'>Sign out</a></li>";
                 } else {
-                    echo "<li><a href='../LogIn&LogOut/login.php'>LogIn&LogOut</a></li>";
-                    echo ">Sign up</a></li>";
+                    echo "<li><a href='../LogIn&LogOut/login.php'>Login</a></li>";
+                    echo "<li><a href='../LogIn&LogOut/signUp.php'>Sign up</a></li>";
                 }
 
                 ?>
