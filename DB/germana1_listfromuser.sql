@@ -23,7 +23,7 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `listfromuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `listfromuser` (
   `userid` varchar(20) DEFAULT NULL,
   `wordid` varchar(20) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `listfromuser` (
 
 LOCK TABLES `listfromuser` WRITE;
 /*!40000 ALTER TABLE `listfromuser` DISABLE KEYS */;
-INSERT INTO `listfromuser` VALUES ('Yuxuan Wang','w1','muessen','must','-','Muss ich arbeiten?','my test list 3'),('Yuxuan','w1','bekommen','receive','-','Heute bekomme ich ein Packet.','Test 1'),('Yuxuan','w2','holen','get','-','','Test 1'),('Yuxuan','w1','aufhören','stop','-','Willst du, dass ich aufhöre?','Test 2'),('Yuxuan','w2','zumachen','close','-','Mach das Fenster zu!','Test 2');
+INSERT INTO `listfromuser` VALUES ('Yuxuan Wang','w1','muessen','must','-','Muss ich arbeiten?','my test list 3'),('Yuxuan','w1','bekommen','receive','-','Heute bekomme ich ein Packet.','Test 1'),('Yuxuan','w2','holen','get','-','','Test 1'),('Yuxuan','w1','aufhören','stop','-','Willst du, dass ich aufhöre?','Test 2'),('Yuxuan','w2','zumachen','close','-','Mach das Fenster zu!','Test 2'),('Yuxuan','w1','einfach','easy','-','','New one');
 /*!40000 ALTER TABLE `listfromuser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-13  1:00:59
+-- Dump completed on 2019-01-14 23:36:58

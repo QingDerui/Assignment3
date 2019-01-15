@@ -23,7 +23,7 @@ USE `germana1`;
 
 DROP TABLE IF EXISTS `word`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8 ;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `word` (
   `wordid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `wordger` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-13  1:00:59
+-- Dump completed on 2019-01-14 23:36:58

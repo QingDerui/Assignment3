@@ -32,7 +32,7 @@ class DB_Controller
     /**
      * @var string
      */
-    private static $password = "";
+    private static $password = "password";
     /**
      * @var string
      */
@@ -524,7 +524,36 @@ WHERE
      */
     public static function getLearnedWords($userID, $section)
     {
-        $query = "SELECT      word.wordid,     word.wordger,     word.wordeng,     word.example,     word.genus,     user_word_status.status,     MAX(user_word_status.listnumber) FROM     word,     user_word_status WHERE     word.wordid = user_word_status.wordid         AND user_word_status.userid = ?         AND word.wordid IN (SELECT              wordid         FROM             word         WHERE             section = ?) GROUP BY wordid";
+        $query = "SELECT 
+    wordid, wordger, wordeng, example, genus, status
+FROM
+    (SELECT 
+        word.wordid,
+            word.wordger,
+            word.wordeng,
+            word.example,
+            word.genus,
+            user_word_status.status,
+            user_word_status.listnumber
+    FROM
+        word, user_word_status
+    WHERE
+        word.wordid = user_word_status.wordid
+            AND user_word_status.userid = ?
+            AND word.wordid IN (SELECT 
+                wordid
+            FROM
+                word
+            WHERE
+                section = ?)) AS a
+WHERE
+    listnumber = (SELECT 
+            MAX(listnumber)
+        FROM
+            user_word_status AS b
+        WHERE
+            a.wordid = b.wordid)
+GROUP BY wordid";
 
         $wordid = '';
         $wordger = '';
