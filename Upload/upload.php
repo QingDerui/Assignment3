@@ -102,7 +102,7 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
             </li>
             <li><a href="../Review/review.php">Review</a></li>
             <li><a id="upload" <?php $login = isset($_SESSION["username"]) && !is_null($_SESSION["username"]);
-            echo "onclick='checkLogin($login)'>Upload your own list</a></li>"; ?>
+            echo "href='upload.php'>Upload your own list</a></li>"; ?>
         </ul>
         <div class="uk-navbar-flip uk-hidden-small">
             <ul class="uk-navbar-nav">
@@ -133,7 +133,6 @@ require_once('../Models/Word.php');//why cannot use require;fatal error
                         echo "<h1>Upload your own word list</h1>";
                     } else {
                         echo "<h1>Please login first.</h1>";
-                        header("Refresh:1;url=../LogIn&LogOut/login.php");
                         die();
                     }
                     ?>
