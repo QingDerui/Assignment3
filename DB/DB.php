@@ -525,7 +525,7 @@ WHERE
     public static function getLearnedWords($userID, $section)
     {
         $query = "SELECT 
-    wordid, wordger, wordeng, example, genus, status
+    wordid, wordger, wordeng, example, genus, status, listnumber
 FROM
     (SELECT 
         word.wordid,
